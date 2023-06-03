@@ -6,7 +6,8 @@ const ApiFeatures = require('../utils/apifeatures');
 //Create child admin
 
 exports.createChild=catchAsyncErrors(async(req,res,next)=>{
-    req.body.user=req.user.id;
+    // req.body.employee=req.employee.id;
+    // console.log(req.body);
 const child=await Child.create(req.body);
 res.status(201).json({
     success:true,
@@ -44,35 +45,35 @@ exports.getAllChilds=catchAsyncErrors(async(req,res)=>{
   
 
 // //Update Child Admin
-// exports.updateChild= catchAsyncErrors(async (req,res,next)=>{
-//     let child=await Child.findById(req.params.id);
-//     if(!child)
-//     {
-//     return next(new errorHandler("Child Not found",404));
-//     }
-//     child = await Child.findByIdAndUpdate(req.params.id,req.body,{
-//         new:true,runValidators:true
-//     });
-//     res.status(200).json({
-//         success:true,
-//         child
-//     })
+exports.updateChild= catchAsyncErrors(async (req,res,next)=>{
+    let child=await Child.findById(req.params.id);
+    if(!child)
+    {
+    return next(new errorHandler("Child Not found",404));
+    }
+    child = await Child.findByIdAndUpdate(req.params.id,req.body,{
+        new:true,runValidators:true
+    });
+    res.status(200).json({
+        success:true,
+        child
+    })
 
 
-// });
-// exports.deleteChild=catchAsyncErrors(async(req,res,next)=>{
-//     const child=await Child.findById(req.params.id);
-//     if(!child)
-//     {
-//         return next(new errorHandler("Child Not found",404));
-//     }
-//     await child.remove();
-//     res.status(200).json({
-//         message:"Child deleted successfully"
-//     })
+});
+exports.deleteChild=catchAsyncErrors(async(req,res,next)=>{
+    const child=await Child.findById(req.params.id);
+    if(!child)
+    {
+        return next(new errorHandler("Child Not found",404));
+    }
+    await Child.deleteOne({ _id: req.params.id });
+    res.status(200).json({
+        message:"Child deleted successfully"
+    })
 
 
-// });
+});
 // exports.getOneChild=catchAsyncErrors(async(req,res)=>{
 //     const child= await Child.findById(req.params.id);
 //     if(!child)
@@ -88,17 +89,17 @@ exports.getAllChilds=catchAsyncErrors(async(req,res)=>{
 // exports.createChildReview=catchAsyncErrors(async(req,res,next)=>{
 //     const {rating,comment,childId}=req.body;
 //     const review={
-//         user:req.user.id,
-//         name:req.user.name,
+//         employee:req.employee.id,
+//         name:req.employee.name,
 //         rating:Number(rating),
 //         comment,
 //     }
 //     const child=await Child.findById(childId);
-//     const isReviewed=child.reviews.find(rev=>rev.user.toString()===req.user._id.toString())
+//     const isReviewed=child.reviews.find(rev=>rev.employee.toString()===req.employee._id.toString())
 //     if(isReviewed)
 //     {
 //         child.reviews.forEach(rev=>{
-//             if(rev.user.toString()===req.user._id.toString())
+//             if(rev.employee.toString()===req.employee._id.toString())
 //             {
 //                 rev.rating=rating,
 //                 rev.comment=comment

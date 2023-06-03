@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 const childSchema=new mongoose.Schema({
     name:{
         type:String,
-        default:"Unknown",
+        default:"Anonymous",
         trim:true
 
     },
@@ -31,11 +31,13 @@ const childSchema=new mongoose.Schema({
         {
         public_id:{
             type:String,
-            required:true
+            default:"Dummy"
+            // required:true
         },
         url:{
             type:String,
-            required:true
+            default:"dummy"
+            // required:true
         }
     }
 
