@@ -1,7 +1,41 @@
-const Order = require("../models/orderModel");
+const caseManager = require("../models/cmModel");
 const Product = require('../models/productModel');
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+
+//Register User
+exports.registerCm=catchAsyncErrors(async(req,res,next)=>{
+    const  { name, email, password, pinCode, phoneNo, photo } = req.body;
+    const user = await caseManager.create({
+        name, email, password, pinCode, phoneNo, photo,
+        avatar:{
+            public_id:"this is a sample id",
+            url:"profilepicUrl"
+        },
+    });
+    sendToken(user,201,res);
+});
+
+//Login User
+exports.loginUser=catchAsyncErrors(async (req,res,next)=>{
+    const {email,password}=req.body;
+    if(!email||!password)
+    {
+        return next(new errorHandler("Please Enter Email and password",400))
+    }
+    const user = await caseManager.findOne({email}).select("+password");
+    if(!user)
+    {
+        return next(new errorHandler("Invalid email or Password",401));
+    }
+    const isPasswordMatched=await user.comparePassword(password);
+
+    if(!isPasswordMatched)
+    {
+        return next(new errorHandler("Invalid email or Password",401));
+    }
+   sendToken(user,200,res);
+})
 
 //Create New Order
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {

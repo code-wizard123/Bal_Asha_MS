@@ -54,7 +54,7 @@ const productSchema=new mongoose.Schema({
     reviews:[{
         user:{
             type:mongoose.Schema.ObjectId,
-            ref:"User",
+            ref:"Employee",
             required:true,
         },
         name:{
@@ -77,7 +77,7 @@ const productSchema=new mongoose.Schema({
     }],
     user:{
         type:mongoose.Schema.ObjectId,
-        ref:"User",
+        ref:"Employee",
         required:true,
     },
     createdAt:{

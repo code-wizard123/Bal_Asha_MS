@@ -1,16 +1,17 @@
 const express = require('express');
-const { registerUser, loginUser, logOut, forgotPassword, resetPassword, getUserDetails, updatePassword, updateProfile, getSingleUser, getAllUser, updateUserRole, deleteUser } = require("../controllers/userController");
-const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
+const { registerEmployee, loginEmployee,
+    /*logOut, forgotPassword, resetPassword, getEmployeeDetails, updatePassword, updateProfile, getSingleEmployee, getAllEmployee, updateEmployeeRole, deleteEmployee */} = require("../controllers/employeeController");
+// const { isAuthenticatedEmployee, authorizeRoles } = require("../middleware/auth");
 const router = express.Router();
-router.route("/register").post(registerUser);
-router.route("/login").post(loginUser);
-router.route("/password/forgot").post(forgotPassword);
-router.route("/password/reset/:token").put(resetPassword);
-router.route("/logout").get(logOut);
-router.route("/password/update").put(isAuthenticatedUser, updatePassword);
-router.route("/me/update").put(isAuthenticatedUser, updateProfile);
-router.route("/me").get(isAuthenticatedUser, getUserDetails);
+router.route("/register").post(registerEmployee);
+router.route("/login").post(loginEmployee);
+// router.route("/password/forgot").post(forgotPassword);
+// router.route("/password/reset/:token").put(resetPassword);
+// router.route("/logout").get(logOut);
+// router.route("/password/update").put(isAuthenticatedEmployee, updatePassword);
+// router.route("/me/update").put(isAuthenticatedEmployee, updateProfile);
+// router.route("/me").get(isAuthenticatedEmployee, getEmployeeDetails);
 
-router.route("/admin/users").get(isAuthenticatedUser, authorizeRoles("admin"), getAllUser);
-router.route("/admin/user/:id").get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser).put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole).delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
+// router.route("/admin/employees").get(isAuthenticatedEmployee, authorizeRoles("admin"), getAllEmployee);
+// router.route("/admin/employee/:id").get(isAuthenticatedEmployee, authorizeRoles("admin"), getSingleEmployee).put(isAuthenticatedEmployee, authorizeRoles("admin"), updateEmployeeRole).delete(isAuthenticatedEmployee, authorizeRoles("admin"), deleteEmployee);
 module.exports = router;
