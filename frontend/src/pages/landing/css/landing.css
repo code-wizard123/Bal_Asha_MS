@@ -2,18 +2,21 @@
 
 html {
 	scroll-behavior: smooth;
-	 background: linear-gradient(rgb(201, 35, 212), #0ef854); 
-	background-color: #ADD8E6;
+	 /* background: linear-gradient(rgb(2, 84, 6), #eef0ef);  */
+	 background-image: url("../../../Images/green-background.jpg");
+	background-color: green;
+	background-repeat: no-repeat;
+	background-size: cover;
 
 }
 html{
 	scroll-behavior: smooth;
   }
 
-* {
+/* * { */
 	/* background: #121212;
 	color: white; */
-}
+/* } */
 
 /* INPUT FIELDS CSS */
 input {
