@@ -6,10 +6,10 @@ import './css/features.css';
 import './css/navbar.css';
 import './css/login.css';
 import './css/signup.css';
-import anima from '../../Images/anima.png';
-import improve from '../../Images/improve.png';
-import lecture from '../../Images/lecture.jpg';
-import proctor1 from '../../Images/proctor1.jpg';
+import anima from '../../Images/abandened-children.jpg';
+import improve from '../../Images/Adoption.jpg';
+import lecture from '../../Images/children-edu.jpg';
+import proctor1 from '../../Images/children-love.webp';
 import logo from '../../Images/logo.jpg'
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner'

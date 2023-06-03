@@ -184,8 +184,8 @@
 	margin-top: 27px;
 	/* background-color: #ADD8E6; */
     /* background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f79cbd 100%); */
-	background-color: #201e1e;
-	/* background-image: url("../../../Images/Screenshot\ from\ 2023-01-28\ 00-55-21.png"); */
+	/* background-color: #a9e7af; */
+	/* background-image: url("https: //th.bing.com/th/id/R.697c7415f7721d7e09f87583edadc678?rik=tzmG8M6wF0TFDw&riu=http%3a%2f%2fwww.strangehistory.net%2fblog%2fwp-content%2fuploads%2f2015%2f01%2fgreen-children2.jpg&ehk=ZX8%2bXL9PU2MHHFXoYMWvTqkSrIr0YW83Qyhdzzq9BEs%3d&risl=&pid=ImgRaw&r=0"); */
 }
 
 .section-row {
@@ -220,7 +220,7 @@
 	max-height: 15rem;
 	padding: 0.5rem;
 	/* margin-top: 3rem; */
-	border: 4px solid white;
+	border: 4px solid rgb(107, 103, 103);
 	border-radius: 10%;
 	transition: transform 250ms linear;
 }
