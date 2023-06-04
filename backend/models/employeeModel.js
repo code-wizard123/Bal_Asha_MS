@@ -48,7 +48,8 @@ const employeeSchema = new mongoose.Schema({
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
-employeeSchema.pre("save",async function(next){
+
+employeeSchema.pre("save",  async function(next){
   if(!this.isModified("password"))
   {
     next();
@@ -61,9 +62,11 @@ employeeSchema.methods.getJWTToken=function(){
     expiresIn:process.env.JWT_EXPIRE,
   });
 };
+
 employeeSchema.methods.comparePassword=async function(enteredPassword){
-  return await /*bcrypt.*/compare(enteredPassword,this.password)
+  return await bcrypt.compare(enteredPassword,this.password)
 }
+
 employeeSchema.methods.getResetPasswordToken=function(){
   const resetToken=crypto.randomBytes(20).toString("hex");
 
