@@ -4,10 +4,12 @@ const Employee = require('../models/employeeModel');
 const sendToken = require('../utils/jwttoken');
 // const sendEmail = require('../utils/sendEmail');
 const crypto = require("crypto");
+const { authorizeRoles } = require('../middleware/auth');
 // const getResetPasswordToken=require('../models/employeeModel')
 //register employee
 exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
     const { name, email, password, pincode, role } = req.body;
+    console.log(req.body)
     const employee = await Employee.create({
         name, email, password, pincode, role,
         avatar: {
@@ -32,8 +34,8 @@ exports.loginEmployee = catchAsyncErrors(async (req, res, next) => {
     if (!employee) {
         return next(new errorHandler("Invalid email", 401));
     }
-    // const isPasswordMatched = await employee.comparePassword(password);
-    const isPasswordMatched=await employee.password===req.body.password;
+    const isPasswordMatched = await employee.comparePassword(password);
+    //const isPasswordMatched=await employee.password===req.body.password;
 
     if (!isPasswordMatched) {
         return next(new errorHandler("Invalid Password", 401));
@@ -207,3 +209,8 @@ exports.deleteEmployee = catchAsyncErrors(async (req, res, next) => {
     sendToken(employee, 200, res);
 });
 
+exports.getCase = catchAsyncErrors(async (req, res, next) => {
+    const {id, pincode} = await req.user;
+    
+    
+})
