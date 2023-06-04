@@ -33,7 +33,7 @@ const employeeSchema = new mongoose.Schema({
     },
   },
   role: {
-    type: String,
+    type: Number,
     required:true
     // default: "employee",
   },
