@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand&display=swap');
 
-html {
+body {
 	scroll-behavior: smooth;
 	 /* background: linear-gradient(rgb(2, 84, 6), #eef0ef);  */
-	 background-image: url("../../../Images/green-background.jpg");
-	background-color: green;
+	 /* background-image: url("../../../Images/green-background.jpg"); */
+	background-color: rgb(149, 227, 149);
 	background-repeat: no-repeat;
 	background-size: cover;
 
 }
-html{
+body{
 	scroll-behavior: smooth;
   }
 
