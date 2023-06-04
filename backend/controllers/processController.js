@@ -77,61 +77,59 @@ exports.myProcess = catchAsyncErrors(async (req, res, next) => {
   
 
 // //get all  processs (admin)
-// exports.getAllProcesss = catchAsyncErrors(async (req, res, next) => {
-//     const processs=await Process.find();
+exports.getAllProcess = catchAsyncErrors(async (req, res, next) => {
+    const process=await Process.find();
 
-//     let totalAmount=0;
-//     processs.forEach((process)=>{
-//         totalAmount+=process.totalPrice;
-//     });
-//     res.status(200).json({
-//         success: true,
-//         totalAmount,
-//         processs
-//     });
-// });
+    res.status(200).json({
+        success: true,
+        process
+    });
+});
 
 
-// exports.updateProcess = catchAsyncErrors(async (req, res, next) => {
-//     const process=await Process.findById(req.params.id);
-//     if(process.processStatus==="Delivered")
-//     {
-//         return next(new errorHandler("You have already received this process",404));
-//     }
-//     process.processItems.forEach(async (process)=>{
-//         await updateStock(process.child,process.quantity);
-//     })
-//     process.processStatus=req.body.status;
-//     if(req.body.status==="Delivered")
-//     {
-//     process.deliveredAt=Date.now();
-//     }
-//     await process.save({runValidatorsBeforeSave:false});
+
+// Update the process with new parameters
+exports.updateProcess = catchAsyncErrors(async (req, res, next) => {
+  const process = await Process.findById(req.params.id);
+
+  // Update the parameters with new values
+  process.DateofAdmission = req.body.DateofAdmission;
+  process.enrollmentDate = req.body.enrollmentDate;
+  process.photoPublication1 = req.body.photoPublication1;
+  process.photoPublication2 = req.body.photoPublication2;
+  process.tvTelecasting = req.body.tvTelecasting;
+  process.policeReport = req.body.policeReport;
+  process.previousOrgReport = req.body.previousOrgReport;
+  process.finalReport = req.body.finalReport;
+  process.FreeForAdoptionDate = req.body.FreeForAdoptionDate;
+  process.MER = req.body.MER;
+  process.CSR = req.body.CSR;
+  process.CaringsUpload = req.body.CaringsUpload;
+  process.lastVisitByFamily = req.body.lastVisitByFamily;
+
+  // Push the updated parameters in the "ActionDone" array
+  const updatedParameters = Object.keys(req.body);
+  process.ActionDone.push(...updatedParameters);
+
+  await process.save({ runValidatorsBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+    process
+  });
+});
+
+
+exports.deleteProcess = catchAsyncErrors(async (req, res, next) => {
+    const process=await Process.findById(req.params.id);
+    if(!process)
+    {
+        return next(new errorHandler("Process not found with this Id",404));
+    }
+    await Process.deleteOne({ _id: req.params.id });
     
-//     res.status(200).json({
-//         success: true,
-//         process
-//     });
-// });
-
-// async function updateStock(id,quantity)
-// {
-//     const child= await Child.findById(id);
-//     child.stock-=quantity;
-//     await child.save({runValidatorsBeforeSave:false});
-
-// }
-
-// exports.deleteProcess = catchAsyncErrors(async (req, res, next) => {
-//     const process=await Process.findById(req.params.id);
-//     if(!process)
-//     {
-//         return next(new errorHandler("Process not found with this Id",404));
-//     }
-//     await process.remove();
-    
-//     res.status(200).json({
-//         success: true,
-//         process
-//     });
-// });
+    res.status(200).json({
+        success: true,
+        process
+    });
+});
