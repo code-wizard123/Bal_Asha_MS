@@ -8,22 +8,26 @@ const childSchema=new mongoose.Schema({
         trim:true
 
     },
-    description:{
+    category:{
+        type:Number,
+        required:[true,"Please Enter type of Case for this child"],
+
+    },
+    keyCase:{
         type:String,
         required:[true,"Please Share the description of the child"]
 
     },
-    age:{
-        type:Number,
-        required:[true,"Please Enter Approximate age "],
+    DateOfBirth:{
+        type:Date,
+        required:[true,"Please Enter Approx DateOfBirth "],
 
     },
-    pinCode:{
-        type:Number,
-        required:true
-
+    familyDetails:{
+        type:String,
+        default:"No details of the family known"
     },
-    orphanage:{
+    gender:{
         type:String,
         required:true
     },
@@ -42,21 +46,15 @@ const childSchema=new mongoose.Schema({
     }
 
     ],
-    type:{
+    pinCode:{
+        type:Number,
+        required:true
+    },
+    CCI:{
         type:String,
-        required:[true,"Please Enter type of Case for this child"],
-
-    },
-    employee:{
-        type:mongoose.Schema.ObjectId,
-        ref:"Employee",
-        required:true,
-    },
-    createdAt:{
-        type:Date,
-        default:Date.now,
-
-    },
+        required:true
+    }
+    
 
 })
 module.exports=mongoose.model("Child",childSchema);

@@ -45,6 +45,7 @@ const employeeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  child: [{ type: mongoose.Schema.ObjectId, ref: "Child" }],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
