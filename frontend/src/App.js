@@ -16,6 +16,12 @@ import "./App.css";
 // import ProtectedLanding from './Protected Routes/ProtectedLanding';
 // import ProtectedTest from './Protected Routes/ProtectedTest';
 
+const ROLES = {
+  GROUND_WORKER: 3,
+  CASE_MANAGER: 1,
+  OPERATION_MANAGER: 2
+}
+
 const App = () => {
   return (
     <div className="App">
