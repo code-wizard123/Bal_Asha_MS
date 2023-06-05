@@ -3,14 +3,14 @@ const catchAsyncErrors = require("./catchAsyncErrors");
 const jwt=require("jsonwebtoken");
 const Employee=require('../models/employeeModel');
 
-exports.isAuthenticatedUser=catchAsyncErrors(async (req,res,next)=>{
+exports.isAuthenticatedEmployee=catchAsyncErrors(async (req,res,next)=>{
     const {token}=req.cookies;
     if(!token)
     {
     return next(new errorHandler("Please login to access this resource"));
     }
     const decodedData=jwt.verify(token,process.env.JWT_SECRET);
-    req.user=await Employee.findById(decodedData.id);
+    req.employee=await Employee.findById(decodedData.id);
     next();
 });
 
