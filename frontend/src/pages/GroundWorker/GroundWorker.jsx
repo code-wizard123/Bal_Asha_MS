@@ -9,7 +9,7 @@ const GroundWorker = () => {
 
   useEffect(() => {
     // Make the Axios GET request to retrieve the child's data
-    axios.get('http://localhost:4000/api/v1/admin/child/647dad74c0d4365beddb6306') // Replace ":id" with the actual child ID
+    axios.get('http://localhost:4000/api/v1/groundWorker/childs/647daf3812c1977244ea0dce') // Replace ":id" with the actual child ID
       .then(response => {
         const { name } = response.data.child; // Assuming the child's name is returned in the "name" field
         setChildName(name);
