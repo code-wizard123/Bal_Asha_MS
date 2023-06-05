@@ -31,7 +31,7 @@ const CaseManager=()=>{
         <img src={orphanage} alt="Orphanage Image" class="product-img"></img>
         <h2 class="product-title">BalAsha</h2>
         <span class="price">Not Assigned: 2/3</span><br></br><br></br>
-        <span class="price">Address:  NNP, Goregaon,Mumbai-65</span>
+        <span class="price">Address:  NNP, Goregaon,Mumbai</span>
       </div>
   </div>
 </section>
