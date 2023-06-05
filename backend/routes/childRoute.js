@@ -1,6 +1,6 @@
 const express=require('express');
 const { getAllChilds,createChild , updateChild, deleteChild,/*, getOneChild, getChildDetails, createChildReview, deleteReview, getChildReviews*/ 
-getChildDetails}=require("../controllers/childController");
+getChildDetails,getOneChild}=require("../controllers/childController");
 const { isAuthenticatedEmployee,authorizeRoles } = require('../middleware/auth');
 // const { getAllChilds } = require('../controllers/childController');
 
@@ -13,9 +13,10 @@ router.route('/admin/child/new').post/*(isAuthenticatedUser,authorizeRoles("admi
 // router.route('/opManager/').(isAuthenticatedUser,authorizeRoles(2), );
 
 // Ground Worker
-router.route('/groundWorker/new').post(isAuthenticatedEmployee,authorizeRoles(3), createChild);
-router.route('/groundWorker/childs').get(isAuthenticatedEmployee,authorizeRoles(3), getAllChilds);
-router.route('/groundWorker/getchild/:id').post(isAuthenticatedEmployee,authorizeRoles(3), getChildDetails);
+router.route('/groundWorker/new').post(/*isAuthenticatedEmployee,authorizeRoles(3),*/ createChild);
+router.route('/groundWorker/childs').get(/*isAuthenticatedEmployee,authorizeRoles(3),*/ getAllChilds);
+router.route('/groundWorker/childs/:id').get(/*isAuthenticatedEmployee,authorizeRoles(3),*/ getOneChild);
+router.route('/groundWorker/getchild/:id').post(/*isAuthenticatedEmployee,authorizeRoles(3),*/ getChildDetails);
 
 //Case Manager
 
