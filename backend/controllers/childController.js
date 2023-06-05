@@ -72,17 +72,17 @@ exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
 
 
 });
-// exports.getOneChild=catchAsyncErrors(async(req,res)=>{
-//     const child= await Child.findById(req.params.id);
-//     if(!child)
-//     {
-//         return next(new errorHandler("Child Not found",404));
-//     }
-//     res.status(200).json({
-//         success:true,
-//         child
-//     });
-// });
+exports.getOneChild=catchAsyncErrors(async(req,res)=>{
+    const child= await Child.findById(req.params.id);
+    if(!child)
+    {
+        return next(new errorHandler("Child Not found",404));
+    }
+    res.status(200).json({
+        success:true,
+        child
+    });
+});
 
 // exports.createChildReview=catchAsyncErrors(async(req,res,next)=>{
 //     const {rating,comment,childId}=req.body;

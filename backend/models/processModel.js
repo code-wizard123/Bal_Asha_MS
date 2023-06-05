@@ -87,22 +87,94 @@ const generateProcessSchema = (actionLeft) => {
       }
     }],
     previousOrgReport: {
-      type: Date
+        dateRegistered: {
+            type: Date
+          },
+          public_id: {
+            type: String,
+            default: "Dummy"
+            // required: true
+          },
+          url: {
+            type: String,
+            default: "dummy"
+            // required: true
+          }
     },
     finalReport: {
-      type: Date
+        dateRegistered: {
+            type: Date
+          },
+          public_id: {
+            type: String,
+            default: "Dummy"
+            // required: true
+          },
+          url: {
+            type: String,
+            default: "dummy"
+            // required: true
+          }
     },
     FreeForAdoptionDate: {
-      type: Date
+        dateRegistered: {
+            type: Date
+          },
+          public_id: {
+            type: String,
+            default: "Dummy"
+            // required: true
+          },
+          url: {
+            type: String,
+            default: "dummy"
+            // required: true
+          }
     },
     MER: {
-      type: Date
+        dateRegistered: {
+            type: Date
+          },
+          public_id: {
+            type: String,
+            default: "Dummy"
+            // required: true
+          },
+          url: {
+            type: String,
+            default: "dummy"
+            // required: true
+          }
     },
     CSR: {
-      type: Date
+        dateRegistered: {
+            type: Date
+          },
+          public_id: {
+            type: String,
+            default: "Dummy"
+            // required: true
+          },
+          url: {
+            type: String,
+            default: "dummy"
+            // required: true
+          }
     },
     CaringsUpload: {
-      type: Date
+        dateRegistered: {
+            type: Date
+          },
+          public_id: {
+            type: String,
+            default: "Dummy"
+            // required: true
+          },
+          url: {
+            type: String,
+            default: "dummy"
+            // required: true
+          }
     },
     lastVisitByFamily: {
       type: Date
