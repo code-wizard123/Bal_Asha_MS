@@ -40,14 +40,22 @@ const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // //Create New Process
 exports.newProcess = catchAsyncErrors(async (req, res, next) => {
-    const { child, DateofAdmission, enrollmentDate } = req.body;
-    const process = await Process.create({ child, DateofAdmission, enrollmentDate });
+  const { child, DateofAdmission, enrollmentDate } = req.body;
   
-    res.status(201).json({
-      success: true,
-      process
-    });
+  // Retrieve the child and its actionLeft attribute
+  const childObj = await Child.findById(child);
+  const actionLeft = childObj.actionLeft;
+  // console.log(actionLeft);
+  
+  // Create a new process with the retrieved actionLeft attribute
+  const process = await Process.create({ child, DateofAdmission, enrollmentDate, actionLeft });
+
+  res.status(201).json({
+    success: true,
+    process
   });
+});
+
   
   
 
@@ -92,24 +100,28 @@ exports.getAllProcess = catchAsyncErrors(async (req, res, next) => {
 exports.updateProcess = catchAsyncErrors(async (req, res, next) => {
   const process = await Process.findById(req.params.id);
 
-  // Update the parameters with new values
-  process.DateofAdmission = req.body.DateofAdmission;
-  process.enrollmentDate = req.body.enrollmentDate;
-  process.photoPublication1 = req.body.photoPublication1;
-  process.photoPublication2 = req.body.photoPublication2;
-  process.tvTelecasting = req.body.tvTelecasting;
-  process.policeReport = req.body.policeReport;
-  process.previousOrgReport = req.body.previousOrgReport;
-  process.finalReport = req.body.finalReport;
-  process.FreeForAdoptionDate = req.body.FreeForAdoptionDate;
-  process.MER = req.body.MER;
-  process.CSR = req.body.CSR;
-  process.CaringsUpload = req.body.CaringsUpload;
-  process.lastVisitByFamily = req.body.lastVisitByFamily;
+  // Update the parameters with new values if they exist in ActionLeft or ActionDone
+  const allowedAttributes = [...process.ActionDone, ...process.actionLeft];
+  const updateParams = Object.keys(req.body).filter(param => allowedAttributes.includes(param));
 
-  // Push the updated parameters in the "ActionDone" array
-  const updatedParameters = Object.keys(req.body);
-  process.ActionDone.push(...updatedParameters);
+  updateParams.forEach(param => {
+    process[param] = req.body[param];
+  });
+
+  // Push the updated parameters in the "ActionDone" array if they are not already present
+  updateParams.forEach(param => {
+    if (!process.ActionDone.includes(param)) {
+      process.ActionDone.push(param);
+    }
+  });
+
+  // Remove updated parameters from the "ActionLeft" array if they are present
+  updateParams.forEach(param => {
+    const paramIndex = process.actionLeft.indexOf(param);
+    if (paramIndex !== -1) {
+      process.actionLeft.splice(paramIndex, 1);
+    }
+  });
 
   await process.save({ runValidatorsBeforeSave: false });
 
@@ -118,6 +130,7 @@ exports.updateProcess = catchAsyncErrors(async (req, res, next) => {
     process
   });
 });
+
 
 
 exports.deleteProcess = catchAsyncErrors(async (req, res, next) => {

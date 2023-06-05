@@ -1,5 +1,13 @@
 import React from "react";
-import { Opening, Landing, CaseManager, AddChild } from "./pages";
+import {
+  Opening,
+  Landing,
+  CaseManager,
+  AddChild,
+  GroundWorker,
+  ActionLeft,
+  ProcessDone,
+} from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 // import ProtectedStudent from './Protected Routes/ProtectedStudent';
@@ -17,6 +25,9 @@ const App = () => {
           <Route exact path="/landing" element={<Landing />} />
           <Route exact path="/CaseManager" element={<CaseManager />} />
           <Route exact path="/AddChild" element={<AddChild />} />
+          <Route exact path="/GroundWorker" element={<GroundWorker />} />
+          <Route exact path="/ActionLeft" element={<ActionLeft />} />
+          <Route exact path="/ProcessDone" element={<ProcessDone />} />
 
           {/* <Route exact path="/" element={< ProtectedLanding Component={Opening} />} />
 					<Route exact path="/landing" element={<ProtectedLanding Component={Landing} />} />
