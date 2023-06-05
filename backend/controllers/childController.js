@@ -25,10 +25,22 @@ exports.getAllChilds = catchAsyncErrors(async (req, res) => {
     res.status(200).json({
         success: true,
         childs,
-        childCount
+        childCount,
     });
 });
-
+exports.getAllChildsPinCode = catchAsyncErrors(async (req, res) => {
+    const resultPerPage = 5;
+    const childCount = await Child.countDocuments();
+    const apiFeature = new ApiFeatures(Child.find(), req.query).search().filter().pagination(resultPerPage);
+    const childs = await apiFeature.query;
+    const children= await Child.find({ pinCode: req.query.pinCode });
+    // console.log(res.body);
+    res.status(200).json({
+        success: true,
+        childCount,
+        children
+    });
+});
 exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
 

@@ -1,12 +1,12 @@
 const express=require('express');
 const { getAllChilds,createChild , updateChild, deleteChild,/*, getOneChild, getChildDetails, createChildReview, deleteReview, getChildReviews*/ 
-getChildDetails,getOneChild}=require("../controllers/childController");
+getChildDetails,getOneChild, getAllChildsPinCode}=require("../controllers/childController");
 const { isAuthenticatedEmployee,authorizeRoles } = require('../middleware/auth');
 // const { getAllChilds } = require('../controllers/childController');
 
 const router=express.Router();
 
-router.route('/childs').get(getAllChilds);
+router.route('/childs').get(getAllChilds);//Add ? to get pincode specific details
 router.route('/admin/child/new').post/*(isAuthenticatedUser,authorizeRoles("admin"),*/(createChild);
 
 //Operation Manager
