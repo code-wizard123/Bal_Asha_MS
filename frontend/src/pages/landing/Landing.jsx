@@ -13,7 +13,7 @@ import proctor1 from '../../Images/children-love.webp';
 import logo from '../../Images/logo.jpg'
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner'
-
+import ProtectedRoutes from '../Protected/ProtectedRoutes';
 
 // const ROLES = {
 // 	GROUND_WORKER: 3,
@@ -74,33 +74,39 @@ const Landing = () => {
 	const [role, setRole] = useState()
 	// const navigate = useNavigate();
 
-	const signInFunc = (e) => {
+	const signInFunc = async (e) => {
 		e.preventDefault();
-
-		const senddata = {
-			"email": email,
-			"password": password,
+		const details = {
+			email,
+			password
 		}
+		await axios.post("http://localhost:4000/api/v1/login", details)
+		.then((res) => {
+			const checkRole = res.data.message.role
+			setRole(checkRole)
 
-		axios
-			.post('http://localhost:4000/api/v1/login', senddata)
-			.then((response) => {
-				console.log(response)
-				// if (response. == "Invalid username or password") {
-				// 	console.log("incorrect login")
-				// 	seterrorlogin(true);
-				// }
-				// if (response.data.token) {
-				// 	localStorage.setItem("login", JSON.stringify(response.data));
-				// 	// console.log(loading)
+			if(role){
+				return <ProtectedRoutes role={role}/>
+			}
+		})
+		.catch(e => console.log(e))
+		// axios.post('http://localhost:4000/api/v1/login', senddata).then((response) => {
+		// 		console.log(response)
+		// 		// if (response. == "Invalid username or password") {
+		// 		// 	console.log("incorrect login")
+		// 		// 	seterrorlogin(true);
+		// 		// }
+		// 		// if (response.data.token) {
+		// 		// 	localStorage.setItem("login", JSON.stringify(response.data));
+		// 		// 	// console.log(loading)
 
-				// 	window.location.reload();
-				// }
-				return response.data;
-			})
-			.catch((err) => {
-				console.log(err)
-			});
+		// 		// 	window.location.reload();
+		// 		// }
+		// 		return response.data;
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err)
+		// 	});
 		// axios
 		// 	.post('http://lmsapiv01.azurewebsites.net/login', senddata)
 		// 	.then((response) => {
@@ -361,7 +367,7 @@ const Landing = () => {
 					<Components.SignInContainer signinIn={signIn}>
 						<Components.Form onSubmit={signInFunc}>
 							<Components.Title>Sign in</Components.Title>
-							<Components.Input type='text' placeholder='User Name' value={username} onChange={(e) => setUsername(e.target.value)} required />
+							<Components.Input type='text' placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
 							<Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
 							<Components.Button type="submit">Sign In</Components.Button>
 						</Components.Form>
