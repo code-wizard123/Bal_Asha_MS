@@ -29,20 +29,19 @@ exports.getAllChilds = catchAsyncErrors(async (req, res) => {
     });
 });
 
-// exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
-//     const child = await Child.findById(req.params.id);
+exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
+    const child = await Child.findById(req.params.id);
 
-//     if (!child) {
-//       return next(new errorHandler("Child not found", 404));
-//     }
+    if (!child) {
+      return next(new errorHandler("Child not found", 404));
+    }
 
-//     res.status(200).json({
-//       success: true,
-//       child,
-//       childCount
-//     });
-//   });
-
+    res.status(200).json({
+      success: true,
+      child,
+      childCount
+    });
+  });
 
 // //Update Child Admin
 exports.updateChild = catchAsyncErrors(async (req, res, next) => {
