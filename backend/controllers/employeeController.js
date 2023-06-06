@@ -2,10 +2,10 @@ const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const Employee = require('../models/employeeModel');
 const sendToken = require('../utils/jwttoken');
-// const sendEmail = require('../utils/sendEmail');
+const sendEmail = require('../utils/sendEmail');
 const crypto = require("crypto");
 const { authorizeRoles } = require('../middleware/auth');
-// const getResetPasswordToken=require('../models/employeeModel')
+const getResetPasswordToken=require('../models/employeeModel')
 //register employee
 exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
     const { name, email, password, pincode, role } = req.body;
@@ -57,62 +57,62 @@ exports.logOut = catchAsyncErrors(async (req, res, next) => {
         message: "Logged Out",
     });
 });
-// exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
-//     const employee = await Employee.findOne({ email: req.body.email });
-//     if (!employee) {
-//         return next(new errorHandler("Employee not found", 404));
-//     }
-//     const resetToken = employee.getResetPasswordToken();
+exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
+    const employee = await Employee.findOne({ email: req.body.email });
+    if (!employee) {
+        return next(new errorHandler("Employee not found", 404));
+    }
+    const resetToken = employee.getResetPasswordToken();
 
-//     await employee.save({ validateBeforeSave: false });
-//     const resetPasswordUrl = `${req.protocol}://${req.get("host")}/ap1/v1/password/${resetToken}`;
-//     const message = `Your password rest token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then please ignore`;
+    await employee.save({ validateBeforeSave: false });
+    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/ap1/v1/password/${resetToken}`;
+    const message = `Your password rest token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then please ignore`;
 
-//     try {
-//         await sendEmail({
-//             email: employee.email,
-//             subject: "Password recovery email",
-//             message,
-//         });
-//         res.status(200).json({
-//             success: true,
-//             message: `Email sent to ${employee.email} successfully`
-//         })
-//     } catch (error) {
-//         employee.resetPasswordToken = undefined;
-//         employee.resetPasswordExpire = undefined;
+    try {
+        await sendEmail({
+            email: employee.email,
+            subject: "Password recovery email",
+            message,
+        });
+        res.status(200).json({
+            success: true,
+            message: `Email sent to ${employee.email} successfully`
+        })
+    } catch (error) {
+        employee.resetPasswordToken = undefined;
+        employee.resetPasswordExpire = undefined;
 
-//         await employee.save({ validateBeforeSave: false });
-//         return next(new errorHandler(error.message, 500));
-//     }
-// })
+        await employee.save({ validateBeforeSave: false });
+        return next(new errorHandler(error.message, 500));
+    }
+})
 // Reset Password
-// exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
-//     const resetPasswordToken = crypto
-//         .createHash("sha256")
-//         .update(req.params.token)
-//         .digest("hex");
+exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
+    const resetPasswordToken = crypto
+        .createHash("sha256")
+        .update(req.params.token)
+        .digest("hex");
 
-//     const employee = await Employee.findOne({
-//         resetPasswordToken,
-//         resetPasswordExpire: { $gt: Date.now() },
-//     })
+    const employee = await Employee.findOne({
+        resetPasswordToken,
+        resetPasswordExpire: { $gt: Date.now() },
+    })
 
-//     if (!employee) {
-//         return next(new errorHandler("Reset Password token is not valid or has been expired", 401));
-//     }
-//     if (req.body.password !== req.body.confirmPassword) {
-//         return next(new errorHandler("Password does not match", 401));
-//     }
-//     employee.password = req.body.password;
-//     employee.resetPasswordToken = undefined;
-//     employee.resetPasswordExpire = undefined;
+    if (!employee) {
+        return next(new errorHandler("Reset Password token is not valid or has been expired", 401));
+    }
+    if (req.body.password !== req.body.confirmPassword) {
+        return next(new errorHandler("Password does not match", 401));
+    }
+    employee.password = req.body.password;
+    employee.resetPasswordToken = undefined;
+    employee.resetPasswordExpire = undefined;
 
-//     await employee.save();
-//     sendToken(employee, 200, res);
+    await employee.save();
+    sendToken(employee, 200, res);
 
 
-// });
+});
 // exports.getEmployeeDetails = catchAsyncErrors(async (req, res, next) => {
 //     const employee = await Employee.findById(req.employee.id);
 //     res.status(200).json({
@@ -120,20 +120,20 @@ exports.logOut = catchAsyncErrors(async (req, res, next) => {
 //         employee,
 //     })
 // })
-// exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
-//     const employee = await Employee.findById(req.employee.id).select("+password");
-//     const isPasswordMatched = await employee.comparePassword(req.body.oldPassword);
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+    const employee = await Employee.findById(req.employee.id).select("+password");
+    const isPasswordMatched = await employee.comparePassword(req.body.oldPassword);
 
-//     if (!isPasswordMatched) {
-//         return next(new errorHandler("Old Password is Incorrect", 400));
-//     }
-//     if (req.body.newPassword !== req.body.confirmPassword) {
-//         return next(new errorHandler("Password does not match", 400));
-//     }
-//     employee.password = req.body.newPassword;
-//     await employee.save();
-//     sendToken(employee, 200, res);
-// })
+    if (!isPasswordMatched) {
+        return next(new errorHandler("Old Password is Incorrect", 400));
+    }
+    if (req.body.newPassword !== req.body.confirmPassword) {
+        return next(new errorHandler("Password does not match", 400));
+    }
+    employee.password = req.body.newPassword;
+    await employee.save();
+    sendToken(employee, 200, res);
+})
 
 // exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 //     const newEmployeeData = {
@@ -173,23 +173,37 @@ exports.getSingleEmployee = catchAsyncErrors(async (req, res, next) => {
 })
 //Update Employee Role
 exports.updateEmployeeRole = catchAsyncErrors(async (req, res, next) => {
-    const newEmployeeData = {
-        name: req.body.name,
-        email: req.body.email,
-        role: req.body.role,
-    };
-    const employee = await Employee.findByIdAndUpdate(req.params.id, newEmployeeData, {
-        new: true,
-        runValidators: true,
-    });
+    const employeeId = req.params.id;
+    const { name, email, role, childId } = req.body;
+  
+    const updatedEmployee = await Employee.findByIdAndUpdate(
+      employeeId,
+      {
+        $push: { children: childId },
+        $set: { name, email, role },
+      },
+      { new: true, runValidators: true }
+    );
+  
+    if (!updatedEmployee) {
+      // Handle the case where the employee is not found
+      return res.status(404).json({
+        success: false,
+        message: "Employee not found",
+      });
+    }
+  
     res.status(200).json({
-        success: true,
-        employee
-    })
-
-
-    sendToken(employee, 200, res);
-});
+      success: true,
+      employee: updatedEmployee,
+    });
+  
+    sendToken(updatedEmployee, 200, res);
+  });
+  
+  
+  
+  
 
 // //Delete Employee
 
@@ -213,4 +227,22 @@ exports.getCase = catchAsyncErrors(async (req, res, next) => {
     const {id, pincode} = await req.user;
     
     
+})
+
+exports.getEmployeeWithRole = catchAsyncErrors(async (req, res, next) => {
+    const role = req.params.role;
+
+    if(role !== 1 && role !== 2 && role != 3){
+        res.status(404).json({
+            success: false,
+            message: "Invalid Role"
+        })
+    }
+
+    const employees = await Employee.find({ role });
+
+    res.status(200).json({
+        success: true,
+        employees,
+    })
 })

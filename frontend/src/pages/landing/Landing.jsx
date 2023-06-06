@@ -13,6 +13,13 @@ import proctor1 from '../../Images/children-love.webp';
 import logo from '../../Images/logo.jpg'
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner'
+import ProtectedRoutes from '../Protected/ProtectedRoutes';
+
+// const ROLES = {
+// 	GROUND_WORKER: 3,
+// 	CASE_MANAGER: 1,
+// 	OPERATION_MANAGER: 2
+// }
 
 const featureList = [
 	'Face Verification',
@@ -27,6 +34,7 @@ const featureList = [
 //INSTITUTE TYPE 1
 
 const NavLinks = () => (
+
 	<React.Fragment>
 		<p>
 			<a href="#features">Features</a>
@@ -60,41 +68,74 @@ const Navbar = () => {
 	);
 };
 
-const Landing = () => {
+const Landing = ({ role, roleset }) => {
+	let initialRender = true;
 	const [signIn, toggle] = React.useState(true);
 	const [errorlogin, seterrorlogin] = useState(false);
+	const navigate = useNavigate();
+	useEffect(() => {
+		if(initialRender === false || role){
+			console.log("navigating")
+			navigate('/protected')
+		}
+		else{
+			console.log("set to false")
+			console.log(role)
+			initialRender = false;
+		}
+		
+	}, [role])
 	// const navigate = useNavigate();
 
-	// const signInFunc = (e) => {
-	// 	e.preventDefault();
-	// 	setLoading(true);
-	// 	// console.log(loading)
-	// 	const senddata = {
+	const signInFunc = async (e) => {
+		e.preventDefault();
 
-	// 		"UserName": username,
-	// 		"Password": password,
+		const details = {
+			email,
+			password
+		}
 
-	// 	}
-	// 	// console.log(senddata);
+		await axios.post("http://localhost:4000/api/v1/login", details)
+			.then(async (res) => {
+				const checkRole = res.data.message.role
+				await roleset(checkRole)
+			})
+			.catch(e => console.log(e))
+		// axios.post('http://localhost:4000/api/v1/login', senddata).then((response) => {
+		// 		console.log(response)
+		// 		// if (response. == "Invalid username or password") {
+		// 		// 	console.log("incorrect login")
+		// 		// 	seterrorlogin(true);
+		// 		// }
+		// 		// if (response.data.token) {
+		// 		// 	localStorage.setItem("login", JSON.stringify(response.data));
+		// 		// 	// console.log(loading)
 
-	// 	axios
-	// 		.post('http://lmsapiv01.azurewebsites.net/login', senddata)
-	// 		.then((response) => {
-	// 			setLoading(false);
-	// 			console.log(response)
-	// 			if (response.data.data == "Invalid username or password") {
-	// 				console.log("incorrect login")
-	// 				seterrorlogin(true);
-	// 			}
-	// 			if (response.data.token) {
-	// 				localStorage.setItem("login", JSON.stringify(response.data));
-	// 				// console.log(loading)
+		// 		// 	window.location.reload();
+		// 		// }
+		// 		return response.data;
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err)
+		// 	});
+		// axios
+		// 	.post('http://lmsapiv01.azurewebsites.net/login', senddata)
+		// 	.then((response) => {
+		// 		setLoading(false);
+		// 		console.log(response)
+		// 		if (response.data.data == "Invalid username or password") {
+		// 			console.log("incorrect login")
+		// 			seterrorlogin(true);
+		// 		}
+		// 		if (response.data.token) {
+		// 			localStorage.setItem("login", JSON.stringify(response.data));
+		// 			// console.log(loading)
 
-	// 				window.location.reload();
-	// 			}
-	// 			return response.data;
-	// 		});
-	// }
+		// 			window.location.reload();
+		// 		}
+		// 		return response.data;
+		// 	});
+	}
 
 	// const signUpFunc = (e) => {
 	// 	e.preventDefault();
@@ -168,57 +209,57 @@ const Landing = () => {
 	const [confirm, setConfirm] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [url, setUrl] = useState("");
-	const [image,setImage]=useState("");
+	const [image, setImage] = useState("");
 	let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	// const submitImage = () => {
-    //     setLoading(true)
-    //     // const [loading, setLoading] = useState(false)
+	//     setLoading(true)
+	//     // const [loading, setLoading] = useState(false)
 
-    //     let userid = (JSON.parse(localStorage.getItem('login')).user.UserId).toString();
-    //     // console.log(userid);
-    //     let typeid = (JSON.parse(localStorage.getItem('login')).user.TypeId)
-    //     const data = new FormData()
-    //     data.append("file", image)
-    //     data.append("upload_preset", "Inheritance")
-    //     data.append("cloud_name", "dugkqpzgq")
+	//     let userid = (JSON.parse(localStorage.getItem('login')).user.UserId).toString();
+	//     // console.log(userid);
+	//     let typeid = (JSON.parse(localStorage.getItem('login')).user.TypeId)
+	//     const data = new FormData()
+	//     data.append("file", image)
+	//     data.append("upload_preset", "Inheritance")
+	//     data.append("cloud_name", "dugkqpzgq")
 
-    //     fetch("https://api.cloudinary.com/v1_1/dugkqpzgq/image/upload", {
-    //         method: "post",
-    //         body: data
-    //     }
-    //     )
-            // .then((res) => res.json())
-            // .then((data) => {
-            //     setUrl(data.url)
-                // console.log(data.url);
-                // const sendData = {
-                //     "UserId": userid,
-                //     "UserName": username,
-                //     "Password": password,
-                //     "FirstName": firstname,
-                //     "LastName": lastname,
-                //     "EmailId": email,
-                //     "MobileNo": parseInt(mobile),
-                //     "LastLoginDateTime": "2022-11-27T00:00:00.000Z",
-                //     "DateOfBirth": "1974-07-13T00:00:00.000Z",
-                //     "Age": 17,
-                //     "TypeId": typeid,
-                //     "ActivationStatus": '0',
-                //     "Photo": data.url,
-                // };
+	//     fetch("https://api.cloudinary.com/v1_1/dugkqpzgq/image/upload", {
+	//         method: "post",
+	//         body: data
+	//     }
+	//     )
+	// .then((res) => res.json())
+	// .then((data) => {
+	//     setUrl(data.url)
+	// console.log(data.url);
+	// const sendData = {
+	//     "UserId": userid,
+	//     "UserName": username,
+	//     "Password": password,
+	//     "FirstName": firstname,
+	//     "LastName": lastname,
+	//     "EmailId": email,
+	//     "MobileNo": parseInt(mobile),
+	//     "LastLoginDateTime": "2022-11-27T00:00:00.000Z",
+	//     "DateOfBirth": "1974-07-13T00:00:00.000Z",
+	//     "Age": 17,
+	//     "TypeId": typeid,
+	//     "ActivationStatus": '0',
+	//     "Photo": data.url,
+	// };
 
-                // // console.log(sendData.Photo);
+	// // console.log(sendData.Photo);
 
-                // axios.post('https://lmsapiv01.azurewebsites.net/api/user', sendData).then(result => {
-                //     setLoading(false)
-                //     // console.log(result.data)
-                // });
+	// axios.post('https://lmsapiv01.azurewebsites.net/api/user', sendData).then(result => {
+	//     setLoading(false)
+	//     // console.log(result.data)
+	// });
 
 
-            // }).catch((err) => {
-            //     console.log(err);
-            // })
-    // }
+	// }).catch((err) => {
+	//     console.log(err);
+	// })
+	// }
 	return (
 		<React.Fragment>
 			<Navbar />
@@ -241,6 +282,7 @@ const Landing = () => {
 							strokeWidthSecondary={2} />
 					</div>)
 				: null}
+
 			<div className="section-type-landing-page">
 				<div className="section-fluid-main">
 					<div className="section-row">
@@ -313,13 +355,13 @@ const Landing = () => {
 							}
 							<Components.Input type='password' placeholder='Confirm Password' value={confpassword} onChange={(e) => setConfPassword(e.target.value)} required />
 							<div class="upload-btn-wrapper">
-                <button class="btn">Upload a file</button>
-                <input type="file" onChange={(e) => setImage(e.target.files[0])} name="myfile" />
-		
-            </div>
-            {/* <button className="btn">Upload a file</button>
+								<button class="btn">Upload a file</button>
+								<input type="file" onChange={(e) => setImage(e.target.files[0])} name="myfile" />
+
+							</div>
+							{/* <button className="btn">Upload a file</button>
             <input type="file" ></input> */}
-            <button /*onClick={submitImage}*/ className='file-button'>Upload image as profile Photo</button>
+							<button /*onClick={submitImage}*/ className='file-button'>Upload image as profile Photo</button>
 							<div class="selector">
 								<div class="selector-item">
 									<input type="radio" id="radio1" name="selector" value="2" class="selector-item_radio" onClick={(e) => setType(e.target.value)} />
@@ -333,11 +375,10 @@ const Landing = () => {
 							<Components.Button type="submit">Sign Up</Components.Button>
 						</Components.Form>
 					</Components.SignUpContainer>
-
 					<Components.SignInContainer signinIn={signIn}>
-						<Components.Form /*onSubmit={signInFunc}*/>
+						<Components.Form onSubmit={signInFunc}>
 							<Components.Title>Sign in</Components.Title>
-							<Components.Input type='text' placeholder='User Name' value={username} onChange={(e) => setUsername(e.target.value)} required />
+							<Components.Input type='text' placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
 							<Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
 							<Components.Button type="submit">Sign In</Components.Button>
 						</Components.Form>
@@ -351,7 +392,9 @@ const Landing = () => {
 								<Components.Paragraph>
 									To keep connected with us please login with your personal info
 								</Components.Paragraph>
-								<Components.GhostButton onClick={() => toggle(true)} >
+								<Components.GhostButton onClick={() => {
+									toggle(true)
+								}} >
 									Sign In
 								</Components.GhostButton>
 							</Components.LeftOverlayPanel>

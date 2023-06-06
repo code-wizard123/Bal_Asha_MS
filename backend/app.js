@@ -1,5 +1,7 @@
 const express= require('express');
 const app=express();
+const cors = require('cors');
+app.use(cors())
 const errorMiddleware=require('./middleware/error');
 const cookieParser=require('cookie-parser');
 app.use(express.json())

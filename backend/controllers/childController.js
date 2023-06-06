@@ -25,24 +25,35 @@ exports.getAllChilds = catchAsyncErrors(async (req, res) => {
     res.status(200).json({
         success: true,
         childs,
-        childCount
+        childCount,
     });
 });
+exports.getAllChildsPinCode = catchAsyncErrors(async (req, res) => {
+    const resultPerPage = 5;
+    const childCount = await Child.countDocuments();
+    const apiFeature = new ApiFeatures(Child.find(), req.query).search().filter().pagination(resultPerPage);
+    const childs = await apiFeature.query;
+    const children= await Child.find({ pinCode: req.query.pinCode });
+    // console.log(res.body);
+    res.status(200).json({
+        success: true,
+        childCount,
+        children
+    });
+});
+exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
+    const child = await Child.findById(req.params.id);
 
-// exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
-//     const child = await Child.findById(req.params.id);
+    if (!child) {
+      return next(new errorHandler("Child not found", 404));
+    }
 
-//     if (!child) {
-//       return next(new errorHandler("Child not found", 404));
-//     }
-
-//     res.status(200).json({
-//       success: true,
-//       child,
-//       childCount
-//     });
-//   });
-
+    res.status(200).json({
+      success: true,
+      child,
+      childCount
+    });
+  });
 
 // //Update Child Admin
 exports.updateChild = catchAsyncErrors(async (req, res, next) => {
@@ -72,17 +83,17 @@ exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
 
 
 });
-// exports.getOneChild=catchAsyncErrors(async(req,res)=>{
-//     const child= await Child.findById(req.params.id);
-//     if(!child)
-//     {
-//         return next(new errorHandler("Child Not found",404));
-//     }
-//     res.status(200).json({
-//         success:true,
-//         child
-//     });
-// });
+exports.getOneChild=catchAsyncErrors(async(req,res)=>{
+    const child= await Child.findById(req.params.id);
+    if(!child)
+    {
+        return next(new errorHandler("Child Not found",404));
+    }
+    res.status(200).json({
+        success:true,
+        child
+    });
+});
 
 // exports.createChildReview=catchAsyncErrors(async(req,res,next)=>{
 //     const {rating,comment,childId}=req.body;
