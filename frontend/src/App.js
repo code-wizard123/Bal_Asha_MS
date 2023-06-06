@@ -7,6 +7,7 @@ import {
   GroundWorker,
   ActionLeft,
   ProcessDone,
+  OperationWorker,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -28,6 +29,7 @@ const App = () => {
           <Route exact path="/GroundWorker" element={<GroundWorker />} />
           <Route exact path="/ActionLeft" element={<ActionLeft />} />
           <Route exact path="/ProcessDone" element={<ProcessDone />} />
+          {/* <Route exact path="/OperationWorker" element={<OperationWorker />} /> */}
 
           {/* <Route exact path="/" element={< ProtectedLanding Component={Opening} />} />
 					<Route exact path="/landing" element={<ProtectedLanding Component={Landing} />} />

@@ -18,13 +18,16 @@ const AddChild=()=>{
             console.log(err)
         })
     }
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle the form submission or navigate to a different page here
+  };
         return (
         <div>
             <div id="registration-form">
   <div class='fieldset'>
     <legend>Add a Child</legend>
-    {/* <form> */}
-    <div class="form">
+    <form onSubmit={handleSubmit}>
       <div class='row'>
         <label for='firstname'>Name</label>
         <input type="text" placeholder="First Name" name='firstname' id='firstname' data-required="true" data-error-message="Name is required"/>
@@ -72,12 +75,11 @@ const AddChild=()=>{
       </div>
       <br></br>
       <input type="submit" value="Submit" onclick={submitImage}/>
-    {/* </form> */}
+    </form>
     </div>
   </div>
 </div>
  
-</div>
 
 	);
 }
