@@ -4,29 +4,22 @@ import axios from "axios";
 import "./css/groundworker.css";
 import ChildImage from "../../Images/ChildImage.jpg";
 
-const GroundWorker = ({orphanageName ,handleName}) => {
+const GroundWorker = () => {
   const location = useLocation();
   const [children, setChildren] = useState([]);
 
   useEffect(() => {
-    const orphanageName = location.state && location.state.orphanageName;
-    console.log(orphanageName)
-    if (orphanageName) {
-       axios
-        .get(`http://localhost:4000/api/v1/childs/CCI?CCIName=Rahul's Orphanage`)
-        .then((response) => {
-          if (response.data && response.data.childs) {
-            setChildren(response.data.childs);
-            console.log("Manan");
-          } else {
-            console.log("Invalid response data:", response.data);
-          }
-        })
-        .catch((error) => {
-          console.log("API request error:", error);
-        });
-    }
-  }, [location.state]);
+    axios
+      .get("http://localhost:4000/api/v1/childs/CCI?CCIName=Rahul's Orphanage")
+      .then((response) => {
+        setChildren(response.data.children);
+        console.log(response.data);
+        console.log(children);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const calculateAge = (DateOfBirth) => {
     const birthDate = new Date(DateOfBirth);
@@ -41,25 +34,25 @@ const GroundWorker = ({orphanageName ,handleName}) => {
       <section className="shop contain">
         <h2 className="section-title">Orphanages</h2>
         <div className="shop-content">
-          {children.map((child) => (
-            <Link to="/ActionLeft" className="product-box" key={child._id}>
-              <img
-                src="https://images.unsplash.com/photo-1603185030522-05d4497bb180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kaWFuJTIwY2hpbGR8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
-                alt="Child Image"
-                className="product-img"
-              />
-              <h2 className="product-title">Name: {child.name}</h2>
-              <span className="price">Id: {child._id}</span>
-              <br />
-              <span className="price">Age: {calculateAge(child.DateOfBirth)}</span>
-              <br />
-              <span className="price">Gender: {child.gender}</span>
-              <br />
-              <span className="price">Category: {child.category}</span>
-              <br />
-              <span className="price">Found At: {child.CCI.name}</span>
-            </Link>
-          ))}
+          {children && children.length > 0 ? (
+            children.map((child) => (
+              <Link to="/ActionLeft" className="product-box" key={child._id}>
+                <img src={ChildImage} alt="Child Image" className="product-img" />
+                <h2 className="product-title">Name: {child.name}</h2>
+                <span className="price">Id: {child._id}</span>
+                <br />
+                <span className="price">Age: {calculateAge(child.DateOfBirth)}</span>
+                <br />
+                <span className="price">Gender: {child.gender}</span>
+                <br />
+                <span className="price">Category: {child.category}</span>
+                <br />
+                <span className="price">Found At: {child.CCI.name}</span>
+              </Link>
+            ))
+          ) : (
+            <p>No children available</p>
+          )}
         </div>
       </section>
     </div>
