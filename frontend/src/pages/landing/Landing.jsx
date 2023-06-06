@@ -68,28 +68,39 @@ const Navbar = () => {
 	);
 };
 
-const Landing = () => {
+const Landing = ({ role, roleset }) => {
+	let initialRender = true;
 	const [signIn, toggle] = React.useState(true);
 	const [errorlogin, seterrorlogin] = useState(false);
-	const [role, setRole] = useState()
+	const navigate = useNavigate();
+	useEffect(() => {
+		if(initialRender === false || role){
+			console.log("navigating")
+			navigate('/protected')
+		}
+		else{
+			console.log("set to false")
+			console.log(role)
+			initialRender = false;
+		}
+		
+	}, [role])
 	// const navigate = useNavigate();
 
 	const signInFunc = async (e) => {
 		e.preventDefault();
+
 		const details = {
 			email,
 			password
 		}
-		await axios.post("http://localhost:4000/api/v1/login", details)
-		.then((res) => {
-			const checkRole = res.data.message.role
-			setRole(checkRole)
 
-			if(role){
-				return <ProtectedRoutes role={role}/>
-			}
-		})
-		.catch(e => console.log(e))
+		await axios.post("http://localhost:4000/api/v1/login", details)
+			.then(async (res) => {
+				const checkRole = res.data.message.role
+				await roleset(checkRole)
+			})
+			.catch(e => console.log(e))
 		// axios.post('http://localhost:4000/api/v1/login', senddata).then((response) => {
 		// 		console.log(response)
 		// 		// if (response. == "Invalid username or password") {
@@ -271,6 +282,7 @@ const Landing = () => {
 							strokeWidthSecondary={2} />
 					</div>)
 				: null}
+
 			<div className="section-type-landing-page">
 				<div className="section-fluid-main">
 					<div className="section-row">
@@ -363,7 +375,6 @@ const Landing = () => {
 							<Components.Button type="submit">Sign Up</Components.Button>
 						</Components.Form>
 					</Components.SignUpContainer>
-
 					<Components.SignInContainer signinIn={signIn}>
 						<Components.Form onSubmit={signInFunc}>
 							<Components.Title>Sign in</Components.Title>

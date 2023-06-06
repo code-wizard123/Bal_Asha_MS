@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Opening,
   Landing,
@@ -8,8 +8,9 @@ import {
   ActionLeft,
   ProcessDone,
 } from "./pages";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
+import ProtectedRoutes from "./pages/Protected/ProtectedRoutes";
 // import ProtectedStudent from './Protected Routes/ProtectedStudent';
 // import ProtectedInstitute from './Protected Routes/ProtectedInstitute';
 // import ProtectedAdmin from './Protected Routes/ProtectedAdmin';
@@ -23,18 +24,23 @@ const ROLES = {
 }
 
 const App = () => {
+  const [role, setRole] = useState();
+
+  const handleRole = (role) => {
+    setRole(role);
+  }
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Opening />} />
-          <Route exact path="/landing" element={<Landing />} />
+          <Route exact path="/landing" element={<Landing role={role} roleset={handleRole}/>}/>
           <Route exact path="/CaseManager" element={<CaseManager />} />
           <Route exact path="/AddChild" element={<AddChild />} />
           <Route exact path="/GroundWorker" element={<GroundWorker />} />
           <Route exact path="/ActionLeft" element={<ActionLeft />} />
           <Route exact path="/ProcessDone" element={<ProcessDone />} />
-
+          <Route exact path="/protected" element={<ProtectedRoutes role={role}/>} />
           {/* <Route exact path="/" element={< ProtectedLanding Component={Opening} />} />
 					<Route exact path="/landing" element={<ProtectedLanding Component={Landing} />} />
 					<Route exact path="/logo" element={<ProtectedLanding Component={Opening2} />} />
