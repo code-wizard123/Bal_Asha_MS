@@ -37,8 +37,8 @@ const GroundWorker = ({orphanageName ,handleName}) => {
   };
 
   return (
-    <div>
-      <section className="shop contain">
+    <div class="animation">
+        <section className="shop contain">
         <h2 className="section-title">Orphanages</h2>
         <div className="shop-content">
           {children.map((child) => (
@@ -62,7 +62,9 @@ const GroundWorker = ({orphanageName ,handleName}) => {
           ))}
         </div>
       </section>
-    </div>
+
+
+      </div>
   );
 };
 
