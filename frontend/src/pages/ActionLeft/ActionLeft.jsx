@@ -1,6 +1,6 @@
 import React from "react";
 import './css/actionleft.css'
-import child from '../../Images/Child.jpg';
+import child from '../../Images/ChildImage.jpg';
 
 
 const ActionLeft=()=>{
