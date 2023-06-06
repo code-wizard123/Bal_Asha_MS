@@ -30,8 +30,8 @@ const GroundWorker = () => {
   };
 
   return (
-    <div>
-      <section className="shop contain">
+    <div class="animation">
+        <section className="shop contain">
         <h2 className="section-title">Orphanages</h2>
         <div className="shop-content">
           {children && children.length > 0 ? (
@@ -55,7 +55,9 @@ const GroundWorker = () => {
           )}
         </div>
       </section>
-    </div>
+
+
+      </div>
   );
 };
 

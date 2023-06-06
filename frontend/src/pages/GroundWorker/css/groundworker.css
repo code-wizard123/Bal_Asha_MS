@@ -11,8 +11,105 @@
     border-radius: 5px;
   }
 
-  body{
+  /* body{
     background-color: #372c2e;
+  } */
+
+  .animation{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow: hidden;
+  }
+
+  .bubbles{
+    position: relative;
+    display:flex;
+  }
+
+#r {
+  --i: 10;
+}
+
+ #a{
+    --i:11;
+  }
+#b {
+  --i: 12;
+}
+#c {
+  --i: 13;
+}
+#d {
+  --i: 14;
+}
+#e {
+  --i: 15;
+}
+#f {
+  --i: 16;
+}
+#g {
+  --i: 17;
+}
+#h {
+  --i: 18;
+}
+#i {
+  --i: 19;
+}
+#j {
+  --i: 20;
+}
+#k {
+  --i: 21;
+}
+#l {
+  --i: 22;
+}
+#m {
+  --i: 23;
+}
+#n {
+  --i: 24;
+}
+#o {
+  --i: 25;
+}
+#p {
+  --i: 26;
+}
+#q {
+  --i: 27;
+}
+  
+  .bubbles span{
+    position:relative;
+    width:30px;
+    height:30px;
+    background:#4fc3dc;
+    margin:0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #4fc3dc44,0 0 50px #4fc3dc,0 0 100px #4fc3dc;
+    animation:animate 15s linear infinite;
+    animation-duration: calc(100s/var(--i));
+  }
+
+  .bubbles span:nth-child(even)
+  {
+    background: #ff2d75;
+    box-shadow: 0 0 10px #ff2d7544,0 0 50px #ff2d75,0 0 100px #ff2d75;
+
+  }
+
+  @keyframes animate
+  {
+    0%{
+      transform:translateY(100vh) scale(0);
+    }
+    100%{
+      transform:translateY(-0100vh) scale(1);
+    }
   }
   
   .section-title {
