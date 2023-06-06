@@ -35,7 +35,7 @@ input {
 
 input[type="text"] {
 	background: transparent;
-	border: none;
+	border: 1px solid black;
 }
 
 input[type="password"] {

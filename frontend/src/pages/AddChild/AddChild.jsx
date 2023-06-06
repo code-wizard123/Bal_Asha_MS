@@ -26,7 +26,7 @@ const AddChild=()=>{
         <div>
             <div id="registration-form">
   <div class='fieldset'>
-    <legend>Add a Child</legend>
+    <h1 class="addChild">Enter the Child's Details</h1>
     <form onSubmit={handleSubmit}>
       <div class='row'>
         <label for='firstname'>Name</label>
@@ -45,7 +45,7 @@ const AddChild=()=>{
         <input type="text" placeholder="Family Details" name='FamilyDetails'/>
       </div>
       <div class='row'>
-        <label for="City">Ciyt</label>
+        <label for="City">City</label>
         <input type="text" placeholder="City" name='City'/>
       </div>
       <div class='row'>

@@ -1,76 +1,89 @@
-.contain{
-    position: relatuve;
-    /* top: 15%; */
-    /* left: 33.75%; */
-    z-index: 0;
-    width: 90%;
-    height: auto;
-    margin-left: 2.5rem;
-    padding:2rem;
-    background-color: rgb(62, 61, 61);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgb(32, 32, 32);
-    border-radius: 5px;
-}
-.section-title{
-    font-size: 1.5rem;
-    color:blue;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 1.8rem;
+@media (max-width: 768px) {
+
+    /* Adjust styles for smaller screens */
+    .shop-content {
+        justify-content: flex-start;
+    }
+
+    .product-box {
+        width: 100%;
+    }
 }
 
+@media (max-width: 480px) {
 
-.shop{
-    margin-top:2rem;
-}
+    /* Adjust styles for even smaller screens */
+    .shop-content {
+        padding: 10px;
+    }
 
-.shop-content{
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,auto));
-    gap:1.5rem
-}
-
-section{
-    padding:4rem 0 3rem;
+    .product-box {
+        margin: 10px;
+    }
 }
 
-.product-img{
-    height:9.5rem;
-    width:100%;
-    border-radius: 5px;
-    margin-bottom: 0.5rem;
-}
-.product-box{
-    position:relative;
-    background:black;
-    padding:10px;
-    border-radius: 5px;
-    transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
-    width:10rem;
-    height:20rem;
-}
-.product-title{
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom:0.8rem;
+/* orphanages.css */
+.shop {
+  text-align: center;
+  padding: 40px;
+  background-color: black;
 }
 
-.price{
-    font-weight: 500;
-}
-.product-box:hover{
-    /* background:var(--bg-color); */
-    background: rgb(222, 235, 220);
-    border:3px solid black;
-    box-shadow: 0 8px 32px hsla(0.75,0.82,0.165,1);
-    transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+.section-title {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 20px;
 }
 
-.product-box:hover .product-title,.product-box:hover .price{
-    color:#141414;
+.shop-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.product-box:hover .img{
-    border: 3px solid black;
+
+.product-box {
+  margin: 20px;
+  padding: 20px;
+  background-color: #afba4c;
+  box-shadow: 0px 0px 10px rgba(64, 213, 45, 0.1);
+  border-radius: 10px;
+  max-width: 300px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-box:hover {
+  transform: scale(1.05);
+}
+
+.product-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  color:#d967e6
+}
+
+.price {
+  font-size: 16px;
+  color: #4CAF50;
+}
+
+/* Additional Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.shop {
+  animation: fadeIn 1s ease-in-out;
 }

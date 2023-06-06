@@ -26,10 +26,10 @@ const ActionLeft=()=>{
 </nav><br></br><br></br>
 <div class="profile">
     <img src={child} alt="Child Avatar"/>
-    <h2>John Doe</h2>
+    <h2>Aditi Sharma</h2>
     <p><label>Age:</label> 7 years</p>
     <p><label>Gender:</label> Female</p>
-    <p><label>Action Left:</label>Photo Publication1,Photo Publication2,TV Telecasting,Police report,MER,CSR</p>
+    <p><label>Processes Left:</label>Photo Publication1,Photo Publication2,TV Telecasting,Police report,MER,CSR</p>
     <p><label>KeyCase:</label>She is a special need child.The child was taken charge by Kurla Railway police station on 12/08/2019 and admitted to Additional observation Home</p>
   </div>
 </div>
