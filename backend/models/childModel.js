@@ -39,14 +39,30 @@ const childSchema = new Schema({
       }
     }
   ],
-  pinCode: {
-    type: Number,
-    required: true
-  },
-  CCI: {
-    type: String,
-    required: true
-  },
+  CCI: [
+    {
+      name:{
+        type:String,
+        required:true
+      },
+      pinCode: {
+        type: Number,
+        required: true
+      },
+      CCIdescription:{
+        type:String,
+        required:true
+      },
+      public_id: {
+        type: String,
+        default: "Dummy"
+      },
+      url: {
+        type: String,
+        default: "dummy"
+      }
+    }
+  ],
   actionLeft: {
     type: [String],
     default: function () {

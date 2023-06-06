@@ -8,6 +8,7 @@ import {
   ActionLeft,
   ProcessDone,
   OperationWorker,
+  Orphanages
 } from "./pages";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -26,9 +27,13 @@ const ROLES = {
 
 const App = () => {
   const [role, setRole] = useState();
+  const [orphanageName, setOrphanageName] = useState("");
 
   const handleRole = (role) => {
     setRole(role);
+  };
+  const handleOrphanageName = (orphanageName) => {
+    setOrphanageName(orphanageName);
   };
   return (
     <div className="App">
@@ -42,9 +47,10 @@ const App = () => {
           />
           <Route exact path="/CaseManager" element={<CaseManager />} />
           <Route exact path="/AddChild" element={<AddChild />} />
-          <Route exact path="/GroundWorker" element={<GroundWorker />} />
+          <Route exact path="/GroundWorker" element={<GroundWorker   orphanageName={orphanageName} handleName={handleOrphanageName}/>}    />
           <Route exact path="/ActionLeft" element={<ActionLeft />} />
           <Route exact path="/ProcessDone" element={<ProcessDone />} />
+          <Route exact path="/Orphanages" element={<Orphanages />} />
           <Route
             exact
             path="/protected"

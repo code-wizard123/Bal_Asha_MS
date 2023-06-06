@@ -28,19 +28,28 @@ exports.getAllChilds = catchAsyncErrors(async (req, res) => {
         childCount,
     });
 });
-exports.getAllChildsPinCode = catchAsyncErrors(async (req, res) => {
-    const resultPerPage = 5;
-    const childCount = await Child.countDocuments();
-    const apiFeature = new ApiFeatures(Child.find(), req.query).search().filter().pagination(resultPerPage);
-    const childs = await apiFeature.query;
-    const children= await Child.find({ pinCode: req.query.pinCode });
-    // console.log(res.body);
+exports.getAllCCIsByPinCode = catchAsyncErrors(async (req, res) => {
+    const pinCode = req.query.pinCode;
+  
+    const CCIs = await Child.distinct("CCI", { "CCI.pinCode": pinCode });
+  
     res.status(200).json({
-        success: true,
-        childCount,
-        children
+      success: true,
+      CCIs,
     });
-});
+  });
+  exports.getChildrenByCCI = catchAsyncErrors(async (req, res) => {
+    const CCIName = req.query.CCIName;
+  
+    const children = await Child.find({ "CCI.name": CCIName });
+  
+    res.status(200).json({
+      success: true,
+      children,
+    });
+  });
+  
+  
 exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
 
