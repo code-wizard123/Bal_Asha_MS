@@ -43,6 +43,7 @@ exports.loginEmployee = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: employee,
+        token: employee.getJWTToken()
     });
     sendToken(employee, 200, res);
 })

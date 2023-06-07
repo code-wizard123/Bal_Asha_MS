@@ -3,11 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./css/groundworker.css";
 import ChildImage from "../../Images/ChildImage.jpg";
+import useDetails from "../../hooks/useDetails";
 
-const GroundWorker = () => {
+const GroundWorker = ({orphanageName ,handleName}) => {
+  const details = useDetails();
   const location = useLocation();
   const [children, setChildren] = useState([]);
-
+  console.log(details)
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/v1/childs/CCI?CCIName=Rahul's Orphanage")
