@@ -9,7 +9,9 @@ const ActionLeft = () => {
   useEffect(() => {
     const getChildDetails = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/groundWorker/childs/647ef57bd1e250a87a4a817a");
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/groundWorker/childs/64804f46bfe26d82fa5047a7"
+        );
         const { child } = response.data;
         setChildDetails(child);
       } catch (error) {
@@ -24,14 +26,31 @@ const ActionLeft = () => {
     return <div>Loading...</div>;
   }
 
-  const { name, DateOfBirth, gender, actionLeft, keyCase , familyDetails } = childDetails;
+  const { name, DateOfBirth, gender, actionLeft, keyCase, familyDetails } =
+    childDetails;
+
   const calculateAge = (DateOfBirth) => {
     const birthDate = new Date(DateOfBirth);
     const currentDate = new Date();
     const ageInMillis = currentDate - birthDate;
-    const ageInYears = Math.floor(ageInMillis / (1000 * 60 * 60 * 24 * 365.25)); // Assuming a year is 365.25 days
+    const ageInYears = Math.floor(
+      ageInMillis / (1000 * 60 * 60 * 24 * 365.25) // Assuming a year is 365.25 days
+    );
     return ageInYears;
   };
+
+  const sendChildDetailsEmail = async () => {
+    try {
+      await axios.post("http://localhost:4000/api/v1/sendEmail", {
+        emailId: "manavshah.2003.ms@gmail.com", // Specify the email address to which you want to send the child details
+        childDetails,
+      });
+      console.log("Email sent successfully");
+    } catch (error) {
+      console.log("Email sending error:", error);
+    }
+  };
+
   return (
     <div>
       <nav role="navigation">
@@ -44,7 +63,8 @@ const ActionLeft = () => {
 
           <ul id="menu">
             {actionLeft.map((action, index) => (
-              <a href="#" key={index}>
+              <a href="#" key={index} onClick={sendChildDetailsEmail}>
+                {/* Call sendChildDetailsEmail when clicked */}
                 <li>{action}</li>
               </a>
             ))}

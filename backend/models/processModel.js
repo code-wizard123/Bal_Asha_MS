@@ -5,6 +5,7 @@ const generateProcessSchema = (actionLeft) => {
     child: { type: mongoose.Schema.ObjectId, ref: "Child", required: true },
     DateofAdmission: {
       type: Date,
+      default:Date.now
       // required: true
     },
     enrollmentDate: {
