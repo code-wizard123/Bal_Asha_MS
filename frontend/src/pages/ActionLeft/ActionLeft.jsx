@@ -5,7 +5,7 @@ import child from '../../Images/ChildImage.jpg';
 
 const ActionLeft=()=>{
     return (
-		<div>
+		<div class="animate">
 <nav role="navigation">
   <div id="menuToggle">
     <input type="checkbox" />
@@ -26,6 +26,28 @@ const ActionLeft=()=>{
 </nav><br></br><br></br>
 <div class="profile">
     <img src={child} alt="Child Avatar"/>
+    <div class="bubbles">
+        <span id="a"></span>
+        <span id="b"></span>
+        <span id="n"></span>
+        <span id="r"></span>
+        <span id="d"></span>
+        <span id="m"></span>
+        <span id="i"></span>
+        <span id="f"></span>
+        <span id="j"></span>
+        <span id="k"></span>
+        <span id="l"></span>
+        <span id="o"></span>
+        <span id="h"></span>
+        <span id="k"></span>
+        <span id="e"></span>
+        <span id="q"></span>
+        <span id="p"></span>
+        <span id="g"></span>
+        <span id="c"></span>
+        <span id="p"></span>
+    </div>
     <h2>Aditi Sharma</h2>
     <p><label>Age:</label> 7 years</p>
     <p><label>Gender:</label> Female</p>

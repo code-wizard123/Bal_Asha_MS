@@ -9,8 +9,8 @@ const Opening = () => {
 				<div className="untitled__slide">
 					<div className="untitled__slideBg"></div>
 					<div className="untitled__slideContent">
-						<span>Want to </span>
-						<span>Improve your Score?</span>
+						<span>Every vulnerable and abandoned child</span>
+						<span>has a future at BalAsha Trust</span>
 						<a className="button" href="/landing">Sign Up</a>
 					</div>
 				</div>
@@ -18,24 +18,24 @@ const Opening = () => {
 					<div className="untitled__slideBg"></div>
 					<div className="untitled__slideContent">
 
-						<span>We Got</span>
-						<span>This Covered</span>
+						<span>We rescue abandoned children</span>
+						<span>and give them a safe home,love and care</span>
 						<a className="button" href="/landing" >Sign Up</a>
 					</div>
 				</div>
 				<div className="untitled__slide">
 					<div className="untitled__slideBg"></div>
 					<div className="untitled__slideContent">
-						<span> An Online Test Platform</span>
-						<span>for All your Competitive Exams</span>
+						<span>Serving children in communities with</span>
+						<span>Education,Nutrition and Health</span>
 						<a className="button" href="/landing">Sign Up</a>
 					</div>
 				</div>
 				<div className="untitled__slide">
 					<div className="untitled__slideBg"></div>
 					<div className="untitled__slideContent">
-						<span>Today you show this Test</span>
-						<span>who the Boss is</span>
+						<span>Finding Forever Adoptive Families</span>
+						<span>For Children</span>
 						<a className="button" href="/landing" target="/black">Sign Up</a>
 					</div>
 				</div>
