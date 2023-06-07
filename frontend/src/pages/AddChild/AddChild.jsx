@@ -13,6 +13,8 @@ const AddChild = () => {
   const [category, setCategory] = useState("Abandoned");
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [EnrollmentDate, setEnrollmentDate] = useState("");
+  const [DateOfAdmission, setDateOfAdmission] = useState("");
 
   const submitImage = async () => {
     const formData = new FormData();
@@ -47,18 +49,26 @@ const AddChild = () => {
       pinCode: parseInt(pinCode),
       images: images ? images.url : "", // Assuming the image URL is stored in the 'url' property
     };
-
+    let childID = ""
     try {
       const response = await axios.post(
         "http://localhost:4000/api/v1/admin/child/new",
         sendData
       );
       console.log(response.data);
+      childID = response.data.child._id;
+
+      const response2 = await axios.post(
+        "http://localhost:4000/api/v1/process/new",
+        { child: childID, DateOfAdmission, EnrollmentDate}
+      )
+      console.log(response2.data)
       // Handle successful child creation
     } catch (error) {
       console.log("API request error:", error);
       // Handle error case
     }
+
 
     setLoading(false);
   };
@@ -98,6 +108,7 @@ const AddChild = () => {
                 onChange={(e) => setKeyCase(e.target.value)}
                 required
               />
+
             </div>
             <div className="row">
               <label htmlFor="FamilyDetails">Family Details</label>
@@ -129,6 +140,27 @@ const AddChild = () => {
                 <option value="Others">Others</option>
               </select>
             </div>
+            <div className="row">
+              <label htmlFor="EnrollmentDate">Enrollment Date</label>
+              <input
+                type="date"
+                placeholder="Enrollment Date"
+                value={EnrollmentDate}
+                onChange={(e) => setEnrollmentDate(e.target.value)}
+                required
+              />
+            </div>
+            <div className="row">
+              <label htmlFor="DateOfAdmission">Date of Admission</label>
+              <input
+                type="date"
+                placeholder="Date of Admission"
+                value={DateOfAdmission}
+                onChange={(e) => setDateOfAdmission(e.target.value)}
+                required
+              />
+            </div>
+
             <div className="row dropdown">
               <label htmlFor="Category">Category</label>
               <select
