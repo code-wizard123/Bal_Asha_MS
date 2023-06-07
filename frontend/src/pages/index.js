@@ -6,4 +6,5 @@ export { default as GroundWorker } from "./GroundWorker/GroundWorker";
 export { default as ActionLeft } from "./ActionLeft/ActionLeft";
 export { default as ProcessDone } from "./ProcessDone/ProcessDone";
 export { default as Orphanages } from "./Orphanages/Orphanages";
+export { default as Landing } from "./landing/Landing";
 // export { default as OperationWorker } from "./OperationWorker/OperationWorker";

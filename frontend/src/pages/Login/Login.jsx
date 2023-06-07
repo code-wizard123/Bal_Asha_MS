@@ -34,6 +34,8 @@ const Login = () => {
                 // Redirect the user based on their role
                 if (message.role === 1) {
                     navigate('/GroundWorker'); // Redirect to admin dashboard
+                }else if(message.role === 2){
+                    navigate('/OperationManager');
                 } else if (message.role === 3) {
                     navigate('/CaseManager'); // Redirect to user dashboard
                 }

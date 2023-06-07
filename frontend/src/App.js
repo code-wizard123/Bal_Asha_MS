@@ -8,7 +8,8 @@ import {
   ProcessDone,
   OperationWorker,
   Orphanages,
-  Login
+  Login,
+  Landing
 } from "./pages";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -43,7 +44,8 @@ const App = () => {
           <Route
             exact
             path="/landing"
-            element={<Login role={role} roleset={handleRole} />}
+            // element={<Login role={role} roleset={handleRole} />}
+            element={<Landing />} 
           />
           <Route exact path="/CaseManager" element={<CaseManager />} />
           <Route exact path="/AddChild" element={<AddChild />} />
