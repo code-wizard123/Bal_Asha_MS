@@ -9,9 +9,10 @@ const ActionLeft = () => {
   useEffect(() => {
     const getChildDetails = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/groundWorker/childs/647ef57bd1e250a87a4a817a");
+        const response = await axios.get("http://localhost:4000/api/v1/groundWorker/childs/64805460e72fe213c57630bc");
         const { child } = response.data;
         setChildDetails(child);
+        console.log(child)
       } catch (error) {
         console.log("API request error:", error);
       }

@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "./css/processdone.css";
+import axios from 'axios'
 
-const ProcessDone = () => {
+const ProcessDone = ({ childId }) => {
+  const [processId, setProcessId] = useState("");
   const [image, setImage] = useState("");
   const [selectedAction, setSelectedAction] = useState("");
   const [actionLeftOptions, setActionLeftOptions] = useState([]);
+  const [publicId, setPublicId] = useState("")
+  const [url, setUrl] = useState("")
+  const [date, setDate] = useState()
 
   useEffect(() => {
     // Fetch the process details from the server to get the actionLeft options
     const fetchProcessDetails = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/process/me"); // Update the API endpoint with your server URL
+        const response = await fetch("http://localhost:4000/api/v1/process/64805460e72fe213c57630bc"); // Update the API endpoint with your server URL
         const data = await response.json();
-        const { actionLeft } = data.process;
+        const { actionLeft, _id } = data.process[data.process.length - 1];
+        setProcessId(_id)
         setActionLeftOptions(actionLeft);
-        console.log(actionLeft);
       } catch (error) {
         console.log("API request error:", error);
       }
@@ -32,17 +37,41 @@ const ProcessDone = () => {
     fetch("https://api.cloudinary.com/v1_1/dmomonuiu/image/upload", { method: "post", body: data })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data)
+        setPublicId(data.public_id)
+        setUrl(data.url)
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the form submission or navigate to a different page here
+    const updateData = {
+      child: "64805460e72fe213c57630bc",
+    };
+
+    updateData[selectedAction] = {
+      dateRegistered: date,
+      public_id: publicId,
+      url
+    }
+
+    if(url && publicId){
+      try {
+        const response = await axios.put(`http://localhost:4000/api/v1/admin/process/${processId}`, updateData);
+        console.log(response.data) // Process the response data as needed
+      } catch (error) {
+        console.log("Axios PUT request error:", error);
+      }
+    }
   };
+
+  const handleSelectAction = (e) => {
+    const action = e.target.value;
+    setSelectedAction(action);
+  }
 
   return (
     <div className="form-container">
@@ -50,7 +79,7 @@ const ProcessDone = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="date">Date of Completion:</label>
-          <input type="date" id="birthdate" name="birthdate" />
+          <input type="date" id="birthdate" name="birthdate" value={date} onChange={(e) => setDate(e.target.value)}/>
         </div>
         <div className="form-group">
           <label htmlFor="proof">Proof</label>
@@ -59,7 +88,12 @@ const ProcessDone = () => {
         </div>
         <div className="form-group">
           <label htmlFor="action">Action:</label>
-          <select id="action" name="action" value={selectedAction} onChange={(e) => setSelectedAction(e.target.value)}>
+          <select
+            id="action"
+            name="action"
+            value={selectedAction}
+            onChange={handleSelectAction}
+          >
             <option value="">Select an action</option>
             {actionLeftOptions.map((option, index) => (
               <option key={index} value={option}>

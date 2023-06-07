@@ -1,6 +1,6 @@
 const Employee = require("../models/employeeModel");
 const Child = require('../models/childModel');
-const Process=require('../models/processModel');
+const Process = require('../models/processModel');
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
@@ -41,12 +41,12 @@ const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 // //Create New Process
 exports.newProcess = catchAsyncErrors(async (req, res, next) => {
   const { child, DateofAdmission, enrollmentDate } = req.body;
-  
+
   // Retrieve the child and its actionLeft attribute
   const childObj = await Child.findById(child);
   const actionLeft = childObj.actionLeft;
   // console.log(actionLeft);
-  
+
   // Create a new process with the retrieved actionLeft attribute
   const process = await Process.create({ child, DateofAdmission, enrollmentDate, actionLeft });
 
@@ -56,42 +56,39 @@ exports.newProcess = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-  
-  
-
-// exports.getSingleProcess = catchAsyncErrors(async (req, res, next) => {
-//     const process=await Process.findById(req.params.id).populate("employee","name email");
-//     if(!process)
-//     {
-//         return next(new errorHandler("Process not found with this Id",404));
-//     }
-//     res.status(200).json({
-//         success: true,
-//         process
-//     });
-// });
-
-// //get logged in child processs
-exports.myProcess = catchAsyncErrors(async (req, res, next) => {
-    const { child } = req.body;
-    const childId = child._id; // Access the child ID from the request body
-  
-    const process = await Process.find({ child: childId });
-    res.status(200).json({
-      success: true,
-      process
-    });
-  });
-  
-
-// //get all  processs (admin)
-exports.getAllProcess = catchAsyncErrors(async (req, res, next) => {
-    const process=await Process.find();
-
+exports.getSingleProcess = catchAsyncErrors(async (req, res, next) => {
+    const process = await Process.find({ child: req.params.childId});
+    if(!process)
+    {
+        return next(new errorHandler("Process not found with this Id",404));
+    }
     res.status(200).json({
         success: true,
         process
     });
+});
+
+// //get logged in child processs
+exports.myProcess = catchAsyncErrors(async (req, res, next) => {
+  const { child } = req.body;
+  const childId = child._id; // Access the child ID from the request body
+
+  const process = await Process.find({ child: childId });
+  res.status(200).json({
+    success: true,
+    process
+  });
+});
+
+
+// //get all  processs (admin)
+exports.getAllProcess = catchAsyncErrors(async (req, res, next) => {
+  const process = await Process.find();
+
+  res.status(200).json({
+    success: true,
+    process
+  });
 });
 
 
@@ -99,7 +96,7 @@ exports.getAllProcess = catchAsyncErrors(async (req, res, next) => {
 // Update the process with new parameters
 exports.updateProcess = catchAsyncErrors(async (req, res, next) => {
   const process = await Process.findById(req.params.id);
-
+  const child = await Child.findById(process.child)
   // Update the parameters with new values if they exist in ActionLeft or ActionDone
   const allowedAttributes = [...process.ActionDone, ...process.actionLeft];
   const updateParams = Object.keys(req.body).filter(param => allowedAttributes.includes(param));
@@ -123,10 +120,14 @@ exports.updateProcess = catchAsyncErrors(async (req, res, next) => {
     }
   });
 
+  child.actionLeft = child.actionLeft.filter((param) => !updateParams.includes(param));
+
   await process.save({ runValidatorsBeforeSave: false });
+  await child.save({ runValidatorsBeforeSave: false });
 
   res.status(200).json({
     success: true,
+    child,
     process
   });
 });
@@ -134,15 +135,14 @@ exports.updateProcess = catchAsyncErrors(async (req, res, next) => {
 
 
 exports.deleteProcess = catchAsyncErrors(async (req, res, next) => {
-    const process=await Process.findById(req.params.id);
-    if(!process)
-    {
-        return next(new errorHandler("Process not found with this Id",404));
-    }
-    await Process.deleteOne({ _id: req.params.id });
-    
-    res.status(200).json({
-        success: true,
-        process
-    });
+  const process = await Process.findById(req.params.id);
+  if (!process) {
+    return next(new errorHandler("Process not found with this Id", 404));
+  }
+  await Process.deleteOne({ _id: req.params.id });
+
+  res.status(200).json({
+    success: true,
+    process
+  });
 });

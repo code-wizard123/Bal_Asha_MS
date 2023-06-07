@@ -7,4 +7,5 @@ export { default as ActionLeft } from "./ActionLeft/ActionLeft";
 export { default as ProcessDone } from "./ProcessDone/ProcessDone";
 export { default as Orphanages } from "./Orphanages/Orphanages";
 export { default as Landing } from "./landing/Landing";
+export { default as SetFlow } from "./ReactFlow/SetFlow";
 // export { default as OperationWorker } from "./OperationWorker/OperationWorker";

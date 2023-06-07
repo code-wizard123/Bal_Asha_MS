@@ -9,7 +9,8 @@ import {
   OperationWorker,
   Orphanages,
   Login,
-  Landing
+  Landing,
+  SetFlow
 } from "./pages";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -53,6 +54,7 @@ const App = () => {
           <Route exact path="/ActionLeft" element={<ActionLeft />} />
           <Route exact path="/ProcessDone" element={<ProcessDone />} />
           <Route exact path="/Orphanages" element={<Orphanages />} />
+          <Route exact path="/ReactFlow" element={<SetFlow />} />
           <Route
             exact
             path="/protected"
