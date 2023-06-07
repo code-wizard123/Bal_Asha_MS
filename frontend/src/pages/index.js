@@ -1,5 +1,5 @@
 export { default as Opening } from "./opening/Opening";
-export { default as Landing } from "./landing/Landing";
+export { default as Login } from "./Login/Login";
 export { default as CaseManager } from "./CaseManager/CaseManager";
 export { default as AddChild } from "./AddChild/AddChild";
 export { default as GroundWorker } from "./GroundWorker/GroundWorker";
