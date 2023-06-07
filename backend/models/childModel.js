@@ -43,15 +43,15 @@ const childSchema = new Schema({
     {
       name:{
         type:String,
-        required:true
+        // required:true
       },
       pinCode: {
         type: Number,
-        required: true
+        // required: true
       },
       CCIdescription:{
         type:String,
-        required:true
+        // required:true
       },
       public_id: {
         type: String,

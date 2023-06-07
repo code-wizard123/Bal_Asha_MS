@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Opening,
-  Landing,
   CaseManager,
   AddChild,
   GroundWorker,
@@ -9,6 +8,9 @@ import {
   ProcessDone,
   OperationWorker,
   Orphanages,
+  Login,
+  Landing,
+  SetFlow,
   CaughtUp,
   Download,
 } from "./pages";
@@ -45,7 +47,8 @@ const App = () => {
           <Route
             exact
             path="/landing"
-            element={<Landing role={role} roleset={handleRole} />}
+            // element={<Login role={role} roleset={handleRole} />}
+            element={<Landing />}
           />
           <Route exact path="/CaseManager" element={<CaseManager />} />
           <Route exact path="/AddChild" element={<AddChild />} />
@@ -62,7 +65,6 @@ const App = () => {
           <Route exact path="/ActionLeft" element={<ActionLeft />} />
           <Route exact path="/ProcessDone" element={<ProcessDone />} />
           <Route exact path="/Orphanages" element={<Orphanages />} />
-          <Route exact path="/Download" element={<Download />} />
           <Route
             exact
             path="/protected"
