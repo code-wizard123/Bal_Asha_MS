@@ -66,7 +66,7 @@ const attachments = [];
     for (const cci of CCI) {
       if (cci.url) {
         const attachment = {
-          filename: "Image of the child", // Set the filename as per your requirement
+          filename: "Imageofthechild.jpg", // Set the filename as per your requirement
           path: cci.url,
         };
         attachments.push(attachment);
