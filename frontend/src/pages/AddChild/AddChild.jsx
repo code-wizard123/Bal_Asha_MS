@@ -1,88 +1,163 @@
-import React,{useState} from "react";
-import './css/addchild.css'
 
+import React, { useState } from "react";
+import "./css/addchild.css";
+import axios from "axios";
 
-const AddChild=()=>{
-    const[image,setImage]=useState("")
-    const submitImage=()=>{
-        const data=new FormData()
-        data.append("file",image);
-        data.append("upload_preset","vkgzvauu");
-        data.append("cloud_name","dmomonuiu");
+const AddChild = () => {
+  const [name, setName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [keyCase, setKeyCase] = useState("");
+  const [familyDetails, setFamilyDetails] = useState("");
+  const [pinCode, setPinCode] = useState("");
+  const [gender, setGender] = useState("Male");
+  const [category, setCategory] = useState("Abandoned");
+  const [images, setImages] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-        fetch("https://api.cloudinary.com/v1_1/dmomonuiu/image/upload",{method:"post",body:data})
-        .then((res)=>res.json())
-        .then((data)=>{
-            console.log(data);
-        }).catch((err)=>{
-            console.log(err)
-        })
+  const submitImage = async () => {
+    const formData = new FormData();
+    formData.append("file", images);
+    formData.append("upload_preset", "vkgzvauu");
+    formData.append("cloud_name", "dmomonuiu");
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dmomonuiu/image/upload",
+        formData
+      );
+      console.log(response.data);
+      // Store the image URL or handle other necessary tasks
+    } catch (error) {
+      console.log(error);
+      // Handle image upload error
     }
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle the form submission or navigate to a different page here
   };
-        return (
-        <div>
-            <div id="registration-form">
-  <div class='fieldset'>
-    <legend>Add a Child</legend>
-    <form onSubmit={handleSubmit}>
-      <div class='row'>
-        <label for='firstname'>Name</label>
-        <input type="text" placeholder="First Name" name='firstname' id='firstname' data-required="true" data-error-message="Name is required"/>
-      </div>
-      <div class='row'>
-        <label for="DOB">Date of Birth</label>
-        <input type="date" placeholder="E-mail"  name='DOB' data-required="true" data-type="DOB" data-error-message="DOB is required"/>
-      </div>
-      <div class='row'>
-        <label for="Description">Description</label>
-        <input type="text" placeholder="Description" name='Description' data-required="true" data-error-message="Description is required"/>
-      </div>
-      <div class='row'>
-        <label for="FamilyDetails">Family Details</label>
-        <input type="text" placeholder="Family Details" name='FamilyDetails'/>
-      </div>
-      <div class='row'>
-        <label for="City">Ciyt</label>
-        <input type="text" placeholder="City" name='City'/>
-      </div>
-      <div class='row'>
-        <label for="State">State</label>
-        <input type="text" placeholder="State" name='State'/>
-      </div>
-      <div class='row dropdown'>
-        <label for="Gender">Gender</label>
-        <select name="Gender">
-            <option>Male</option>
-            <option>Female</option>
-            <option>Others</option>
-        </select>
-      </div>
-      <div class='row dropdown'>
-        <label for="Category">Category</label>
-        <select name="Category">
-            <option>Abandoned</option>
-            <option>Surrendered</option>
-            <option>Orphan</option>
-        </select>
-      </div>
-      <div class='row'>
-        <label for="Photo">Photo</label>
-        <input type="file" onChange={(e)=>setImage(e.target.files[0])}/>
-        <button onClick={submitImage}>Upload</button>
-      </div>
-      <br></br>
-      <input type="submit" value="Submit" onclick={submitImage}/>
-    </form>
-    </div>
-  </div>
-</div>
- 
 
-	);
-}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const sendData = {
+      name,
+      category: category === "Abandoned" ? 1 : category === "Surrendered" ? 2 : 3,
+      keyCase,
+      DateOfBirth: dateOfBirth,
+      familyDetails,
+      gender,
+      pinCode: parseInt(pinCode),
+      images: images ? images.url : "", // Assuming the image URL is stored in the 'url' property
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/admin/child/new",
+        sendData
+      );
+      console.log(response.data);
+      // Handle successful child creation
+    } catch (error) {
+      console.log("API request error:", error);
+      // Handle error case
+    }
+
+    setLoading(false);
+  };
+
+  return (
+    <div>
+      <div id="registration-form">
+        <div className="fieldset">
+          <h1 className="addChild">Enter the Child's Details</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <label htmlFor="firstname">Name</label>
+              <input
+                type="text"
+                placeholder="First Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="row">
+              <label htmlFor="DOB">Date of Birth</label>
+              <input
+                type="date"
+                placeholder="Date of Birth"
+                value={dateOfBirth}
+                onChange={(e) => setDateOfBirth(e.target.value)}
+                required
+              />
+            </div>
+            <div className="row">
+              <label htmlFor="Description">Description</label>
+              <input
+                type="text"
+                placeholder="Description"
+                value={keyCase}
+                onChange={(e) => setKeyCase(e.target.value)}
+                required
+              />
+            </div>
+            <div className="row">
+              <label htmlFor="FamilyDetails">Family Details</label>
+              <input
+                type="text"
+                placeholder="Family Details"
+                value={familyDetails}
+                onChange={(e) => setFamilyDetails(e.target.value)}
+              />
+            </div>
+            <div className="row">
+              <label htmlFor="PinCode">PinCode</label>
+              <input
+                type="text"
+                placeholder="PinCode"
+                value={pinCode}
+                onChange={(e) => setPinCode(e.target.value)}
+              />
+            </div>
+            <div className="row dropdown">
+              <label htmlFor="Gender">Gender</label>
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                required
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div className="row dropdown">
+              <label htmlFor="Category">Category</label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                <option value="Abandoned">Abandoned</option>
+                <option value="Surrendered">Surrendered</option>
+                <option value="Orphan">Orphan</option>
+              </select>
+            </div>
+            <div className="row">
+              <label htmlFor="Photo">Photo</label>
+              <input
+                type="file"
+                onChange={(e) => setImages(e.target.files[0])}
+              />
+              <button type="button" onClick={submitImage}>
+                Upload
+              </button>
+            </div>
+            <br />
+            <input type="submit" value="Submit" disabled={loading} />
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default AddChild;
-

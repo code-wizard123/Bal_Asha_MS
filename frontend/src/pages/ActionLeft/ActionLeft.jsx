@@ -1,40 +1,76 @@
-import React from "react";
-import './css/actionleft.css'
-import child from '../../Images/ChildImage.jpg';
+import React, { useEffect, useState } from "react";
+import "./css/actionleft.css";
+import child from "../../Images/ChildImage.jpg";
+import axios from "axios";
 
+const ActionLeft = () => {
+  const [childDetails, setChildDetails] = useState(null);
 
-const ActionLeft=()=>{
-    return (
-		<div>
-<nav role="navigation">
-  <div id="menuToggle">
-    <input type="checkbox" />
+  useEffect(() => {
+    const getChildDetails = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/v1/groundWorker/childs/647ef57bd1e250a87a4a817a");
+        const { child } = response.data;
+        setChildDetails(child);
+      } catch (error) {
+        console.log("API request error:", error);
+      }
+    };
 
-    <span></span>
-    <span></span>
-    <span></span>
+    getChildDetails();
+  }, []);
 
-    <ul id="menu">
-      <a href="#"><li>Photo Publication1</li></a>
-      <a href="#"><li>Photo Publication2</li></a>
-      <a href="#"><li>TV Telecasting</li></a>
-      <a href="#"><li>Police report</li></a>
-      <a href="#"><li>MER</li></a>
-      <a href="#"><li>CSR</li></a>
-    </ul>
-  </div>
-</nav><br></br><br></br>
-<div class="profile">
-    <img src={child} alt="Child Avatar"/>
-    <h2>John Doe</h2>
-    <p><label>Age:</label> 7 years</p>
-    <p><label>Gender:</label> Female</p>
-    <p><label>Action Left:</label>Photo Publication1,Photo Publication2,TV Telecasting,Police report,MER,CSR</p>
-    <p><label>KeyCase:</label>She is a special need child.The child was taken charge by Kurla Railway police station on 12/08/2019 and admitted to Additional observation Home</p>
-  </div>
-</div>
-	);
-}
+  if (!childDetails) {
+    return <div>Loading...</div>;
+  }
+
+  const { name, DateOfBirth, gender, actionLeft, keyCase , familyDetails } = childDetails;
+  const calculateAge = (DateOfBirth) => {
+    const birthDate = new Date(DateOfBirth);
+    const currentDate = new Date();
+    const ageInMillis = currentDate - birthDate;
+    const ageInYears = Math.floor(ageInMillis / (1000 * 60 * 60 * 24 * 365.25)); // Assuming a year is 365.25 days
+    return ageInYears;
+  };
+  return (
+    <div>
+      <nav role="navigation">
+        <div id="menuToggle">
+          <input type="checkbox" />
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu">
+            {actionLeft.map((action, index) => (
+              <a href="#" key={index}>
+                <li>{action}</li>
+              </a>
+            ))}
+          </ul>
+        </div>
+      </nav>
+      <br />
+      <br />
+      <div className="profile">
+        <img src={child} alt="Child Avatar" />
+        <h2>{name}</h2>
+        <p>
+          <label>Age:</label> {calculateAge(DateOfBirth)} years
+        </p>
+        <p>
+          <label>Gender:</label> {gender}
+        </p>
+        <p>
+          <label>Family Details:</label> {familyDetails}
+        </p>
+        <p>
+          <label>KeyCase:</label> {keyCase}
+        </p>
+      </div>
+    </div>
+  );
+};
 
 export default ActionLeft;
-

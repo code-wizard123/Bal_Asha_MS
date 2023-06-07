@@ -27,13 +27,13 @@ const ProcessDone=()=>{
     <h2>Upload Proof and Enter Date</h2>
     <form onSubmit={handleSubmit}>
       <div class="form-group">
+        <label for="date">Date of Completion:</label>
+        <input type="date" id="birthdate" name="birthdate"/>
+      </div>
+      <div class="form-group">
         <label for="proof">Proof</label>
         <input type="file" id="profile-pic" name="profile-pic" onChange={(e)=>setImage(e.target.files[0])}/>
         <button onClick={submitImage}>Upload</button>
-      </div>
-      <div class="form-group">
-        <label for="date">Date of Completion:</label>
-        <input type="date" id="birthdate" name="birthdate"/>
       </div>
       <div class="form-group">
         <input type="submit" value="Submit"/>

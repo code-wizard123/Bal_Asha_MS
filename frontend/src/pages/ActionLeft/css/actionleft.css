@@ -16,6 +16,7 @@ body {
     /* make it look decent enough */
     background: #8ede8e;
     color: #cdcdcd;
+    background-color: #372c2e;
     font-family: "Avenir Next", "Avenir", sans-serif;
 }
 
@@ -71,7 +72,8 @@ body {
     margin-bottom: 5px;
     position: relative;
 
-    background: #060000;
+    /* background:#DE9E48; */
+    background: #e6d9ca;
     border-radius: 3px;
 
     z-index: 1;
@@ -165,9 +167,9 @@ body {
      max-width: 400px;
      margin: 0 auto;
      padding: 20px;
-     border: 1px solid #ccc;
+     border: 1px solid black;
      border-radius: 5px;
-     background-color: #fff;
+     background-color: #e6d9ca;
      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
  }
 
@@ -178,6 +180,7 @@ body {
      border-radius: 50%;
      margin: 0 auto 20px;
      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+     border:2px solid black;
  }
 
  .profile h2 {

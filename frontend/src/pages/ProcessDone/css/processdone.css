@@ -2,12 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f2f2f2;
+    background-color: #372c2e;
 }
 
 h2 {
     text-align: center;
-    color:#434643;
+    color:rgba(68, 13, 13, 0.449);
 }
 
 .form-container {
@@ -16,7 +16,7 @@ h2 {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #e6d9ca;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -36,7 +36,7 @@ label{
 
 .form-group input[type="date"],
 .form-group input[type="file"] {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -47,12 +47,14 @@ label{
 }
 
 .form-group input[type="submit"] {
-    background-color: #4caf50;
+    /* background-color: #4caf50;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: pointer; */
+    background-color: #563727;
+        cursor: pointer;
 }
 
 .form-group input[type="submit"]:hover {
