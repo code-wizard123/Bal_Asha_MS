@@ -8,6 +8,6 @@ export { default as ProcessDone } from "./ProcessDone/ProcessDone";
 export { default as Orphanages } from "./Orphanages/Orphanages";
 export { default as Landing } from "./landing/Landing";
 export { default as SetFlow } from "./ReactFlow/SetFlow";
-export { default as ProtectedGroundRoutes } from './Protected/ProtectedGroundRoutes'
-export { default as ProtectedCaseRoutes } from './Protected/ProtectedCaseRoutes'
-// export { default as OperationWorker } from "./OperationWorker/OperationWorker";
+export { default as ProtectedGroundRoutes } from "./Protected/ProtectedGroundRoutes";
+export { default as ProtectedCaseRoutes } from "./Protected/ProtectedCaseRoutes";
+export { default as Download } from "./Download/Download";

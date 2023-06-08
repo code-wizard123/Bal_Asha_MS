@@ -172,7 +172,7 @@ section {
   transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
   width: 400px;
   /* max-width: 13rem; */
-  height: 380px;
+  height: 325px;
 /* flex-wrap: wrap; */
     /* display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

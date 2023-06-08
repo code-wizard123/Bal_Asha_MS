@@ -14,7 +14,7 @@ import {
   CaughtUp,
   Download,
   ProtectedGroundRoutes,
-  ProtectedCaseRoutes
+  ProtectedCaseRoutes,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -30,7 +30,6 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          
           <Route exact path="/" element={<Opening />} />
           <Route exact path="/landing" element={<Landing />} />
           <Route exact path="/AddChild" element={<AddChild />} />
@@ -38,15 +37,15 @@ const App = () => {
           <Route exact path="/ProcessDone" element={<ProcessDone />} />
           <Route exact path="/Orphanages" element={<Orphanages />} />
           <Route exact path="/ReactFlow" element={<SetFlow />} />
+          <Route exact path="/Download" element={<Download />} />
 
-          <Route element={<ProtectedGroundRoutes />} >
+          <Route element={<ProtectedGroundRoutes />}>
             <Route path="/GroundWorker" element={<GroundWorker />} />
           </Route>
-          
-          <Route element={<ProtectedCaseRoutes />} >
+
+          <Route element={<ProtectedCaseRoutes />}>
             <Route path="/CaseManager" element={<CaseManager />} />
           </Route>
-
         </Routes>
       </BrowserRouter>
     </div>

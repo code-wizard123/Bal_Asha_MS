@@ -170,6 +170,8 @@ body {
      border-radius: 5px;
      background-color: #e6d9ca;
      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     animation: none;
+     z-index: 1;
  }
 
  .profile img {
@@ -207,6 +209,7 @@ body {
  .bubbles {
      position: relative;
      display: flex;
+     z-index:-1;
  }
 
  #r {
@@ -280,6 +283,30 @@ body {
  #q {
      --i: 27;
  }
+  #s {
+      --i: 28;
+  }
+ #t {
+     --i: 29;
+ }
+  #u {
+      --i: 30;
+  }
+ #v {
+     --i: 31;
+ }
+ #w {
+     --i: 32;
+ }
+ #x {
+     --i: 33;
+ }
+  #y {
+      --i: 34;
+  }
+   #z {
+       --i: 35;
+   }
 
  .bubbles span {
      position: relative;
@@ -290,7 +317,7 @@ body {
      border-radius: 50%;
      box-shadow: 0 0 0 10px #4fc3dc44, 0 0 50px #4fc3dc, 0 0 100px #4fc3dc;
      animation: animate 15s linear infinite;
-     animation-duration: calc(100s/var(--i));
+     animation-duration: calc(80s/var(--i));
  }
 
  .bubbles span:nth-child(even) {
