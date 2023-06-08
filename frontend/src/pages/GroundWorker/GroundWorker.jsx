@@ -3,13 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./css/groundworker.css";
 import ChildImage from "../../Images/ChildImage.jpg";
-import useDetails from "../../hooks/useDetails";
+// import UseDetails from "../../hooks/UseDetails";
 
-const GroundWorker = ({orphanageName ,handleName}) => {
-  const details = useDetails();
+const GroundWorker = ({ orphanageName, handleName }) => {
+  // const details = UseDetails();
   const location = useLocation();
   const [children, setChildren] = useState([]);
-  console.log(details)
+  // console.log(details)
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/v1/childs/CCI?CCIName=Rahul's Orphanage")
@@ -33,7 +33,7 @@ const GroundWorker = ({orphanageName ,handleName}) => {
 
   return (
     <div class="animation">
-        <section className="shop contain">
+      <section className="shop contain">
         <h2 className="section-title">Orphanages</h2>
         <div className="shop-content">
           {children && children.length > 0 ? (
@@ -59,7 +59,7 @@ const GroundWorker = ({orphanageName ,handleName}) => {
       </section>
 
 
-      </div>
+    </div>
   );
 };
 

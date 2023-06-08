@@ -6,6 +6,7 @@ const sendEmail = require('../utils/sendEmail');
 const crypto = require("crypto");
 const { authorizeRoles } = require('../middleware/auth');
 const getResetPasswordToken=require('../models/employeeModel')
+const jwt = require('jsonwebtoken')
 //register employee
 exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
     const { name, email, password, pincode, role } = req.body;
@@ -245,5 +246,22 @@ exports.getEmployeeWithRole = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         employees,
+    })
+})
+
+exports.parseToken = catchAsyncErrors(async (req, res, next) => {
+    const { token } = req.body;
+    const payload = jwt.verify(token, process.env.JWT_SECRET)
+
+    if(!payload){
+        res.status(404).json({
+            success: false,
+            message: "Invalid token"
+        })
+    }
+
+    res.status(200).json({
+        success: true,
+        payload
     })
 })

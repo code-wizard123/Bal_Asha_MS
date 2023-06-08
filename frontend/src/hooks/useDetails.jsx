@@ -1,25 +1,38 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
-const useDetails = () => {
+const UseDetails = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
-    const token = Cookies.get('token');
-    if (token) {
-      // Parse the token to extract the role information
-      const decodedToken = parseToken(token);
+    const checkAuthentication = async () => {
+      const token = Cookies.get('token');
+      if (token) {
+        // Parse the token to extract the role information
+        const decodedToken = await parseToken(token);
+        console.log(decodedToken)
+        // Do something with the role, such as storing it in state or performing role-specific logic
+        if (decodedToken) {
+          setIsAuthenticated(true);
+        }
+      }
+    };
 
-      // Do something with the role, such as storing it in state or performing role-specific logic
-      console.log('message', decodedToken);
-    }
+    checkAuthentication();
   }, []);
 
-  // Replace this with your actual token parsing logic
-  const parseToken = (token) => {
-    // Assuming the token is in JWT format, you can use a JWT library or decode it manually
-    // This is just a placeholder implementation for demonstration purposes
-    const decodedToken = { message: token };
-    return decodedToken;
+  const parseToken = async (token) => {
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/parsetoken', { token });
+      return response.data;
+    } catch (error) {
+      console.error('Failed to decode token:', error);
+      return null;
+    }
   };
+
+  return isAuthenticated;
 };
 
-export default useDetails;
+export default UseDetails;

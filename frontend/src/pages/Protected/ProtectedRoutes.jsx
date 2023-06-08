@@ -1,17 +1,14 @@
-import React from 'react'
-import { CaseManager, GroundWorker } from '../index'
-import { GroundRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-const ProtectedRoutes = ({role}) => {
-  if (role === 1) {
-    return (
-      <CaseManager />
-    )
-  }
-  if(role === 3){
-    return (
-      <GroundWorker />
-    )
-  }
-}
+import React from 'react';
+import { Route, useNavigate } from 'react-router-dom';
 
-export default ProtectedRoutes
+const ProtectedRoutes = ({ isAuthenticated, ...rest }) => {
+  const navigate = useNavigate();
+  if (isAuthenticated) {
+    // If the user is authenticated, render the specified component
+    return <Route {...rest} />;
+  } else {
+    navigate("/login")
+  }
+};
+
+export default ProtectedRoutes;
