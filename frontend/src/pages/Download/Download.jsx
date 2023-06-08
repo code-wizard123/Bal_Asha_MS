@@ -1,36 +1,35 @@
 import React from "react";
 
+const Download = () => {
+  const imageUrl = "https://th.bing.com/th/id/OIP.DvKic9NKqCyOwHxwaqzi9QHaQE?pid=ImgDet&rs=1";
 
-const downloadImage=(url,filName)=>{
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filName;
+  const handleDownload = (url, fileName) => {
+    fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create a download link
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
 
-  // Append the anchor element to the body
-  document.body.appendChild(link);
+        // Trigger the click event on the link
+        link.click();
 
-  // Trigger the click event on the anchor element
-  link.click();
-
-  // Clean up
-  document.body.removeChild(link);
-    };
-const Download=()=>{
-
-  const imageUrl = "https://i.pinimg.com/originals/88/fd/03/88fd03d6d0ce054c5b443f54b6db5685.jpg";
-  const fileName = 'imageDownload.jpg';
-
-  const handleDownload = () => {
-    downloadImage(imageUrl, fileName);
+        // Clean up
+        URL.revokeObjectURL(link.href);
+      })
+      .catch((error) => {
+        console.log("Download error:", error);
+      });
   };
-    return(
-    //     <button onClick={handleDownload}>
-    //   Download Image
-    // </button>
+
+  return (
     <div>
-        <a href={imageUrl} download={fileName}>Download</a>
+      <button onClick={() => handleDownload(imageUrl, "image.jpg")}>
+        Download Image
+      </button>
     </div>
-    );
-}
+  );
+};
 
 export default Download;
