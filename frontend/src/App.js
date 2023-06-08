@@ -39,13 +39,18 @@ const App = () => {
           <Route exact path="/Orphanages" element={<Orphanages />} />
           <Route exact path="/ReactFlow" element={<SetFlow />} />
 
-          <Route element={<ProtectedGroundRoutes />} >
+        {/* Unprotected Routes */}
+          <Route path="/GroundWorker" element={<GroundWorker />} />
+          <Route path="/CaseManager" element={<CaseManager />} />
+
+          {/* Protected Routes */}
+          {/* <Route element={<ProtectedGroundRoutes />} >
             <Route path="/GroundWorker" element={<GroundWorker />} />
           </Route>
           
           <Route element={<ProtectedCaseRoutes />} >
             <Route path="/CaseManager" element={<CaseManager />} />
-          </Route>
+          </Route> */}
 
         </Routes>
       </BrowserRouter>

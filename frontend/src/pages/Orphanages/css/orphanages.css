@@ -4,16 +4,11 @@
   width: 90%;
   margin: 0 auto;
   padding: 2rem;
-  /* background-color:#d1a563; */
   background-color: #e6d9ca;
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgb(32, 32, 32);
   border-radius: 5px;
 }
-
-/* body{
-    background-color: #372c2e;
-  } */
 
 .animation {
   position: relative;

@@ -28,7 +28,7 @@ const AddChild = () => {
         formData
       );
       console.log(response.data);
-      // Store the image URL or handle other necessary tasks
+      // Store the image URLa or handle other necessary tasks
     } catch (error) {
       console.log(error);
       // Handle image upload error
