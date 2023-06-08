@@ -9,7 +9,6 @@ const checkAuth = () => {
     if(cookie){
         try{
             const decodedToken = decode(cookie)
-            console.log(decodedToken)
             if(decodedToken.id){
                 if(parseInt(decodedToken.role) === 1){
                     return true;
