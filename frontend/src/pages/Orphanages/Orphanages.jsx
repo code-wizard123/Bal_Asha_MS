@@ -39,6 +39,7 @@ const Orphanages = () => {
       <section className="shop contain">
         <h2 className="section-title">Orphanages</h2>
         <div className="shop-content">
+          <div className="content">
           {orphanages.map((orphanage) => (
             <Link
               to={{
@@ -57,6 +58,7 @@ const Orphanages = () => {
               <p className="product-description">Description: {orphanage.CCIdescription}</p>
             </Link>
           ))}
+        </div>
         </div>
       </section>
     </div>

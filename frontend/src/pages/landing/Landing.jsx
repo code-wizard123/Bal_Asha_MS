@@ -68,41 +68,45 @@ const Navbar = () => {
 	);
 };
 
-const Landing = ({ role, roleset }) => {
+const Landing = () => {
 	let initialRender = true;
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [signIn, toggle] = React.useState(true);
 	const [errorlogin, seterrorlogin] = useState(false);
 	const navigate = useNavigate();
-	useEffect(() => {
-		if (initialRender === false || role) {
-			console.log("navigating")
-			navigate('/protected')
-		}
-		else {
-			console.log("set to false")
-			console.log(role)
-			initialRender = false;
-		}
-
-	}, [role])
 	// const navigate = useNavigate();
 
 	const signInFunc = async (e) => {
 		e.preventDefault();
 
-		const details = {
-			email,
-			password
-		}
+        try {
+            const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
+            console.log(response.data);
+            // Assuming the server responds with a success message and a token
+            const { success, message, token } = response.data;
 
-		await axios.post("http://localhost:4000/api/v1/login", details)
-			.then(async (res) => {
-				const checkRole = res.data.message.role
-				await roleset(checkRole)
-			})
-			.catch(e => console.log(e))
+            if (success) {
+                // Set the token as a cookie or store it in localStorage as per your preference
+                document.cookie = `token=${token}`;
+                localStorage.setItem('role', message.role)
+
+                // Redirect the user based on their role
+                if (message.role === 3) {
+                    navigate('/GroundWorker'); // Redirect to admin dashboard
+                }else if(message.role === 2){
+                    navigate('/OperationManager');
+                } else if (message.role === 1) {
+                    navigate('/CaseManager'); // Redirect to user dashboard
+                }
+
+                console.log('Login successful!');
+            } else {
+                console.log("Invalid Email and Password")
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
 	}
 
 	return (

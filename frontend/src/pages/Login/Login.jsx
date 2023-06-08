@@ -30,13 +30,14 @@ const Login = () => {
             if (success) {
                 // Set the token as a cookie or store it in localStorage as per your preference
                 document.cookie = `token=${token}`;
+                localStorage.setItem('role', message.role)
 
                 // Redirect the user based on their role
-                if (message.role === 1) {
+                if (message.role === 3) {
                     navigate('/GroundWorker'); // Redirect to admin dashboard
                 }else if(message.role === 2){
                     navigate('/OperationManager');
-                } else if (message.role === 3) {
+                } else if (message.role === 1) {
                     navigate('/CaseManager'); // Redirect to user dashboard
                 }
 

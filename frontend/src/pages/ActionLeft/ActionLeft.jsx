@@ -52,46 +52,48 @@ const ActionLeft = () => {
     }
   };
 
-  return (
-    <div>
-      <nav role="navigation">
-        <div id="menuToggle">
-          <input type="checkbox" />
+  const ActionLeft = () => {
+    return (
+      <div>
+        <nav role="navigation">
+          <div id="menuToggle">
+            <input type="checkbox" />
 
-          <span></span>
-          <span></span>
-          <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
 
-          <ul id="menu">
-            {actionLeft.map((action, index) => (
-              <a href="#" key={index} onClick={sendChildDetailsEmail}>
-                {/* Call sendChildDetailsEmail when clicked */}
-                <li>{action}</li>
-              </a>
-            ))}
-          </ul>
+            <ul id="menu">
+              {actionLeft.map((action, index) => (
+                <a href="#" key={index} onClick={sendChildDetailsEmail}>
+                  {/* Call sendChildDetailsEmail when clicked */}
+                  <li>{action}</li>
+                </a>
+              ))}
+            </ul>
+          </div>
+        </nav>
+        <br />
+        <br />
+        <div className="profile">
+          <img src={child} alt="Child Avatar" />
+          <h2>{name}</h2>
+          <p>
+            <label>Age:</label> {calculateAge(DateOfBirth)} years
+          </p>
+          <p>
+            <label>Gender:</label> {gender}
+          </p>
+          <p>
+            <label>Family Details:</label> {familyDetails}
+          </p>
+          <p>
+            <label>KeyCase:</label> {keyCase}
+          </p>
         </div>
-      </nav>
-      <br />
-      <br />
-      <div className="profile">
-        <img src={child} alt="Child Avatar" />
-        <h2>{name}</h2>
-        <p>
-          <label>Age:</label> {calculateAge(DateOfBirth)} years
-        </p>
-        <p>
-          <label>Gender:</label> {gender}
-        </p>
-        <p>
-          <label>Family Details:</label> {familyDetails}
-        </p>
-        <p>
-          <label>KeyCase:</label> {keyCase}
-        </p>
       </div>
-    </div>
-  );
-};
+    );
+  };
+}
 
 export default ActionLeft;
