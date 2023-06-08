@@ -11,7 +11,7 @@ const ActionLeft = () => {
   const [actionLeft, setActionLeft] = useState([]);
   const notify = () => toast("Email Sent Successfully");
 
-  const [childDetails, setChildDetails] = useState(null);
+  // const [childDetails, setChildDetails] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     const getChildDetails = async () => {
