@@ -52,11 +52,12 @@ const ActionLeft = () => {
     }
   };
 
-  return (
-    <div>
-      <nav role="navigation">
-        <div id="menuToggle">
-          <input type="checkbox" />
+const ActionLeft=()=>{
+    return (
+		<div>
+<nav role="navigation">
+  <div id="menuToggle">
+    <input type="checkbox" />
 
           <span></span>
           <span></span>
