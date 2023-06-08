@@ -40,12 +40,12 @@ const NavLinks = () => (
 			<a href="#features">Features</a>
 		</p>
 		<p>
-			<li class="nav-link dropdown"><a href="/contact" class="dropdown-landing">Contact<i
-				class="bi bi-chevron-compact-down"></i></a>
-				<ul class="dropdown-list">
-					<li class="nav-link">
+			<li className="nav-link dropdown"><a href="/contact" className="dropdown-landing">Contact<i
+				className="bi bi-chevron-compact-down"></i></a>
+				<ul className="dropdown-list">
+					<li className="nav-link">
 						<a href="mailto:cod.callofduty@gmail.com" target="_blank">&nbsp;&nbsp;E-Mail</a>
-						<li class="nav-link">
+						<li className="nav-link">
 							<a href="">Phone</a>
 						</li>
 					</li>
@@ -74,48 +74,49 @@ const Landing = () => {
 	const [password, setPassword] = useState('');
 	const [signIn, toggle] = React.useState(true);
 	const [errorlogin, seterrorlogin] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 	// const navigate = useNavigate();
 
 	const signInFunc = async (e) => {
 		e.preventDefault();
 
-        try {
-            const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
-            console.log(response.data);
-            // Assuming the server responds with a success message and a token
-            const { success, message, token } = response.data;
+		try {
+			const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
+			console.log(response.data);
+			// Assuming the server responds with a success message and a token
+			const { success, message, token } = response.data;
 
-            if (success) {
-                // Set the token as a cookie or store it in localStorage as per your preference
-                document.cookie = `token=${token}`;
-                localStorage.setItem('role', message.role)
+			if (success) {
+				// Set the token as a cookie or store it in localStorage as per your preference
+				document.cookie = `token=${token}`;
+				localStorage.setItem('role', message.role)
 
-                // Redirect the user based on their role
-                if (message.role === 3) {
-                    navigate('/GroundWorker'); // Redirect to admin dashboard
-                }else if(message.role === 2){
-                    navigate('/OperationManager');
-                } else if (message.role === 1) {
-                    navigate('/CaseManager'); // Redirect to user dashboard
-                }
+				// Redirect the user based on their role
+				if (message.role === 3) {
+					navigate('/GroundWorker'); // Redirect to admin dashboard
+				} else if (message.role === 2) {
+					navigate('/OperationManager');
+				} else if (message.role === 1) {
+					navigate('/CaseManager'); // Redirect to user dashboard
+				}
 
-                console.log('Login successful!');
-            } else {
-                console.log("Invalid Email and Password")
-            }
-        } catch (error) {
-            console.error('An error occurred:', error);
-        }
+				console.log('Login successful!');
+			} else {
+				console.log("Invalid Email and Password")
+			}
+		} catch (error) {
+			console.error('An error occurred:', error);
+		}
 	}
 
 	return (
 		<React.Fragment>
 			<Navbar />
-			{/* {errorlogin
+			{errorlogin
 				? (<h1 className='error-login'>Wrong details pls re enter</h1>)
-				: null} */}
-			{/* {loading
+				: null}
+			{loading
 				? (
 					<div className='Loading-Screen'>
 						<Oval
@@ -130,7 +131,7 @@ const Landing = () => {
 							strokeWidth={2}
 							strokeWidthSecondary={2} />
 					</div>)
-				: null} */}
+				: null}
 
 			<div className="section-type-landing-page">
 				<div className="section-fluid-main">
@@ -142,7 +143,7 @@ const Landing = () => {
 								</div>
 							</div>
 						</div>
-						<div class="hover-text">
+						<div className="hover-text">
 							<h2>Animation filled User Interface</h2>
 						</div>
 						<div className="section-col">
@@ -152,7 +153,7 @@ const Landing = () => {
 								</div>
 							</div>
 						</div>
-						<div class="hover-text">
+						<div className="hover-text">
 							<h2>Improve by strengthening your weak topics</h2>
 						</div>
 						<div className="section-col">
@@ -162,7 +163,7 @@ const Landing = () => {
 								</div>
 							</div>
 						</div>
-						<div class="hover-text">
+						<div className="hover-text">
 							<h2>Online Lectures and frequent doubt solving with the best faculty</h2>
 						</div>
 						<div className="section-col">
@@ -172,58 +173,12 @@ const Landing = () => {
 								</div>
 							</div>
 						</div>
-						<div class="hover-text">
+						<div className="hover-text">
 							<h2>Active invigilation by Proctoring Software</h2>
 						</div>
 					</div>
 				</div>
 				<Components.Container>
-					{/* <Components.SignUpContainer signinIn={signIn}>
-						<Components.Form /*onSubmit={signUpFunc}>
-							<Components.Title>Create Account</Components.Title>
-							{confirm
-								? (
-									<h1 className='ReEnter'>Re-Enter Details</h1>
-								)
-								: null}
-							<Components.Input type='text' placeholder='First Name' value={firstname} onChange={(e) => setFirstName(e.target.value)} required />
-							<Components.Input type='text' placeholder='Last Name' value={lastname} onChange={(e) => setLastName(e.target.value)} required />
-							{email == ''
-								? null
-								: ((re.test(email))
-									? null
-									: (<h1 className='ReEnter'>Enter valid email</h1>))
-							}
-							<Components.Input type='email' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
-							<Components.Input type='number' placeholder='Mobile No.' value={mobile} onChange={(e) => setMobile(e.target.value)} required />
-							<Components.Input type='text' placeholder='User Name' value={username} onChange={(e) => setUsername(e.target.value)} required />
-							<Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
-							{password === confpassword
-								? null
-								: (<h1 className='ReEnter'>Enter same password</h1>)
-							}
-							<Components.Input type='password' placeholder='Confirm Password' value={confpassword} onChange={(e) => setConfPassword(e.target.value)} required />
-							<div class="upload-btn-wrapper">
-								<button class="btn">Upload a file</button>
-								<input type="file" onChange={(e) => setImage(e.target.files[0])} name="myfile" />
-
-							</div>
-							 <button className="btn">Upload a file</button>
-            <input type="file" ></input> }
-							<button /*onClick={submitImage} className='file-button'>Upload image as profile Photo</button>
-							<div class="selector">
-								<div class="selector-item">
-									<input type="radio" id="radio1" name="selector" value="2" class="selector-item_radio" onClick={(e) => setType(e.target.value)} />
-									<label for="radio1" class="selector-item_label">Student</label>
-								</div>
-								<div class="selector-item">
-									<input type="radio" id="radio2" name="selector" value="1" class="selector-item_radio" onClick={(e) => setType(e.target.value)} />
-									<label for="radio2" class="selector-item_label">Teacher</label>
-								</div>
-							</div>
-							<Components.Button type="submit">Sign Up</Components.Button>
-						</Components.Form>
-					</Components.SignUpContainer> */}
 					<Components.SignInContainer signinIn={signIn}>
 						<Components.Form onSubmit={signInFunc}>
 							<Components.Title>Sign in</Components.Title>
@@ -232,35 +187,6 @@ const Landing = () => {
 							<Components.Button type="submit">Sign In</Components.Button>
 						</Components.Form>
 					</Components.SignInContainer>
-
-					{/* <Components.OverlayContainer signinIn={signIn}>
-						<Components.Overlay signinIn={signIn}>
-
-							<Components.LeftOverlayPanel signinIn={signIn}>
-								<Components.Title>Welcome Back!</Components.Title>
-								<Components.Paragraph>
-									To keep connected with us please login with your personal info
-								</Components.Paragraph>
-								<Components.GhostButton onClick={() => {
-									toggle(true)
-								}} >
-									Sign In
-								</Components.GhostButton>
-							</Components.LeftOverlayPanel> */}
-
-							{/* <Components.RightOverlayPanel signinIn={signIn}>
-								<Components.Title>Hello!</Components.Title>
-								<Components.Paragraph>
-									Enter Your personal details and start journey with us
-								</Components.Paragraph>
-								<Components.GhostButton onClick={() => toggle(false)}>
-									Sign Up
-								</Components.GhostButton>
-							</Components.RightOverlayPanel> */}
-
-						{/* </Components.Overlay>
-					</Components.OverlayContainer> */}
-
 				</Components.Container>
 				<div id="features" className='features'>
 					<h1>Features</h1>

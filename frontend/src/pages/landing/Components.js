@@ -9,7 +9,7 @@ export const Container = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 800px;
+  width: 400px;
   max-width: 100%;
   min-height: 400px;
   height: 500px;
@@ -41,7 +41,7 @@ export const SignInContainer = styled.div`
   height: 100%;
   transition: all 0.6s ease-in-out;
   left: 0;
-  width: 50%;
+  width: 100%;
   z-index: 2;
 
   ${(props) =>
@@ -67,11 +67,9 @@ export const Title = styled.h1`
 `;
 
 export const Input = styled.input`
-  background-color: white;
-  border: none;
-  color: white;
+  color: black;
   padding: 12px 15px;
-  margin: 8px 0;
+  margin: 15px 0;
   width: 100%;
   height: 20px;
 `;
@@ -97,6 +95,7 @@ export const Button = styled.button`
     background-color: green;
     color: #fc46aa;
   }
+  margin-top: 30px;
 `;
 export const GhostButton = styled(Button)`
   background-color: black;

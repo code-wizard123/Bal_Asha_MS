@@ -21,8 +21,8 @@ body{
 /* INPUT FIELDS CSS */
 input {
 	width: 100%;
-	border: 1px solid var(--color-input-border);
-	/* padding: 1rem 2rem; */
+	border: 1px solid black;
+	padding: 1rem 2rem;
 	border-radius: 0.5rem;
 	font-family: Inter;
 	font-size: 1rem;
@@ -40,20 +40,6 @@ input[type="text"] {
 
 input[type="password"] {
 	background: transparent;
-	border: none;
-}
-
-/* input[type="radio"] {
-	display: none;
-} */
-
-input:active,
-input:focus {
-	outline: none;
-}
-
-input:placeholder {
-	color: var(--color-input-placeholder);
 }
 
 .Footer {
