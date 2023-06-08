@@ -4,7 +4,7 @@ import child from "../../Images/ChildImage.jpg";
 import axios from "axios";
 
 const ActionLeft = () => {
-  const [childDetails, setChildDetails] = useState(null);
+  const [childDetails, setChildDetails] = useState();
 
   useEffect(() => {
     const getChildDetails = async () => {
