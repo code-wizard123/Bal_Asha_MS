@@ -92,15 +92,8 @@ const ActionLeft = () => {
           </p>
         </div>
       </div>
-<<<<<<< HEAD
-    </div>
-  );
-};
-};
-=======
     );
   };
 }
->>>>>>> 1af71f78576d8e70a676483a151cba5d2cc50d94
 
 export default ActionLeft;
