@@ -59,6 +59,7 @@ exports.logOut = catchAsyncErrors(async (req, res, next) => {
         message: "Logged Out",
     });
 });
+
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     const employee = await Employee.findOne({ email: req.body.email });
     if (!employee) {

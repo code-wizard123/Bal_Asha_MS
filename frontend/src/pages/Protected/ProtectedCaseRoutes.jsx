@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { Navigate, Outlet } from 'react-router-dom'
 import decode from 'jwt-decode'
 import Cookies from 'js-cookie'
 
-const useAuth = (check) => {
+const checkAuth = () => {
     const cookie = Cookies.get("token")
-    const role = localStorage.getItem("role")
 
     if(cookie){
         try{
             const decodedToken = decode(cookie)
-
+            console.log(decodedToken)
             if(decodedToken.id){
-                if(parseInt(role) === check){
+                if(parseInt(decodedToken.role) === 1){
                     return true;
                 }
                 else{
@@ -28,5 +28,15 @@ const useAuth = (check) => {
     }
 }
 
+const ProtectedCaseRoutes = () => {
+    let checker = checkAuth();
+    useEffect(() => {
+        checker = checkAuth();
+    }, [])
 
-export default useAuth
+    return (
+        (checker) ? <Outlet /> : <Navigate to="/landing" />
+    )
+}
+
+export default ProtectedCaseRoutes
