@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import './css/Sidebar.css'
 import './css/orphanages.css'
-import { useNavigate } from "react-router-dom";
 import orphanage from '../../Images/children-edu.jpg';
 
 const CaseManager = () => {
