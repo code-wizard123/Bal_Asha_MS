@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Opening,
   CaseManager,
@@ -17,20 +17,15 @@ import {
   ProtectedCaseRoutes
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-
-// import ProtectedStudent from './Protected Routes/ProtectedStudent';
-// import ProtectedInstitute from './Protected Routes/ProtectedInstitute';
-// import ProtectedAdmin from './Protected Routes/ProtectedAdmin';
-// import ProtectedLanding from './Protected Routes/ProtectedLanding';
-// import ProtectedTest from './Protected Routes/ProtectedTest';
 
 const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          
           <Route exact path="/" element={<Opening />} />
           <Route exact path="/landing" element={<Landing />} />
           <Route exact path="/AddChild" element={<AddChild />} />
@@ -38,8 +33,9 @@ const App = () => {
           <Route exact path="/ProcessDone" element={<ProcessDone />} />
           <Route exact path="/Orphanages" element={<Orphanages />} />
           <Route exact path="/ReactFlow" element={<SetFlow />} />
+          <Route exact path="/Download" element={<Download />} />
 
-        {/* Unprotected Routes */}
+          {/* Unprotected Routes */}
           <Route path="/GroundWorker" element={<GroundWorker />} />
           <Route path="/CaseManager" element={<CaseManager />} />
 
@@ -51,9 +47,9 @@ const App = () => {
           <Route element={<ProtectedCaseRoutes />} >
             <Route path="/CaseManager" element={<CaseManager />} />
           </Route> */}
-
         </Routes>
       </BrowserRouter>
+      <ToastContainer /> {/* Place the ToastContainer at the root level */}
     </div>
   );
 };

@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./css/actionleft.css";
 import child from "../../Images/ChildImage.jpg";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ActionLeft = () => {
   const [childDetails, setChildDetails] = useState();
+  const [actionLeft, setActionLeft] = useState([]);
+  const notify = () => toast("Email Sent Successfully");
 
   useEffect(() => {
     const getChildDetails = async () => {
@@ -14,7 +18,8 @@ const ActionLeft = () => {
         );
         const { child } = response.data;
         setChildDetails(child);
-        console.log(child)
+        setActionLeft(child.actionLeft); // Set the actionLeft array
+        console.log(child);
       } catch (error) {
         console.log("API request error:", error);
       }
@@ -23,12 +28,17 @@ const ActionLeft = () => {
     getChildDetails();
   }, []);
 
+  const deleteEntry = (index) => {
+    const updatedActionLeft = [...actionLeft];
+    updatedActionLeft.splice(index, 1);
+    setActionLeft(updatedActionLeft);
+  };
+
   if (!childDetails) {
     return <div>Loading...</div>;
   }
 
-  const { name, DateOfBirth, gender, actionLeft, keyCase, familyDetails } =
-    childDetails;
+  const { name, DateOfBirth, gender, keyCase, familyDetails } = childDetails;
 
   const calculateAge = (DateOfBirth) => {
     const birthDate = new Date(DateOfBirth);
@@ -42,58 +52,69 @@ const ActionLeft = () => {
 
   const sendChildDetailsEmail = async () => {
     try {
-      await axios.post("http://localhost:4000/api/v1/sendEmail", {
-        emailId: "manavshah.2003.ms@gmail.com", // Specify the email address to which you want to send the child details
-        childDetails,
-      });
+      const data = {
+        emailId: "manavshah.2003.ms@gmail.com",
+        childDetails: [childDetails], // Wrap childDetails in an array
+      };
+
+      await axios.post("http://localhost:4000/api/v1/sendEmail", data);
       console.log("Email sent successfully");
+      notify();
     } catch (error) {
       console.log("Email sending error:", error);
     }
   };
 
-  const ActionLeft = () => {
-    return (
-      <div>
-        <nav role="navigation">
-          <div id="menuToggle">
-            <input type="checkbox" />
+  return (
+    <div>
+      <nav role="navigation">
+        <div id="menuToggle">
+          <input type="checkbox" />
 
-            <span></span>
-            <span></span>
-            <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
 
-            <ul id="menu">
-              {actionLeft.map((action, index) => (
-                <a href="#" key={index} onClick={sendChildDetailsEmail}>
-                  {/* Call sendChildDetailsEmail when clicked */}
-                  <li>{action}</li>
-                </a>
-              ))}
-            </ul>
-          </div>
-        </nav>
-        <br />
-        <br />
-        <div className="profile">
-          <img src={child} alt="Child Avatar" />
-          <h2>{name}</h2>
-          <p>
-            <label>Age:</label> {calculateAge(DateOfBirth)} years
-          </p>
-          <p>
-            <label>Gender:</label> {gender}
-          </p>
-          <p>
-            <label>Family Details:</label> {familyDetails}
-          </p>
-          <p>
-            <label>KeyCase:</label> {keyCase}
-          </p>
+          <ul id="menu">
+            {actionLeft.map((action, index) => (
+              <a
+                href="#"
+                key={index}
+                onClick={() => {
+                  sendChildDetailsEmail();
+                  notify();
+                  deleteEntry(index); // Call deleteEntry function on click
+                }}
+              >
+                <li>{action}</li>
+              </a>
+            ))}
+          </ul>
         </div>
+      </nav>
+      <br />
+      <br />
+      <div className="profile">
+        <img src={child} alt="Child Avatar" />
+        <h2>{name}</h2>
+        <p>
+          <label>Age:</label> {calculateAge(DateOfBirth)} years
+        </p>
+        <p>
+          <label>Gender:</label> {gender}
+        </p>
+        <p>
+          <label>Family Details:</label> {familyDetails}
+        </p>
+        <p>
+          <label>KeyCase:</label> {keyCase}
+        </p>
       </div>
-    );
-  };
-}
+      <div className="toast-container">
+        <ToastContainer />
+      </div>
+    </div>
+  );
+};
 
 export default ActionLeft;

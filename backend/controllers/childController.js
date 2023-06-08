@@ -30,39 +30,40 @@ exports.getAllChilds = catchAsyncErrors(async (req, res) => {
 });
 exports.getAllCCIsByPinCode = catchAsyncErrors(async (req, res) => {
     const pinCode = req.query.pinCode;
-  
+
     const CCIs = await Child.distinct("CCI", { "CCI.pinCode": pinCode });
-  
+
     res.status(200).json({
-      success: true,
-      CCIs,
+        success: true,
+        CCIs,
     });
-  });
-  exports.getChildrenByCCI = catchAsyncErrors(async (req, res) => {
+});
+
+exports.getChildrenByCCI = catchAsyncErrors(async (req, res) => {
     const CCIName = req.query.CCIName;
-  
+
     const children = await Child.find({ "CCI.name": CCIName });
-  
+
     res.status(200).json({
-      success: true,
-      children,
+        success: true,
+        children,
     });
-  });
-  
-  
+});
+
+
 exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
 
     if (!child) {
-      return next(new errorHandler("Child not found", 404));
+        return next(new errorHandler("Child not found", 404));
     }
 
     res.status(200).json({
-      success: true,
-      child,
-      childCount
+        success: true,
+        child,
+        childCount
     });
-  });
+});
 
 // //Update Child Admin
 exports.updateChild = catchAsyncErrors(async (req, res, next) => {
@@ -92,14 +93,13 @@ exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
 
 
 });
-exports.getOneChild=catchAsyncErrors(async(req,res)=>{
-    const child= await Child.findById(req.params.id);
-    if(!child)
-    {
-        return next(new errorHandler("Child Not found",404));
+exports.getOneChild = catchAsyncErrors(async (req, res) => {
+    const child = await Child.findById(req.params.id);
+    if (!child) {
+        return next(new errorHandler("Child Not found", 404));
     }
     res.status(200).json({
-        success:true,
+        success: true,
         child
     });
 });

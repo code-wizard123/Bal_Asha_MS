@@ -5,11 +5,8 @@ import "./css/groundworker.css";
 import ChildImage from "../../Images/ChildImage.jpg";
 // import UseDetails from "../../hooks/UseDetails";
 
-const GroundWorker = ({ orphanageName, handleName }) => {
-  // const details = UseDetails();
-  const location = useLocation();
+const GroundWorker = () => {
   const [children, setChildren] = useState([]);
-  // console.log(details)
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/v1/childs/CCI?CCIName=Rahul's Orphanage")
@@ -38,7 +35,7 @@ const GroundWorker = ({ orphanageName, handleName }) => {
         <div className="shop-content">
           {children && children.length > 0 ? (
             children.map((child) => (
-              <Link to="/ActionLeft" className="product-box" key={child._id}>
+              <Link to={"/ActionLeft/" + child._id} className="product-box" key={child._id}>
                 <img src={ChildImage} alt="Child Image" className="product-img" />
                 <h2 className="product-title">Name: {child.name}</h2>
                 <span className="price">Id: {child._id}</span>

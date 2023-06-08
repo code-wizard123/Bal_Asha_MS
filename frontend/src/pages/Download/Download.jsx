@@ -24,12 +24,12 @@ const Download=()=>{
     downloadImage(imageUrl, fileName);
   };
     return(
-        <button onClick={handleDownload}>
-      Download Image
-    </button>
-    // <div>
-    //     <a href={imageUrl} download={fileName}>Download</a>
-    // </div>
+    //     <button onClick={handleDownload}>
+    //   Download Image
+    // </button>
+    <div>
+        <a href={imageUrl} download={fileName}>Download</a>
+    </div>
     );
 }
 
