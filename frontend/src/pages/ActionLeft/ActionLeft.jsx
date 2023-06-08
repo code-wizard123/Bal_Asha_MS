@@ -94,5 +94,6 @@ const ActionLeft=()=>{
     </div>
   );
 };
+};
 
 export default ActionLeft;
