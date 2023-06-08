@@ -5,7 +5,7 @@ const sendToken = require('../utils/jwttoken');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require("crypto");
 const { authorizeRoles } = require('../middleware/auth');
-const getResetPasswordToken=require('../models/employeeModel')
+const getResetPasswordToken = require('../models/employeeModel')
 const jwt = require('jsonwebtoken')
 //register employee
 exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
@@ -20,9 +20,9 @@ exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
     });
     sendToken(employee, 201, res);
     res.status(200).json({
-                success: true,
-                message: employee,
-            });
+        success: true,
+        message: employee,
+    });
 });
 
 //Login Employee
@@ -180,36 +180,43 @@ exports.getSingleEmployee = catchAsyncErrors(async (req, res, next) => {
 exports.updateEmployeeRole = catchAsyncErrors(async (req, res, next) => {
     const employeeId = req.params.id;
     const { name, email, role, childId } = req.body;
-  
-    const updatedEmployee = await Employee.findByIdAndUpdate(
-      employeeId,
-      {
-        $push: { children: childId },
-        $set: { name, email, role },
-      },
-      { new: true, runValidators: true }
-    );
-  
-    if (!updatedEmployee) {
-      // Handle the case where the employee is not found
-      return res.status(404).json({
-        success: false,
-        message: "Employee not found",
-      });
-    }
-  
-    res.status(200).json({
-      success: true,
-      employee: updatedEmployee,
-    });
-  
-    sendToken(updatedEmployee, 200, res);
-  });
-  
-  
-  
-  
 
+    const updatedEmployee = await Employee.findByIdAndUpdate(
+        employeeId,
+        {
+            $push: { children: childId },
+            $set: { name, email, role },
+        },
+        { new: true, runValidators: true }
+    );
+
+    if (!updatedEmployee) {
+        // Handle the case where the employee is not found
+        return res.status(404).json({
+            success: false,
+            message: "Employee not found",
+        });
+    }
+
+    res.status(200).json({
+        success: true,
+        employee: updatedEmployee,
+    });
+
+    sendToken(updatedEmployee, 200, res);
+});
+
+
+exports.getOperationWithPincode = catchAsyncErrors(async (req, res, next) => {
+    const { pincode } = req.params;
+
+    const employees = await Employee.find({ pincode: pincode, role: 2 })
+
+    res.status(200).json({
+        success: true,
+        employees
+    })
+})
 // //Delete Employee
 
 exports.deleteEmployee = catchAsyncErrors(async (req, res, next) => {
@@ -229,15 +236,15 @@ exports.deleteEmployee = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.getCase = catchAsyncErrors(async (req, res, next) => {
-    const {id, pincode} = await req.user;
-    
-    
+    const { id, pincode } = await req.user;
+
+
 })
 
 exports.getEmployeeWithRole = catchAsyncErrors(async (req, res, next) => {
     const role = req.params.role;
 
-    if(role !== 1 && role !== 2 && role != 3){
+    if (role !== 1 && role !== 2 && role != 3) {
         res.status(404).json({
             success: false,
             message: "Invalid Role"
@@ -256,7 +263,7 @@ exports.parseToken = catchAsyncErrors(async (req, res, next) => {
     const { token } = req.body;
     const payload = jwt.verify(token, process.env.JWT_SECRET)
 
-    if(!payload){
+    if (!payload) {
         res.status(404).json({
             success: false,
             message: "Invalid token"

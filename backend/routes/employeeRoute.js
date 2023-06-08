@@ -1,6 +1,6 @@
 const express = require('express');
 const { registerEmployee, loginEmployee,
-    logOut,getAllEmployee,updateEmployeeRole,getSingleEmployee, deleteEmployee, forgotPassword,resetPassword, updatePassword, getEmployeeWithRole, parseToken,getEmployeeDetails, /* updateProfile */} = require("../controllers/employeeController");
+    logOut,getAllEmployee,updateEmployeeRole,getSingleEmployee, deleteEmployee, forgotPassword,resetPassword, updatePassword, getEmployeeWithRole, parseToken,getEmployeeDetails, getOperationWithPincode, /* updateProfile */} = require("../controllers/employeeController");
 const { isAuthenticatedEmployee, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
@@ -10,6 +10,7 @@ router.route("/password/forgot").post(forgotPassword);
 router.route("/password/reset/:token").put(resetPassword);
 router.route("/logout").get(logOut);
 router.route("/password/update").put(/*isAuthenticatedEmployee,*/ updatePassword);
+router.route("/operation/:pincode").get(getOperationWithPincode);
 // router.route("/me/update").put(isAuthenticatedEmployee, updateProfile);
 router.route("/me").post(getEmployeeDetails);
 router.route("/admin/employees").get(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ getAllEmployee);
