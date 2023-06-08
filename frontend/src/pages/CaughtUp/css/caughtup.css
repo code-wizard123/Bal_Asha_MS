@@ -6,7 +6,6 @@ label {
     border-radius: 50%;
     animation: rotate 6s infinite ease-out;
     position: relative;
-    /* margin:0 auto; */
     left: 45%; 
     top:30vh;
 }

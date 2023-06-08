@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Opening,
   CaseManager,
@@ -17,13 +17,9 @@ import {
   ProtectedCaseRoutes,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-
-// import ProtectedStudent from './Protected Routes/ProtectedStudent';
-// import ProtectedInstitute from './Protected Routes/ProtectedInstitute';
-// import ProtectedAdmin from './Protected Routes/ProtectedAdmin';
-// import ProtectedLanding from './Protected Routes/ProtectedLanding';
-// import ProtectedTest from './Protected Routes/ProtectedTest';
 
 const App = () => {
   return (
@@ -48,6 +44,7 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer /> {/* Place the ToastContainer at the root level */}
     </div>
   );
 };
