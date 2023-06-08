@@ -28,6 +28,7 @@ exports.getAllChilds = catchAsyncErrors(async (req, res) => {
         childCount,
     });
 });
+
 exports.getAllCCIsByPinCode = catchAsyncErrors(async (req, res) => {
     const pinCode = req.query.pinCode;
 
@@ -39,6 +40,15 @@ exports.getAllCCIsByPinCode = catchAsyncErrors(async (req, res) => {
     });
 });
 
+exports.getChildrenByPincode = catchAsyncErrors(async (req, res) => {
+    const { pincode } = req.params.pincode
+    const children = await Child.find({ 'CCI.pinCode': pincode });
+    res.status(200).json({
+        success: true,
+        children
+    })
+})
+
 exports.getChildrenByCCI = catchAsyncErrors(async (req, res) => {
     const CCIName = req.query.CCIName;
 
@@ -49,7 +59,6 @@ exports.getChildrenByCCI = catchAsyncErrors(async (req, res) => {
         children,
     });
 });
-
 
 exports.getChildDetails = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
