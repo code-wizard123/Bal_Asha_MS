@@ -116,13 +116,15 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 
 });
-// exports.getEmployeeDetails = catchAsyncErrors(async (req, res, next) => {
-//     const employee = await Employee.findById(req.employee.id);
-//     res.status(200).json({
-//         success: true,
-//         employee,
-//     })
-// })
+
+exports.getEmployeeDetails = catchAsyncErrors(async (req, res, next) => {
+    const employee = await Employee.findById(req.body.id);
+    res.status(200).json({
+        success: true,
+        employee,
+    })
+})
+
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     const employee = await Employee.findById(req.employee.id).select("+password");
     const isPasswordMatched = await employee.comparePassword(req.body.oldPassword);

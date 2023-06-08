@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./css/actionleft.css";
 import child from "../../Images/ChildImage.jpg";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,11 +11,13 @@ const ActionLeft = () => {
   const [actionLeft, setActionLeft] = useState([]);
   const notify = () => toast("Email Sent Successfully");
 
+  const [childDetails, setChildDetails] = useState(null);
+  const { id } = useParams();
   useEffect(() => {
     const getChildDetails = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/groundWorker/childs/64804f46bfe26d82fa5047a7"
+          `http://localhost:4000/api/v1/groundWorker/childs/${id}`
         );
         const { child } = response.data;
         setChildDetails(child);

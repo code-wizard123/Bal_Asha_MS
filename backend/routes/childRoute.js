@@ -1,6 +1,6 @@
 const express=require('express');
 const { getAllChilds,createChild , updateChild, deleteChild,/*, getOneChild, getChildDetails, createChildReview, deleteReview, getChildReviews*/ 
-getChildDetails,getOneChild, getAllCCIsByPinCode, getChildrenByCCI}=require("../controllers/childController");
+getChildDetails,getOneChild, getAllCCIsByPinCode, getChildrenByCCI, getChildrenByPincode}=require("../controllers/childController");
 const { isAuthenticatedEmployee,authorizeRoles } = require('../middleware/auth');
 // const { getAllChilds } = require('../controllers/childController');
 
@@ -9,6 +9,7 @@ const router=express.Router();
 router.route('/childs').get(getAllChilds);//Add ? to get pincode specific details
 router.route('/childs/orphanage').get(getAllCCIsByPinCode);
 router.route('/childs/CCI').get(getChildrenByCCI);
+router.route('/children/:pincode').get(getChildrenByPincode)
 router.route('/admin/child/new').post/*(isAuthenticatedUser,authorizeRoles("admin"),*/(createChild);
 
 //Operation Manager
