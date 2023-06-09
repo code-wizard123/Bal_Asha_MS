@@ -25,13 +25,7 @@ const CaseManager = () => {
 
     if(response.data.success){
       // window.location.reload()
-      try{
-        const response2 = await axios.post(`http://localhost:4000/child/update/${child_id}`, {category: 2})
-        console.log(response2.data)
-      }
-      catch(e){
-        console.log(e)
-      }
+      
       
     }
   }
