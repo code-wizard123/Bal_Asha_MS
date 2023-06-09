@@ -2,15 +2,37 @@ import React, { useEffect, useState } from "react";
 import "./css/actionleft.css";
 import child from "../../Images/ChildImage.jpg";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ActionLeft = () => {
+  const navigate = useNavigate();
   const [childDetails, setChildDetails] = useState();
   const [actionLeft, setActionLeft] = useState([]);
+  const [operation, setOperation] = useState([]);
+  const [selectedOption, setSelectedOption] = useState();
   const notify = () => toast("Email Sent Successfully");
 
+  const handleProcess = () => { 
+    if(childDetails._id){
+      navigate(`/ProcessDone/${childDetails._id}`)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(selectedOption){
+      console.log(selectedOption)
+      const filtered = operation.filter(op => op._id === selectedOption)
+      console.log(filtered[0])
+    }
+  }
+
+  const handleOptionChange = (e) => {
+    const current = e.target.value;
+    setSelectedOption(current)
+  }
   // const [childDetails, setChildDetails] = useState(null);
   const { id } = useParams();
 
@@ -22,8 +44,7 @@ const ActionLeft = () => {
         );
         const { child } = response.data;
         setChildDetails(child);
-        setActionLeft(child.actionLeft); // Set the actionLeft array
-        console.log(child);
+        setActionLeft(child.actionLeft);
       } catch (error) {
         console.log("API request error:", error);
       }
@@ -31,6 +52,24 @@ const ActionLeft = () => {
 
     getChildDetails();
   }, []);
+
+  useEffect(() => {
+    const getOperation = async () => {
+      if (childDetails) {
+        try {
+          const response = await axios.get(
+            `http://localhost:4000/api/v1/operation/${childDetails.pinCode}`
+          );
+          const { employees } = response.data
+          setOperation(employees)
+        } catch (error) {
+          console.log("API request error:", error);
+        }
+      }
+    }
+
+    getOperation();
+  }, [childDetails])
 
   const deleteEntry = (index) => {
     const updatedActionLeft = [...actionLeft];
@@ -98,7 +137,7 @@ const ActionLeft = () => {
       </nav>
       <br />
       <br />
-      <div class="animate">
+      <div className="animate">
         <div className="bubbles">
           <span id="r"></span>
           <span id="a"></span>
@@ -141,12 +180,17 @@ const ActionLeft = () => {
         <p>
           <label>KeyCase:</label> {keyCase}
         </p>
-        <form>
-          <select>
-            <option value="">Select an option</option>
-            {/* <option key={option.value} value={option.value}>
-                {option.label}
-              </option> */}
+        <p>
+          <div color="red" onClick={handleProcess}>View Process</div>
+        </p>
+        <form onSubmit={handleSubmit}>
+          <select value={selectedOption} onChange={handleOptionChange}>
+            <option value="">Select Operation Manager</option>
+            {operation.map((option, index) => (
+              <option key={index} value={option._id} >
+                {option.name}-{option._id}
+              </option>
+            ))}
           </select>
           <button>SUBMIT</button>
         </form>
