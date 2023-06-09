@@ -119,7 +119,12 @@ const CaseManager = () => {
               <h2 className="product-title">{child.name}</h2>
               <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Category: {getCategory[child.category]}</span><br /><br />
               <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Family Details {child.familyDetails}</span>
-              <form onSubmit={(e) => handleSubmit(e, child._id)}>
+              { child.isAssigned ? 
+              (<>
+                <br /><span style={{color: "green"}} className="price">Assigned To: {child.assignedTo}</span>
+              </>): 
+              (
+                <form onSubmit={(e) => handleSubmit(e, child._id)}>
                 <select>
                   <option value="">Select Operation Manager</option>
                   {operation.map((option, index) => (
@@ -130,6 +135,8 @@ const CaseManager = () => {
                 </select>
                 <button>Add Case</button>
               </form>
+              )}
+              
             </div>
           ))}
         </div>
