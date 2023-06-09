@@ -1,6 +1,7 @@
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const Employee = require('../models/employeeModel');
+const BackupChild = require('../models/backupChildModel');
 const sendToken = require('../utils/jwttoken');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require("crypto");
@@ -251,7 +252,56 @@ exports.getEmployeeWithRole = catchAsyncErrors(async (req, res, next) => {
         employees,
     })
 })
-
+exports.updateCasesClosed = async (req, res, next) => {
+    const { employeeId } = req.params;
+  
+    try {
+      // Find the employee by ID
+      const employee = await Employee.findById(employeeId);
+  
+      if (!employee) {
+        return res.status(404).json({
+          success: false,
+          message: `Employee not found with ID: ${employeeId}`,
+        });
+      }
+  
+      // Get the current month as a string (e.g., "June")
+      const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+  
+      // Find the corresponding casesClosed object for the current month
+      const casesClosedObject = employee.casesClosed.find((entry) => {
+        return entry.month === currentMonth;
+      });
+  
+      if (casesClosedObject) {
+        // Increment the count if the casesClosed object exists for the current month
+        casesClosedObject.count += 1;
+      } else {
+        // Create a new casesClosed object for the current month and set the count to 1
+        employee.casesClosed.push({
+          month: currentMonth,
+          count: 1,
+        });
+      }
+  
+      // Save the updated employee
+      await employee.save();
+  
+      res.status(200).json({
+        success: true,
+        message: 'Cases closed count updated successfully',
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message,
+      });
+    }
+  };
+  
+  
 exports.parseToken = catchAsyncErrors(async (req, res, next) => {
     const { token } = req.body;
     const payload = jwt.verify(token, process.env.JWT_SECRET)
