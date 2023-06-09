@@ -145,7 +145,7 @@
     transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
     /* width: 100%; */
     width: 400px;
-    height: 350px;
+    height: auto;
   }
   
   .product-title {
@@ -184,3 +184,11 @@
     border: 3px solid black;
   }
   
+  .select-om{
+    width:225px;
+  }
+
+  .profile-img{
+    width:45px;
+    height:45px;
+  }
