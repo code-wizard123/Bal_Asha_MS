@@ -44,6 +44,18 @@ const employeeSchema = new mongoose.Schema({
     required: true,
   },
   children: [{ type: mongoose.Schema.ObjectId, ref: "Child" }],
+  casesClosed: [
+    {
+      month: {
+        type: String,
+        default:"January",
+      },
+      count: {
+        type: Number,
+        default: 0,
+      },
+    },
+  ],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
