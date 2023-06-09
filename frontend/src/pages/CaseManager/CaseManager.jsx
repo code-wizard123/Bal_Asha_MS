@@ -6,6 +6,7 @@ import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 const getCategory = {
   1: "Abandoned",
@@ -55,6 +56,11 @@ const CaseManager = () => {
     fetchChildren(pincode);
   }, [pincode]);
 
+  const handleProfileClick = () => {
+    // Logic to show profile details of the employee
+    console.log("Profile clicked");
+    <a href="/Profile"></a>
+  };
 
   return (
     <div>
@@ -74,7 +80,12 @@ const CaseManager = () => {
             <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
           </ul>
         </div>
-      </nav><br></br><br></br>
+      </nav>
+      <br></br>
+      <br></br>
+      <div className="profile-icon" onClick={handleProfileClick}>
+          <FaUser />
+        </div>
       <section className="shop contain">
         <h2 className="section-title">Orphanages</h2>
         <div className="shop-content">
@@ -90,8 +101,6 @@ const CaseManager = () => {
       </section>
     </div>
   );
-
 }
 
 export default CaseManager;
-

@@ -15,6 +15,7 @@ import {
   Download,
   ProtectedGroundRoutes,
   ProtectedCaseRoutes,
+  Profile
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -34,14 +35,20 @@ const App = () => {
           <Route exact path="/Orphanages" element={<Orphanages />} />
           <Route exact path="/ReactFlow" element={<SetFlow />} />
           <Route exact path="/Download" element={<Download />} />
+          <Route exact path="/Profile" element={<Profile />} />
 
-          <Route element={<ProtectedGroundRoutes />}>
+
+
+          <Route path="/GroundWorker" element={<GroundWorker />} />
+          <Route path="/CaseManager" element={<CaseManager />} />
+
+          {/* <Route element={<ProtectedGroundRoutes />}>
             <Route path="/GroundWorker" element={<GroundWorker />} />
           </Route>
 
           <Route element={<ProtectedCaseRoutes />}>
             <Route path="/CaseManager" element={<CaseManager />} />
-          </Route>
+          </Route> */}
         </Routes>
       </BrowserRouter>
       <ToastContainer /> {/* Place the ToastContainer at the root level */}
