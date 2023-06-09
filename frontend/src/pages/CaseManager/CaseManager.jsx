@@ -76,8 +76,9 @@ const CaseManager = () => {
         </div>
       </nav><br></br><br></br>
       <section className="shop contain">
-        <h2 className="section-title">Orphanages</h2>
+        <h2 className="section-title">Children</h2>
         <div className="shop-content">
+          <div className="content">
           {children.map((child, index) => (
             <div className="product-box" key={index} onClick={() => handleClick(child._id)}>
               <img src={orphanage} alt="Orphanage Image" className="product-img" />
@@ -86,6 +87,7 @@ const CaseManager = () => {
               <span className="price">Family Details {child.familyDetails}</span>
             </div>
           ))}
+        </div>
         </div>
       </section>
     </div>

@@ -144,7 +144,7 @@ const Landing = () => {
 							</div>
 						</div>
 						<div className="hover-text">
-							<h2>Animation filled User Interface</h2>
+							<h2>Every abandoned and vulnerable child has a future at BalAsha Trust</h2>
 						</div>
 						<div className="section-col">
 							<div className='section'>
@@ -154,7 +154,7 @@ const Landing = () => {
 							</div>
 						</div>
 						<div className="hover-text">
-							<h2>Improve by strengthening your weak topics</h2>
+							<h2>Finding forever adoptive families for children</h2>
 						</div>
 						<div className="section-col">
 							<div className='section'>
@@ -164,7 +164,7 @@ const Landing = () => {
 							</div>
 						</div>
 						<div className="hover-text">
-							<h2>Online Lectures and frequent doubt solving with the best faculty</h2>
+							<h2>Serving children in communities with Education, Nutrition and Health</h2>
 						</div>
 						<div className="section-col">
 							<div className='section'>
@@ -174,13 +174,13 @@ const Landing = () => {
 							</div>
 						</div>
 						<div className="hover-text">
-							<h2>Active invigilation by Proctoring Software</h2>
+							<h2>We rescue abandoned children and give then safe home, love and acre</h2>
 						</div>
 					</div>
 				</div>
 				<Components.Container>
 					<Components.SignInContainer signinIn={signIn}>
-						<Components.Form onSubmit={signInFunc}>
+						<Components.Form  className='colour' onSubmit={signInFunc}>
 							<Components.Title>Sign in</Components.Title>
 							<Components.Input type='text' placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
 							<Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
@@ -188,9 +188,9 @@ const Landing = () => {
 						</Components.Form>
 					</Components.SignInContainer>
 				</Components.Container>
-				<div id="features" className='features'>
+				{/* <div id="features" className='features'>
 					<h1>Features</h1>
-				</div>
+				</div> */}
 			</div >
 
 			<footer className="Footer">Copyright © 2022 All rights reserved.</footer>
