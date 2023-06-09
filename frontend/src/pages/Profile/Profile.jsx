@@ -69,12 +69,21 @@ const ProfilePage = () => {
   }));
 
   return (
-    <div>
-    <div className="chart-container">
+    <div className="stats-profile">
+    <div className="profile-container">
+      <h1>Profile</h1>
+      <div className="profile-details">
+        {profileData && (
+          <>
+            <div className="profile-image">
+              <img src={profileData.avatar.url} alt="Profile" />
+            </div>
+            <h2>{profileData.name}</h2>
+            <div className="chart-container">
               <LineChart width={500} height={300} data={chartData}>
                 <XAxis dataKey="month" />
                 <YAxis />
-                <CartesianGrid stroke="#ccc" />
+                <CartesianGrid stroke="black" />
                 <Tooltip />
                 <Legend />
                 <Line
@@ -85,15 +94,6 @@ const ProfilePage = () => {
                 />
               </LineChart>
             </div>
-    <div className="profile-container">
-      <h1>Profile</h1>
-      <div className="profile-details">
-        {profileData && (
-          <>
-            <div className="profile-image">
-              <img src={profileData.avatar.url} alt="Profile" />
-            </div>
-            <h2>{profileData.name}</h2>
             <p>Email: {profileData.email}</p>
             <p>Role: {getRoleName(profileData.role)}</p>
             <p>Pincode: {profileData.pincode}</p>
