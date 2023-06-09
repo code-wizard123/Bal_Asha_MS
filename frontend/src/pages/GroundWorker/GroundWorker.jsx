@@ -1,24 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./css/groundworker.css";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 import ChildImage from "../../Images/ChildImage.jpg";
-// import UseDetails from "../../hooks/UseDetails";
 
 const GroundWorker = () => {
   const [children, setChildren] = useState([]);
+  const [pincode, setPincode] = useState();
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/v1/childs/CCI?CCIName=Rahul's Orphanage")
-      .then((response) => {
-        setChildren(response.data.children);
-        console.log(response.data);
-        console.log(children);
-      })
-      .catch((error) => {
+    const fetchPincode = async () => {
+      try {
+        const cookie = Cookies.get("token")
+        const { id } = jwtDecode(cookie)
+        const response = await axios.post("http://localhost:4000/api/v1/me", { id });
+        const searchPin = response.data.employee.pincode;
+        setPincode(searchPin);
+      } catch (error) {
         console.log(error);
-      });
+      }
+    };
+
+    fetchPincode();
   }, []);
+
+  useEffect(() => {
+    const fetchChildren = async (setpincode) => {
+      if (setpincode) {
+        try {
+          const response = await axios.get(`http://localhost:4000/api/v1/children/${setpincode}`);
+          const childrenData = response.data.children;
+          setChildren(childrenData);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+
+    fetchChildren(pincode);
+  }, [pincode]);
 
   const calculateAge = (DateOfBirth) => {
     const birthDate = new Date(DateOfBirth);
