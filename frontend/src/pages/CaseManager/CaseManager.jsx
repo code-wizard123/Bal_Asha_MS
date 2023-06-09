@@ -25,7 +25,9 @@ const CaseManager = () => {
     const response = await axios.post(`http://localhost:4000/api/v1/${employee_id}/${child_id}`)
 
     if(response.data.success){
-      window.location.reload();
+      // window.location.reload()
+      
+      
     }
   }
 
