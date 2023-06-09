@@ -58,7 +58,7 @@ const ActionLeft = () => {
       if (childDetails) {
         try {
           const response = await axios.get(
-            `http://localhost:4000/api/v1/operation/${childDetails.pinCode}`
+            `http://localhost:4000/api/v1/getemployee/${childDetails.pinCode}`
           );
           const { employees } = response.data
           setOperation(employees)

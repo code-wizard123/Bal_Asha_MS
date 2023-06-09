@@ -120,9 +120,10 @@
   }
   
   .shop-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; */
   }
   
   section {

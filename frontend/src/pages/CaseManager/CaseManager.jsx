@@ -14,14 +14,37 @@ const getCategory = {
 }
 
 const CaseManager = () => {
+  const [operation, setOperation] = useState([]);
   const navigate = useNavigate();
-  const handleClick = (id) => {
-    navigate(`/ActionLeft/${id}`)
-    navigate(0)
+  const handleSubmit = async (e, id) => {
+    e.preventDefault();
+    const employee_id = e.target[0].value
+    const child_id = id;
+    const response = await axios.post(`http://localhost:4000/api/v1/${employee_id}/${child_id}`)
+
+    if(response.data.success){
+      window.location.reload();
+    }
   }
 
   const [pincode, setPincode] = useState(null);
   const [children, setChildren] = useState([]);
+
+  useEffect(() => {
+    const getOperation = async () => {
+      if (children) {
+        try {
+          const response = await axios.get("http://localhost:4000/api/v1/getemployee/2");
+          const { employees } = response.data
+          setOperation(employees)
+        } catch (error) {
+          console.log("API request error:", error);
+        }
+      }
+    }
+
+    getOperation();
+  }, [children])
 
   useEffect(() => {
     const fetchPincode = async () => {
@@ -79,11 +102,22 @@ const CaseManager = () => {
         <h2 className="section-title">Orphanages</h2>
         <div className="shop-content">
           {children.map((child, index) => (
-            <div className="product-box" key={index} onClick={() => handleClick(child._id)}>
+            <div className="product-box" key={index}>
               <img src={orphanage} alt="Orphanage Image" className="product-img" />
               <h2 className="product-title">{child.name}</h2>
-              <span className="price">Category: {getCategory[child.category]}</span><br /><br />
-              <span className="price">Family Details {child.familyDetails}</span>
+              <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Category: {getCategory[child.category]}</span><br /><br />
+              <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Family Details {child.familyDetails}</span>
+              <form onSubmit={(e) => handleSubmit(e, child._id)}>
+                <select>
+                  <option value="">Select Operation Manager</option>
+                  {operation.map((option, index) => (
+                    <option key={index} value={option._id} >
+                      {option.name}-{option._id}
+                    </option>
+                  ))}
+                </select>
+                <button>Add Case</button>
+              </form>
             </div>
           ))}
         </div>
