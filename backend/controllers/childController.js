@@ -2,6 +2,8 @@ const Child = require('../models/childModel');
 const Employee = require("../models/employeeModel")
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+const BackupChild = require('../models/backupChildModel');
+const Process=require('../models/processModel');
 const ApiFeatures = require('../utils/apifeatures');
 
 //Create child admin
@@ -94,16 +96,50 @@ exports.updateChild = catchAsyncErrors(async (req, res, next) => {
 
 exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
+    const process = await Process.find({ child: req.params.childId});
     if (!child) {
-        return next(new errorHandler("Child Not found", 404));
+      return next(new errorHandler("Child Not found", 404));
     }
+  
+    // Create a backup child document using the child details
+    const backupChild = new BackupChild({
+      originalChildId: child._id,
+      name: child.name,
+      category: child.category,
+      keyCase: child.keyCase,
+      DateOfBirth: child.DateOfBirth,
+      familyDetails: child.familyDetails,
+      gender: child.gender,
+      images: child.images,
+      CCI: child.CCI,
+      DateofAdmission: process.DateofAdmission,
+      enrollmentDate: process.enrollmentDate,
+      photoPublication1: process.photoPublication1,
+      photoPublication2: process.photoPublication2,
+      tvTelecasting: process.tvTelecasting,
+      policeReport: process.policeReport,
+      familyApproval: process.familyApproval,
+      previousOrgReport: process.previousOrgReport,
+      finalReport: process.finalReport,
+      FreeForAdoptionDate: process.FreeForAdoptionDate,
+      MER: process.MER,
+      CSR: process.CSR,
+      CaringsUpload: process.CaringsUpload,
+      lastVisitByFamily: process.lastVisitByFamily,
+      ActionDone: child.actionLeft,
+    });
+  
+    // Save the backup child document
+    await backupChild.save();
+  
+    // Delete the child document
     await Child.deleteOne({ _id: req.params.id });
+  
     res.status(200).json({
-        message: "Child deleted successfully"
-    })
-
-
-});
+      message: "Child deleted successfully",
+      backupChild
+    });
+  });
 exports.getOneChild = catchAsyncErrors(async (req, res) => {
     const child = await Child.findById(req.params.id);
     if (!child) {
