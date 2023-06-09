@@ -74,6 +74,16 @@ const childSchema = new Schema({
         return [];
       }
     }
+  },
+
+  isAssigned: {
+    type: Boolean,
+    default: false
+  },
+
+  assignedTo: {
+    type: String,
+    default: "Not Assigned"
   }
 });
 

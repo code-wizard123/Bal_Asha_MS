@@ -31,7 +31,7 @@ const App = () => {
           <Route exact path="/landing" element={<Landing />} />
           <Route exact path="/AddChild" element={<AddChild />} />
           <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />
-          <Route exact path="/ProcessDone" element={<ProcessDone />} />
+          <Route exact path="/ProcessDone/:id" element={<ProcessDone />} />
           <Route exact path="/Orphanages" element={<Orphanages />} />
           <Route exact path="/ReactFlow" element={<SetFlow />} />
           <Route exact path="/Download" element={<Download />} />

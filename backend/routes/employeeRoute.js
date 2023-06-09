@@ -16,7 +16,5 @@ router.route("/me").post(getEmployeeDetails);
 router.route("/admin/employees").get(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ getAllEmployee);
 router.route("/admin/employee/:id").get(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ getSingleEmployee).put(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/updateEmployeeRole).delete(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ deleteEmployee);
 router.route("/parsetoken").post(parseToken)
-router.route("/getgroundworkers/:role").get(isAuthenticatedEmployee, authorizeRoles(1), getEmployeeWithRole)
-
-
+router.route("/getemployee/:role").get(getEmployeeWithRole)
 module.exports = router;

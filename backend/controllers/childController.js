@@ -1,4 +1,5 @@
 const Child = require('../models/childModel');
+const Employee = require("../models/employeeModel")
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const BackupChild = require('../models/backupChildModel');
@@ -92,6 +93,7 @@ exports.updateChild = catchAsyncErrors(async (req, res, next) => {
 
 
 });
+
 exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
     const process = await Process.find({ child: req.params.childId});
@@ -149,6 +151,25 @@ exports.getOneChild = catchAsyncErrors(async (req, res) => {
     });
 });
 
+exports.setChildtoEmployee = catchAsyncErrors(async (req, res) => {
+    const { c_id, e_id } = req.params;
+
+    const child = await Child.findByIdAndUpdate(c_id,
+        {
+            isAssigned: true,
+            assignedTo: e_id
+        });
+
+    const employee = await Employee.findByIdAndUpdate(e_id,
+        { $push: { children: child } },
+        { new: true });
+
+    res.status(200).json({
+        success: true,
+        employee
+    })
+
+})
 // exports.createChildReview=catchAsyncErrors(async(req,res,next)=>{
 //     const {rating,comment,childId}=req.body;
 //     const review={

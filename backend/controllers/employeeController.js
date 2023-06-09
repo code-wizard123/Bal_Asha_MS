@@ -245,13 +245,6 @@ exports.getCase = catchAsyncErrors(async (req, res, next) => {
 exports.getEmployeeWithRole = catchAsyncErrors(async (req, res, next) => {
     const role = req.params.role;
 
-    if (role !== 1 && role !== 2 && role != 3) {
-        res.status(404).json({
-            success: false,
-            message: "Invalid Role"
-        })
-    }
-
     const employees = await Employee.find({ role });
 
     res.status(200).json({

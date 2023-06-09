@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./css/processdone.css";
 import axios from 'axios'
+import { useParams } from "react-router-dom";
 
-const ProcessDone = ({ childId }) => {
+const ProcessDone = () => {
+  const { id } = useParams();
   const [processId, setProcessId] = useState("");
   const [image, setImage] = useState("");
   const [selectedAction, setSelectedAction] = useState("");
@@ -15,7 +17,8 @@ const ProcessDone = ({ childId }) => {
     // Fetch the process details from the server to get the actionLeft options
     const fetchProcessDetails = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/process/64805460e72fe213c57630bc"); // Update the API endpoint with your server URL
+        console.log(id)
+        const response = await fetch(`http://localhost:4000/api/v1/process/${id}`); // Update the API endpoint with your server URL
         const data = await response.json();
         const { actionLeft, _id } = data.process[data.process.length - 1];
         setProcessId(_id)
@@ -49,7 +52,7 @@ const ProcessDone = ({ childId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updateData = {
-      child: "64805460e72fe213c57630bc",
+      child: id,
     };
 
     updateData[selectedAction] = {
