@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge } from 'reactflow';
 import axios from 'axios';
-
+import "./css/updatenode.css"
 import 'reactflow/dist/style.css';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
@@ -116,12 +116,20 @@ export default function SetFlow() {
                 );
               })}
             </tbody>
-          </table>
+            <tr class="uploadButton">
+              <td><br></br>
+              </td>
+              <td><br></br>
+              <button>Upload Process Flow</button></td>
+              <td><br></br></td>
+            </tr>
+          </table>          
         ) : (
           <div>Loading document details...</div>
         )}
-        <br />
-        <br />
+
+         
+        
       </div>
     </div>
   );

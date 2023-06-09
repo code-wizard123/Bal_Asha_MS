@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import profile from "../../Images/profile.jpg";
 
 const getCategory = {
   1: "Abandoned",
@@ -96,6 +97,7 @@ const CaseManager = () => {
           <span></span>
 
           <ul id="menu">
+            <a href="/Profile"><li> <img class="profile-img" src={profile} alt="profile"/></li></a>
             <a href="#"><li>Home</li></a>
             <a href="#"><li>About</li></a>
             <a href="#"><li>Info</li></a>
@@ -106,7 +108,7 @@ const CaseManager = () => {
       </nav>
       <br></br>
       <br></br>
-      <div className="profile-icon" onClick={handleProfileClick}>
+      <div onClick={handleProfileClick}>
           <FaUser />
         </div>
       <section className="shop contain">
@@ -125,7 +127,7 @@ const CaseManager = () => {
               </>): 
               (
                 <form onSubmit={(e) => handleSubmit(e, child._id)}>
-                <select>
+                <select class="select-om">
                   <option value="">Select Operation Manager</option>
                   {operation.map((option, index) => (
                     <option key={index} value={option._id} >

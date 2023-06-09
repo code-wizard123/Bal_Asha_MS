@@ -7,34 +7,21 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ActionLeft = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [childDetails, setChildDetails] = useState();
   const [actionLeft, setActionLeft] = useState([]);
-  const [operation, setOperation] = useState([]);
-  const [selectedOption, setSelectedOption] = useState();
   const notify = () => toast("Email Sent Successfully");
 
-  const handleProcess = () => { 
-    if(childDetails._id){
+  const viewProcess = () => {
+    console.log('Showing Process')
+  }
+
+  const handleProcess = () => {
+    if (childDetails._id) {
       navigate(`/ProcessDone/${childDetails._id}`)
     }
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if(selectedOption){
-      console.log(selectedOption)
-      const filtered = operation.filter(op => op._id === selectedOption)
-      console.log(filtered[0])
-    }
-  }
-
-  const handleOptionChange = (e) => {
-    const current = e.target.value;
-    setSelectedOption(current)
-  }
-  // const [childDetails, setChildDetails] = useState(null);
-  const { id } = useParams();
 
   useEffect(() => {
     const getChildDetails = async () => {
@@ -52,24 +39,6 @@ const ActionLeft = () => {
 
     getChildDetails();
   }, []);
-
-  useEffect(() => {
-    const getOperation = async () => {
-      if (childDetails) {
-        try {
-          const response = await axios.get(
-            `http://localhost:4000/api/v1/getemployee/${childDetails.pinCode}`
-          );
-          const { employees } = response.data
-          setOperation(employees)
-        } catch (error) {
-          console.log("API request error:", error);
-        }
-      }
-    }
-
-    getOperation();
-  }, [childDetails])
 
   const deleteEntry = (index) => {
     const updatedActionLeft = [...actionLeft];
@@ -180,20 +149,9 @@ const ActionLeft = () => {
         <p>
           <label>KeyCase:</label> {keyCase}
         </p>
-        <p>
-          <div color="red" onClick={handleProcess}>View Process</div>
-        </p>
-        <form onSubmit={handleSubmit}>
-          <select value={selectedOption} onChange={handleOptionChange}>
-            <option value="">Select Operation Manager</option>
-            {operation.map((option, index) => (
-              <option key={index} value={option._id} >
-                {option.name}-{option._id}
-              </option>
-            ))}
-          </select>
-          <button>SUBMIT</button>
-        </form>
+
+        <button onClick={handleProcess}>Add Process</button>
+        <button onClick={viewProcess}>View Process</button>
       </div>
       <div className="toast-container">
         <ToastContainer />
