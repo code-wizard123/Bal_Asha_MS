@@ -6,10 +6,10 @@ import 'reactflow/dist/style.css';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: 'photoPublication2' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
-  { id: '3', position: { x: 0, y: 200 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' } },
-  { id: '4', position: { x: 0, y: 300 }, data: { label: 'photoPublication2' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
+  { id: '1', position: { x: 300, y: 100 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' } ,type: 'textUpdater'},
+  { id: '2', position: { x: 350, y: 100 }, data: { label: 'photoPublication2' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
+  { id: '3', position: { x: 400, y: 200 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' } },
+  { id: '4', position: { x: 450, y: 300 }, data: { label: 'photoPublication2' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
 ];
 const initialEdges = [
   { id: 'e1-2', source: '1', target: '2', data: { label: 'Edge 1 to 2' } },
@@ -21,6 +21,7 @@ export default function SetFlow() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [documentDetails, setDocumentDetails] = useState([]);
+  const [nodeCount, setNodeCount] = useState(initialNodes.length + 1);
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
@@ -59,8 +60,21 @@ export default function SetFlow() {
       });
   };
 
+  const addNode = () => {
+    const newNodeId = `node-${nodeCount}`;
+    const newNode = {
+      id: newNodeId,
+      position: { x: 0, y: 0 },
+      data: { label: `photoPublication${nodeCount}` },
+      style: { backgroundColor: 'red', color: '#fffff' },
+    };
+
+    setNodes((prevNodes) => [...prevNodes, newNode]);
+    setNodeCount((prevCount) => prevCount + 1);
+  };
+
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100%', height: '400px' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -69,12 +83,13 @@ export default function SetFlow() {
         onConnect={onConnect}
       >
         <Controls />
-        <MiniMap />
+        {/* <MiniMap /> */}
         <Background variant="dots" gap={12} size={1} />
       </ReactFlow>
       <div>
         <br />
         <br />
+        <button onClick={addNode}>Add Node</button>
         {documentDetails.length > 0 ? (
           <table className="Download">
             <thead>

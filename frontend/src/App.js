@@ -15,7 +15,8 @@ import {
   Download,
   ProtectedGroundRoutes,
   ProtectedCaseRoutes,
-  Profile
+  Profile,
+  FlowTemp
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -39,6 +40,7 @@ const App = () => {
           <Route exact path="/Profile" element={<Profile />} />
           <Route path="/GroundWorker" element={<GroundWorker />} />
           <Route path="/CaseManager" element={<CaseManager />} />
+          <Route path="/FlowTemp" element={<FlowTemp />} />
           {/* <Route element={<ProtectedGroundRoutes />}>
             <Route path="/GroundWorker" element={<GroundWorker />} />
             {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
