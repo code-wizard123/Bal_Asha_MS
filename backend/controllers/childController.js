@@ -90,8 +90,6 @@ exports.updateChild = catchAsyncErrors(async (req, res, next) => {
         success: true,
         child
     })
-
-
 });
 
 exports.deleteChild = catchAsyncErrors(async (req, res, next) => {

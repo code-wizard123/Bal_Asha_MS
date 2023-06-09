@@ -12,6 +12,7 @@ router.route('/childs/CCI').get(getChildrenByCCI);
 router.route('/children/:pincode').get(getChildrenByPincode)
 router.route('/admin/child/new').post/*(isAuthenticatedUser,authorizeRoles("admin"),*/(createChild);
 router.route('/:e_id/:c_id').post(setChildtoEmployee)
+router.route('/child/update/:id').post(updateChild)
 //Operation Manager
 // router.route('/opManager/').(isAuthenticatedUser,authorizeRoles(2), );
 
