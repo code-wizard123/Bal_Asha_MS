@@ -12,3 +12,4 @@ export { default as Profile } from "./Profile/Profile";
 export { default as ProtectedGroundRoutes } from "./Protected/ProtectedGroundRoutes";
 export { default as ProtectedCaseRoutes } from "./Protected/ProtectedCaseRoutes";
 export { default as Download } from "./Download/Download";
+export { default as OperationWorker } from "./OperationWorker/OperationWorker";

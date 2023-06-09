@@ -13,6 +13,7 @@ const ActionLeft = () => {
 
   // const [childDetails, setChildDetails] = useState(null);
   const { id } = useParams();
+
   useEffect(() => {
     const getChildDetails = async () => {
       try {
@@ -98,33 +99,33 @@ const ActionLeft = () => {
       <br />
       <br />
       <div class="animate">
-      <div className="bubbles">
-      <span id="r"></span>
-      <span id="a"></span>
-      <span id="b"></span>
-      <span id="n"></span>
-      <span id="o"></span>
-      <span id="p"></span>
-      <span id="s"></span>
-      <span id="v"></span>
-      <span id="w"></span>
-      <span id="x"></span>
-      <span id="t"></span>
-      <span id="u"></span>
-      <span id="g"></span>
-      <span id="h"></span>
-      <span id="i"></span>
-      <span id="c"></span>
-      <span id="d"></span>
-      <span id="e"></span>
-      <span id="f"></span>
-      <span id="k"></span>
-      <span id="l"></span>
-      <span id="j"></span>
-      <span id="y"></span>
-      <span id="z"></span>
+        <div className="bubbles">
+          <span id="r"></span>
+          <span id="a"></span>
+          <span id="b"></span>
+          <span id="n"></span>
+          <span id="o"></span>
+          <span id="p"></span>
+          <span id="s"></span>
+          <span id="v"></span>
+          <span id="w"></span>
+          <span id="x"></span>
+          <span id="t"></span>
+          <span id="u"></span>
+          <span id="g"></span>
+          <span id="h"></span>
+          <span id="i"></span>
+          <span id="c"></span>
+          <span id="d"></span>
+          <span id="e"></span>
+          <span id="f"></span>
+          <span id="k"></span>
+          <span id="l"></span>
+          <span id="j"></span>
+          <span id="y"></span>
+          <span id="z"></span>
+        </div>
       </div>
-    </div>
       <div className="profile">
         <img src={child} alt="Child Avatar" />
         <h2>{name}</h2>
@@ -140,6 +141,15 @@ const ActionLeft = () => {
         <p>
           <label>KeyCase:</label> {keyCase}
         </p>
+        <form>
+          <select>
+            <option value="">Select an option</option>
+            {/* <option key={option.value} value={option.value}>
+                {option.label}
+              </option> */}
+          </select>
+          <button>SUBMIT</button>
+        </form>
       </div>
       <div className="toast-container">
         <ToastContainer />

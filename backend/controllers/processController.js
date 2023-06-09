@@ -146,3 +146,28 @@ exports.deleteProcess = catchAsyncErrors(async (req, res, next) => {
     process
   });
 });
+
+exports.getActionDoneDetails = catchAsyncErrors(async (req, res, next) => {
+  const process = await Process.findById(req.params.id);
+
+  const actionDoneDetails = [];
+
+  // Retrieve details of each attribute present in ActionDone
+  process.ActionDone.forEach(async (attribute) => {
+    if (process[attribute]) {
+      // Get the value and other details of the attribute
+      actionDoneDetails.push({
+        [attribute]: {
+          value: process[attribute]
+          // You can add more details as needed
+        }
+      });
+    }
+  });
+
+  res.status(200).json({
+    success: true,
+    actionDoneDetails,
+  });
+});
+

@@ -35,20 +35,18 @@ const App = () => {
           <Route exact path="/Orphanages" element={<Orphanages />} />
           <Route exact path="/ReactFlow" element={<SetFlow />} />
           <Route exact path="/Download" element={<Download />} />
+          <Route path="/OperationWorker" element={<OperationWorker />} />
           <Route exact path="/Profile" element={<Profile />} />
-
-
-
           <Route path="/GroundWorker" element={<GroundWorker />} />
           <Route path="/CaseManager" element={<CaseManager />} />
-
           {/* <Route element={<ProtectedGroundRoutes />}>
             <Route path="/GroundWorker" element={<GroundWorker />} />
-          </Route>
+            {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
+          {/* </Route> */}
 
-          <Route element={<ProtectedCaseRoutes />}>
+          {/* <Route element={<ProtectedCaseRoutes />}>
             <Route path="/CaseManager" element={<CaseManager />} />
-          </Route> */}
+          </Route> */} 
         </Routes>
       </BrowserRouter>
       <ToastContainer /> {/* Place the ToastContainer at the root level */}
