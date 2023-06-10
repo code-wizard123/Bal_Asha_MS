@@ -36,16 +36,31 @@ const OperationWorker = () => {
               <div key={index}>{child.name}</div>
             ))} */}
             {children.map((child, index) => (
-              <div key={index}>
-                <img
-                  src="https://content.jdmagicbox.com/comp/hyderabad/b3/040pxx40.xx40.131123151657.m4b3/catalogue/care-and-love-orphanage-gajularamaram-hyderabad-orphanages-for-children-2mtljew-250.jpg"
-                  alt="Orphanage Image"
-                  className="product-img"
-                />
-                <h2 className="product-title">Name: {child.name}</h2>
-                <p className="product-description">Description: {child.keyCase}</p>
+            // <Link
+            //   to={{
+            //     pathname: "/GroundWorker",
+            //     state: { orphanageID: "Rahul's Orphanage" }
+            //   }}
+            //   className="product-box"
+            //   key={orphanage._id}
+            // >
+            <div className="product-box" key={index}>
+              <img
+                src="https://content.jdmagicbox.com/comp/hyderabad/b3/040pxx40.xx40.131123151657.m4b3/catalogue/care-and-love-orphanage-gajularamaram-hyderabad-orphanages-for-children-2mtljew-250.jpg"
+                alt="Orphanage Image"
+                className="product-img"
+              />
+              <h2 className="product-title">Name: {child.name}</h2>
+              <p className="product-description">Description: {child.keyCase}</p>
+              <form>
+                <select /*value={selectedOption} onChange={handleChange} */>
+                  <option>Select Option</option>
+                  <option>Ok</option>
+                </select>
+              </form>
               </div>
-            ))}
+              // </Link>
+          ))}
           </div>
         </div>
       </section>
