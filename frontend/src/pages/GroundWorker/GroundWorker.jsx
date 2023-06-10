@@ -57,7 +57,9 @@ const GroundWorker = () => {
           {children && children.length > 0 ? (
             children.map((child) => (
               <Link to={"/ActionLeft/" + child._id} className="product-box1" key={child._id}>
+                <div className="Image-box1">
                 <img src={ChildImage} alt="Child Image" className="product-img1" />
+                </div>
                 <div>
                 <h2 className="product-title">Name: {child.name}</h2>
                 <span className="price">Id: {child._id}</span>

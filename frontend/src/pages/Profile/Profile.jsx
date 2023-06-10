@@ -84,7 +84,7 @@ const ProfilePage = () => {
                 <LineChart width={500} height={300} data={chartData}>
                   <XAxis dataKey="month" />
                   <YAxis />
-                  <CartesianGrid stroke="black" />
+                  <CartesianGrid stroke="grey" />
                   <Tooltip />
                   <Legend />
                   <Line

@@ -111,53 +111,90 @@ body {
     transform: none;
 }
 
- body {
-     font-family: Arial, sans-serif;
-     margin: 0;
-     padding: 20px;
-     background-color: #f2f2f2;
- }
-
- h1 {
-     text-align: center;
- }
-
  .profile {
      max-width: 400px;
      margin: 0 auto;
      padding: 20px;
-     border: 1px solid black;
-     border-radius: 5px;
-     background-color: #e6d9ca;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-     animation: none;
-     z-index: 1;
+     background-color: #000000;
+     border: 1px solid #dddddd;
+     border-radius: 4px;
+     text-align: center;
+     animation: fadeIn 0.5s ease;
+     transition: transform 0.3s ease;
+ }
+
+ @keyframes fadeIn {
+     0% {
+         opacity: 0;
+         transform: translateY(-10px);
+     }
+
+     100% {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .profile:hover {
+     transform: scale(1.05);
  }
 
  .profile img {
-     display: block;
      width: 150px;
      height: 150px;
      border-radius: 50%;
-     margin: 0 auto 20px;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-     border:2px solid black;
+     margin-bottom: 20px;
+     border:1px solid white;
+     animation: slideIn 0.5s ease;
+ }
+
+ @keyframes slideIn {
+     0% {
+         opacity: 0;
+         transform: translateY(-20px);
+     }
+
+     100% {
+         opacity: 1;
+         transform: translateY(0);
+     }
  }
 
  .profile h2 {
-     text-align: center;
+     font-size: 24px;
      margin-bottom: 10px;
-     color: #333;
+     color:#948d8d;
+     animation: fadeIn 0.5s ease;
  }
 
  .profile p {
+     font-size: 16px;
      margin-bottom: 10px;
-     color: #666;
+     animation: fadeIn 0.5s ease;
  }
 
  .profile label {
      font-weight: bold;
  }
+
+ .profile-button {
+     display: inline-block;
+     padding: 10px 20px;
+     font-size: 16px;
+     font-weight: bold;
+     text-align: center;
+     background-color: #333333;
+     color: #ffffff;
+     border:none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        animation: fadeIn 0.5s ease;
+    }
+    
+    .profile-button:hover {
+        background-color: #222222;
+    }
 
  .animation {
      position: relative;

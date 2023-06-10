@@ -5,7 +5,7 @@
     border: 2px solid #ccc;
     border-radius: 5px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: #101010;
 }
 
 .addChild {
@@ -38,19 +38,21 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 0 auto;
+    background: #a9e9ef;
+    color:#7a7878;
 }
 
 /* input[type='file'] { */
     /* display: none; */
 /* } */
 
-input[type='submit'] {
+.submit-btn {
     width: 96%;
     /* max-width: 300px; */
     /* Adjust the max-width as desired */
     padding: 10px;
     border: none;
-    background-color: #4fa94d;
+    background-color: #d7a526;
     color: #fff;
     font-size: 16px;
     font-weight: bold;
@@ -60,7 +62,7 @@ input[type='submit'] {
     margin: 0 auto;
 }
 
-input[type='submit']:hover {
+.submit-btn:hover {
     background-color: #45a345;
 }
 
@@ -79,7 +81,7 @@ input[type='submit']:hover {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: transparent;
+    background: white;
     cursor: pointer;
     margin: 0 auto;
     /* margin-left: 5px; */
@@ -93,7 +95,7 @@ input[type='submit']:hover {
     font-size: 12px;
 }
 
-.row button {
+/* .row button {
     padding: 5px 10px;
     background-color: #4fa94d;
     color: #fff;
@@ -106,7 +108,7 @@ input[type='submit']:hover {
 
 .row button:hover {
     background-color: #45a345;
-}
+} */
 
 .fieldset {
     border: none;
@@ -147,7 +149,11 @@ input[type='submit']:hover {
     animation-delay: 0.2s;
 }
 
-input[type='submit'] {
+.submit-btn{
     animation: slideInFromRight 2s ease;
     animation-delay: 0.4s;
+}
+
+.row input[type="text"]{
+    background: #fff;
 }

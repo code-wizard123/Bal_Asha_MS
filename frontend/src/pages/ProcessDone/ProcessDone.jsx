@@ -77,7 +77,7 @@ const ProcessDone = () => {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-container1">
       <h2>Upload Proof and Enter Date</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
