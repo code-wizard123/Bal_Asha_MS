@@ -29,15 +29,15 @@ exports.getSingleProcess = catchAsyncErrors(async (req, res, next) => {
 
 // //get logged in child processs
 exports.myProcess = catchAsyncErrors(async (req, res, next) => {
-  const { child } = req.body;
-  const childId = child._id; // Access the child ID from the request body
+  const { id } = req.params; // Access the ID from the request params
 
-  const process = await Process.find({ child: childId });
+  const process = await Process.find({ child: id });
   res.status(200).json({
     success: true,
     process
   });
 });
+
 
 
 // //get all  processs (admin)
