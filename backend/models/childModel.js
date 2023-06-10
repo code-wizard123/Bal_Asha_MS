@@ -67,9 +67,9 @@ const childSchema = new Schema({
     type: [String],
     default: function () {
       if (this.category === 1) {
-        return ["familyApproval"];
+        return ["familyApproval","ScreenShot"];
       } else if (this.category === 2) {
-        return ["photoPublication1", "photoPublication2", "tvTelecasting","policeReport","previousOrgReport"];
+        return ["photoPublication1", "photoPublication2", "tvTelecasting","policeReport","previousOrgReport","ScreenShot"];
       } else {
         return [];
       }
