@@ -111,18 +111,21 @@ const CaseManager = () => {
       <br></br>
       <br></br>
       <div onClick={handleProfileClick}>
-          <FaUser />
+          {/* <FaUser /> */}
         </div>
       <section className="shop contain">
-        <h2 className="section-title">Children</h2>
+        <h2 className="section-title">CHILDREN</h2>
         <div className="shop-content">
           <div className="content">
           {children.map((child, index) => (
             <div className="product-box" key={index}>
+              <div className="Image-box">
               <img src={orphanage} alt="Orphanage Image" className="product-img" />
+              </div>
+              <div>
               <h2 className="product-title">{child.name}</h2>
-              <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Category: {getCategory[child.category]}</span><br /><br />
-              <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Family Details {child.familyDetails}</span>
+              <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Category: {getCategory[child.category]}</span><br></br>
+              <span style={{ color: child.isAssigned ? "green" : "red" }} className="price">Family Details :NA</span>
               { child.isAssigned ? 
               (<>
                 <br /><span style={{color: "green"}} className="price">Assigned To: {child.assignedTo}</span>
@@ -138,8 +141,10 @@ const CaseManager = () => {
                   ))}
                 </select>
                 <button>Add Case</button>
+                
               </form>
               )}
+              </div>
               
             </div>
           ))}
