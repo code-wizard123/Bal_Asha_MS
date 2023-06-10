@@ -34,24 +34,23 @@ const featureList = [
 //INSTITUTE TYPE 1
 
 const NavLinks = () => (
-
 	<React.Fragment>
 		<p>
 			<a href="#features">Features</a>
 		</p>
-		<p>
+		<div>
 			<li className="nav-link dropdown"><a href="/contact" className="dropdown-landing">Contact<i
 				className="bi bi-chevron-compact-down"></i></a>
 				<ul className="dropdown-list">
 					<li className="nav-link">
 						<a href="mailto:cod.callofduty@gmail.com" target="_blank">&nbsp;&nbsp;E-Mail</a>
-						<li className="nav-link">
-							<a href="">Phone</a>
-						</li>
+					</li>
+					<li className="nav-link">
+						<a href="">Phone</a>
 					</li>
 				</ul>
 			</li>
-		</p>
+		</div>
 	</React.Fragment>
 );
 
@@ -69,8 +68,7 @@ const Navbar = () => {
 };
 
 const Landing = () => {
-	let initialRender = true;
-	const signUpFunc = (e) => {
+	const signUpFunc = async (e) => {
 		e.preventDefault();
 		if ((password == confpassword) && re.test(email)) {
 			const sendData = {
@@ -87,43 +85,27 @@ const Landing = () => {
 			setLoading(true);
 			// console.log(loading)
 
-			axios
-				.post('http://localhost:4000/api/v1/register', sendData)
-				.then(async(response) => {
-					if (response.data.accessToken) {
-						// console.log(response.data)
-						localStorage.setItem("login", JSON.stringify(response.data));
-					}
+			try {
+				const response = await axios.post('http://localhost:4000/api/v1/register', sendData)
+				console.log(response.data)
 
-					// console.log(senddata);
+				document.cookie = `token=${response.data.token}`
+				
+				if (parseInt(role) === 3) {
+					navigate('/GroundWorker'); // Redirect to admin dashboard
+				} else if (parseInt(role) === 2) {
+					navigate('/OperationWorker');
+				} else if (parseInt(role) === 1) {
+					navigate('/CaseManager'); // Redirect to user dashboard
+				}
+			}
+			catch (e) {
+				seterrorlogin(e.response.data.message)
+			}
 
-					try {
-						const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
-						console.log(response.data);
-						// Assuming the server responds with a success message and a token
-						const { success, message, token } = response.data;
-
-						if (success) {
-							// Set the token as a cookie or store it in localStorage as per your preference
-							document.cookie = `token=${token}`;
-
-							// Redirect the user based on their role
-							if (message.role === 3) {
-								navigate('/GroundWorker'); // Redirect to admin dashboard
-							} else if (message.role === 2) {
-								navigate('/OperationWorker');
-							} else if (message.role === 1) {
-								navigate('/CaseManager'); // Redirect to user dashboard
-							}
-
-							console.log('Login successful!');
-						} else {
-							console.log("Invalid Email and Password")
-						}
-					} catch (error) {
-						console.error('An error occurred:', error);
-					}
-		})}}
+			setLoading(false)
+		}
+	}
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [signIn, toggle] = React.useState(true);
@@ -135,10 +117,10 @@ const Landing = () => {
 	const [confpassword, setConfPassword] = useState('');
 	const [name, setName] = useState('');
 	const [firstname, setFirstName] = useState('');
-	const [pincode, setPincode] = useState('');
+	const [pincode, setPincode] = useState(400053);
 	const [mobile, setMobile] = useState('');
 	const [type, setType] = useState("3");
-	const [role, setRole] = useState(3);
+	const [role, setRole] = useState(1);
 	const [confirm, setConfirm] = useState(0);
 	const [url, setUrl] = useState("");
 	const [image, setImage] = useState("");
@@ -158,40 +140,11 @@ const Landing = () => {
 		fetch("'https://api.cloudinary.com/v1_1/dmomonuiu/image/upload',", {
 			method: "post",
 			body: data
-		}
-		)
+		})
 			.then((res) => res.json())
 			.then((data) => {
 				setUrl(data.url)
 			})
-		//     // console.log(data.url);
-		//     const sendData = {
-		//         "UserId": userid,
-		//         "UserName": username,
-		//         "Password": password,
-		//         "FirstName": firstname,
-		//         "LastName": lastname,
-		//         "EmailId": email,
-		//         "MobileNo": parseInt(mobile),
-		//         "LastLoginDateTime": "2022-11-27T00:00:00.000Z",
-		//         "DateOfBirth": "1974-07-13T00:00:00.000Z",
-		//         "Age": 17,
-		//         "TypeId": typeid,
-		//         "ActivationStatus": '0',
-		//         "Photo": data.url,
-		//     };
-
-		//     // console.log(sendData.Photo);
-
-		//     axios.post('https://lmsapiv01.azurewebsites.net/api/user', sendData).then(result => {
-		//         setLoading(false)
-		//         // console.log(result.data)
-		//     });
-
-
-		// }).catch((err) => {
-		//     console.log(err);
-		// })
 	}
 	// const navigate = useNavigate();
 
@@ -207,7 +160,6 @@ const Landing = () => {
 			if (success) {
 				// Set the token as a cookie or store it in localStorage as per your preference
 				document.cookie = `token=${token}`;
-				localStorage.setItem('role', message.role)
 
 				// Redirect the user based on their role
 				if (message.role === 3) {
@@ -231,7 +183,7 @@ const Landing = () => {
 		<React.Fragment>
 			<Navbar />
 			{errorlogin
-				? (<h1 className='error-login'>Wrong details pls re enter</h1>)
+				? (<h1 className='error-login'>Wrong Details Please Re-Enter</h1>)
 				: null}
 			{loading
 				? (
@@ -322,31 +274,35 @@ const Landing = () => {
 									: (<h1 className='ReEnter'>Enter valid email</h1>))
 							}
 							<Components.Input type='email' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
-							<Components.Input type='number' placeholder='Role' value={role} onChange={(e) => setRole(e.target.value)} required />
+							{/* <Components.Input type='number' placeholder='Role' value={role} onChange={(e) => setRole(e.target.value)} required /> */}
+							<select value={role} onChange={e => setRole(e.target.value)}>
+								<option value="1">Case Manager</option>
+								<option value="2">Operation Worker</option>
+								<option value="3">Ground Worker</option>
+							</select>
 							<Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
 							{password === confpassword
 								? null
 								: (<h1 className='ReEnter'>Enter same password</h1>)
 							}
 							<Components.Input type='password' placeholder='Confirm Password' value={confpassword} onChange={(e) => setConfPassword(e.target.value)} required />
-							<div class="upload-btn-wrapper">
-								<button class="btn">Upload a file</button>
+							<div className="upload-btn-wrapper">
+								{/* <button className="btn">Upload a file</button> */}
 								<input type="file" onChange={(e) => setImage(e.target.files[0])} name="myfile" />
-
 							</div>
 							{/* <button className="btn">Upload a file</button>
             <input type="file" ></input> */}
-							<button onClick={submitImage} className='file-button'>Upload image as profile Photo</button>
-							<div class="selector">
-								<div class="selector-item">
-									<input type="radio" id="radio1" name="selector" value="2" class="selector-item_radio" onClick={(e) => setType(e.target.value)} />
-									<label for="radio1" class="selector-item_label">Student</label>
+							{/* <button onClick={submitImage} className='file-button'>Upload image as profile Photo</button> */}
+							{/* <div className="selector">
+								<div className="selector-item">
+									<input type="radio" id="radio1" name="selector" value="2" className="selector-item_radio" onClick={(e) => setType(e.target.value)} />
+									<label htmlFor="radio1" className="selector-item_label">Student</label>
 								</div>
-								<div class="selector-item">
-									<input type="radio" id="radio2" name="selector" value="1" class="selector-item_radio" onClick={(e) => setType(e.target.value)} />
-									<label for="radio2" class="selector-item_label">Teacher</label>
+								<div className="selector-item">
+									<input type="radio" id="radio2" name="selector" value="1" className="selector-item_radio" onClick={(e) => setType(e.target.value)} />
+									<label htmlFor="radio2" className="selector-item_label">Teacher</label>
 								</div>
-							</div>
+							</div> */}
 							<Components.Button type="submit">Sign Up</Components.Button>
 						</Components.Form>
 					</Components.SignUpContainer>
