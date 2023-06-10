@@ -31,9 +31,9 @@ const OperationWorker = () => {
         <h2 className="section-title">Children under you</h2>
         <div className="shop-content">
           <div className="content">
-            {children.map(child) => (
+            {/* {children.map(child) => (
               
-            )}
+            )} */}
             {/* {childre.map((orphanage) => (
             <Link
               to={{

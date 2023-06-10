@@ -44,6 +44,7 @@ const App = () => {
           {/* <Route path="/FlowTemp" element={<FlowTemp />} /> */}
           <Route exact path="/Profile" element={<Profile />} />
           <Route path="/TopPerformerDetails" element={<TopPerformerDetails />} />
+          <Route exact path="/ReactFlow" element={<SetFlow />} />
           {/* <Route element={<ProtectedGroundRoutes />}>
             <Route path="/GroundWorker" element={<GroundWorker />} />
             {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
@@ -58,7 +59,7 @@ const App = () => {
 
           <Route element={<ProtectedOperationRoutes />}>
             <Route path="/OperationWorker" element={<OperationWorker />} />
-            <Route exact path="/ReactFlow" element={<SetFlow />} />
+            {/* <Route exact path="/ReactFlow" element={<SetFlow />} /> */}
           </Route>
 
           <Route element={<ProtectedCaseRoutes />}>
