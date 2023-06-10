@@ -318,3 +318,41 @@ exports.parseToken = catchAsyncErrors(async (req, res, next) => {
         payload
     })
 })
+
+exports.getEmployeeWithMaxCasesClosed = async (req, res, next) => {
+    try {
+      // Get the current month as a string (e.g., "June")
+      const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+  
+      // Find the employee with maximum cases closed in the current month
+      const employee = await Employee.findOne()
+        .sort({ 'casesClosed.count': -1 })
+        .select('name email casesClosed')
+        .populate('children', 'name')
+        .exec();
+  
+      if (!employee) {
+        return res.status(404).json({
+          success: false,
+          message: 'No employee found',
+        });
+      }
+  
+      // Find the casesClosed object for the current month
+      const casesClosedObject = employee.casesClosed.find((entry) => {
+        return entry.month === currentMonth;
+      });
+  
+      res.status(200).json({
+        success: true,
+        employee,
+        casesClosed: casesClosedObject,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message,
+      });
+    }
+  };
