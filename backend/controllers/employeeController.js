@@ -254,54 +254,66 @@ exports.getEmployeeWithRole = catchAsyncErrors(async (req, res, next) => {
 })
 exports.updateCasesClosed = async (req, res, next) => {
     const { employeeId } = req.params;
-  
+
     try {
-      // Find the employee by ID
-      const employee = await Employee.findById(employeeId);
-  
-      if (!employee) {
-        return res.status(404).json({
-          success: false,
-          message: `Employee not found with ID: ${employeeId}`,
+        // Find the employee by ID
+        const employee = await Employee.findById(employeeId);
+
+        if (!employee) {
+            return res.status(404).json({
+                success: false,
+                message: `Employee not found with ID: ${employeeId}`,
+            });
+        }
+
+        // Get the current month as a string (e.g., "June")
+        const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+
+        // Find the corresponding casesClosed object for the current month
+        const casesClosedObject = employee.casesClosed.find((entry) => {
+            return entry.month === currentMonth;
         });
-      }
-  
-      // Get the current month as a string (e.g., "June")
-      const currentMonth = new Date().toLocaleString('default', { month: 'long' });
-  
-      // Find the corresponding casesClosed object for the current month
-      const casesClosedObject = employee.casesClosed.find((entry) => {
-        return entry.month === currentMonth;
-      });
-  
-      if (casesClosedObject) {
-        // Increment the count if the casesClosed object exists for the current month
-        casesClosedObject.count += 1;
-      } else {
-        // Create a new casesClosed object for the current month and set the count to 1
-        employee.casesClosed.push({
-          month: currentMonth,
-          count: 1,
+
+        if (casesClosedObject) {
+            // Increment the count if the casesClosed object exists for the current month
+            casesClosedObject.count += 1;
+        } else {
+            // Create a new casesClosed object for the current month and set the count to 1
+            employee.casesClosed.push({
+                month: currentMonth,
+                count: 1,
+            });
+        }
+
+        // Save the updated employee
+        await employee.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Cases closed count updated successfully',
         });
-      }
-  
-      // Save the updated employee
-      await employee.save();
-  
-      res.status(200).json({
-        success: true,
-        message: 'Cases closed count updated successfully',
-      });
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: 'Internal server error',
-        error: error.message,
-      });
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+            error: error.message,
+        });
     }
-  };
-  
-  
+};
+
+exports.getChildrenUnderOpManager = catchAsyncErrors(async (req, res, next) => {
+    const id = req.params.id;
+    Employee.findById(id)
+        .populate('children') // Populating the 'department' field reference
+        .exec()
+        .then(populatedEmployee => {
+            res.status(200).json({
+                success: true,
+                message: populatedEmployee
+            })
+        })
+})
+
 exports.parseToken = catchAsyncErrors(async (req, res, next) => {
     const { token } = req.body;
     const payload = jwt.verify(token, process.env.JWT_SECRET)

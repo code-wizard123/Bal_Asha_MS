@@ -1,6 +1,6 @@
 const express = require('express');
 const { registerEmployee, loginEmployee,
-    logOut,getAllEmployee,updateEmployeeRole,getSingleEmployee, deleteEmployee, forgotPassword,resetPassword, updatePassword, getEmployeeWithRole, parseToken,getEmployeeDetails, getOperationWithPincode,updateCasesClosed /* updateProfile */} = require("../controllers/employeeController");
+    logOut,getAllEmployee,updateEmployeeRole,getSingleEmployee, deleteEmployee,getChildrenUnderOpManager ,forgotPassword,resetPassword, updatePassword, getEmployeeWithRole, parseToken,getEmployeeDetails, getOperationWithPincode,updateCasesClosed /* updateProfile */} = require("../controllers/employeeController");
 const { isAuthenticatedEmployee, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
@@ -17,4 +17,5 @@ router.route("/admin/employees").get(/*isAuthenticatedEmployee, authorizeRoles("
 router.route("/admin/employee/:id").get(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ getSingleEmployee).put(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/updateEmployeeRole).delete(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ deleteEmployee);
 router.route("/parsetoken").post(parseToken)
 router.route("/getemployee/:role").get(getEmployeeWithRole)
+router.route("/operation/children/:id").get(getChildrenUnderOpManager)
 module.exports = router;
