@@ -15,3 +15,4 @@ export { default as ProtectedOperationRoutes } from "./Protected/ProtectedOperat
 export { default as Download } from "./Download/Download";
 export { default as OperationWorker } from "./OperationWorker/OperationWorker";
 export { default as TopPerformerDetails } from "./TopPerformer/TopPerformerDetails";
+export { default as ViewProcessFlow } from "./ViewProcessFlow/ViewProcessFlow";

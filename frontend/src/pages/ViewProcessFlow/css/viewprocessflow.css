@@ -1,0 +1,10 @@
+.view-process-img{
+    height:200px;
+    width:200px;
+}
+
+.process-flow{
+    width:auto;
+    height:auto;
+    border:1px solid black;
+}

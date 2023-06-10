@@ -104,3 +104,8 @@
 .shop {
     animation: fadeIn 1s ease-in-out;
 }
+
+li img{
+    height:50px;
+    width:50px;
+}

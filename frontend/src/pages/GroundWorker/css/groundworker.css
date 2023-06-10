@@ -4,7 +4,7 @@
   width: 90%;
   margin: 0 auto;
   padding: 2rem;
-  background-color: rgb(206, 202, 202);
+  background-color: rgb(10, 10, 10);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgb(32, 32, 32);
   border-radius: 5px;
@@ -215,5 +215,6 @@ section1 {
 }
 
 .Image-box1 {
-  background-color: white;
+  background-color: #e0d9d9;
+  margin-right:10px;
 }

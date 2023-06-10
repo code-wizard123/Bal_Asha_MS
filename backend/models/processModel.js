@@ -177,7 +177,7 @@ const generateProcessSchema = (actionLeft) => {
             // required: true
           }
     },
-    ScreenShot: {
+    ScreenShot: [{
       dateRegistered: {
           type: Date,
           default:Date.now()
@@ -190,7 +190,7 @@ const generateProcessSchema = (actionLeft) => {
           type: String,
           // required: true
         }
-  },
+  }],
     lastVisitByFamily: {
       type: Date
     },

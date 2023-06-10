@@ -89,7 +89,7 @@ const AddChild = () => {
           <form onSubmit={handleSubmit}>
             <div className="row">
               <label htmlFor="firstname">Name</label>
-              <input
+              <input 
                 type="text"
                 placeholder="Name"
                 value={name}
@@ -192,7 +192,7 @@ const AddChild = () => {
               </button>
             </div>
             <br />
-            <input type="submit" value="Submit" disabled={loading} />
+            <input class="submit-btn" type="submit" value="Submit" disabled={loading} />
           </form>
         </div>
       </div>

@@ -106,7 +106,7 @@ const ActionLeft = () => {
       </nav>
       <br />
       <br />
-      <div className="animate">
+      {/* <div className="animate">
         <div className="bubbles">
           <span id="r"></span>
           <span id="a"></span>
@@ -133,7 +133,7 @@ const ActionLeft = () => {
           <span id="y"></span>
           <span id="z"></span>
         </div>
-      </div>
+      </div> */}
       <div className="profile">
         <img src={child} alt="Child Avatar" />
         <h2>{name}</h2>

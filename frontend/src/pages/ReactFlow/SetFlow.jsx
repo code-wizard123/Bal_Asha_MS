@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge } from 'reactflow';
 import axios from 'axios';
-import "./css/updatenode.css"
+import './css/updatenode.css';
 import 'reactflow/dist/style.css';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const initialNodes = [
-  { id: '1', position: { x: 300, y: 100 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' } ,type: 'textUpdater'},
+  { id: '1', position: { x: 300, y: 100 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' }, type: 'textUpdater' },
   { id: '2', position: { x: 350, y: 100 }, data: { label: 'photoPublication2' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
   { id: '3', position: { x: 400, y: 200 }, data: { label: 'tvTelecasting' }, style: { backgroundColor: 'green', color: '#fffff' } },
   { id: '4', position: { x: 450, y: 300 }, data: { label: 'MER' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
@@ -22,6 +22,7 @@ export default function SetFlow() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [documentDetails, setDocumentDetails] = useState([]);
   const [nodeCount, setNodeCount] = useState(initialNodes.length + 1);
+  const [images, setImages] = useState(null);
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
@@ -65,7 +66,7 @@ export default function SetFlow() {
     const newNode = {
       id: newNodeId,
       position: { x: 0, y: 0 },
-      data: { label: `tvTelecasting` },
+      data: { label: 'tvTelecasting' },
       style: { backgroundColor: 'red', color: '#fffff' },
     };
 
@@ -73,21 +74,43 @@ export default function SetFlow() {
     setNodeCount((prevCount) => prevCount + 1);
   };
 
-  const [images, setImages] = useState(null);
-
   const submitImage = async () => {
     const formData = new FormData();
-    formData.append("file", images);
-    formData.append("upload_preset", "vkgzvauu");
-    formData.append("cloud_name", "dmomonuiu");
+    formData.append('file', images);
+    formData.append('upload_preset', 'vkgzvauu');
+    formData.append('cloud_name', 'dmomonuiu');
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dmomonuiu/image/upload",
+        'https://api.cloudinary.com/v1_1/dmomonuiu/image/upload',
         formData
       );
       console.log(response.data);
-      // Store the image URLa or handle other necessary tasks
+
+      // Prepare the JSON data
+      const json = {
+        child: '64845acf306fc8557715cd6f',
+        ScreenShot: [
+          {
+            dateRegistered: new Date().toISOString(),
+            public_id: response.data.public_id,
+            url: response.data.url,
+          },
+        ],
+      };
+
+      // Post the JSON data to the specified URL
+      console.log(json);
+      try {
+        const response = await axios.put('http://localhost:4000/api/v1/admin/process/6484621b79a32bef7e95413b', json);
+        console.log(response.data);
+        // Other logic after successful request
+      } catch (error) {
+        console.log('Error during axios.put:', error);
+      }
+      
+      console.log(json);
+      // Store the image URL or handle other necessary tasks
     } catch (error) {
       console.log(error);
       // Handle image upload error
@@ -138,8 +161,7 @@ export default function SetFlow() {
               })}
             </tbody>
             <tr class="uploadButton">
-              <td><br></br><br></br>
-              </td>
+              <td><br></br><br></br></td>
               <td><br></br><br></br></td>
                 <td>  <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
                <button type="button" onClick={submitImage}>
@@ -147,13 +169,10 @@ export default function SetFlow() {
                </button>
               <br></br><br></br></td>
             </tr>
-          </table>          
+          </table>
         ) : (
           <div>Loading document details...</div>
         )}
-
-         
-        
       </div>
     </div>
   );
