@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Cookies from 'js-cookie'
 import "./css/OperationWorker.css";
 import ChildImage from "../../Images/ChildImage.jpg";
+import jwtDecode from "jwt-decode";
 // import { OperationManager } from "..";
 
 const OperationWorker = () => {
-  const [pinCode, setPinCode] = useState("");
-  const [orphanages, setOrphanages] = useState([]);
-
+  const [children, setChildren] = useState([]);
   useEffect(() => {
-    if (pinCode) {
-      // Make the Axios GET request to retrieve the orphanages data
-      axios
-        .get(`http://localhost:4000/api/v1/childs/orphanage?pinCode=${pinCode}`)
-        .then((response) => {
-          setOrphanages(response.data.CCIs);
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    const getChildren = async () => {
+      try {
+        const cookie = Cookies.get("token")
+        if (cookie) {
+          const decoded = jwtDecode(cookie)
+          const response = await axios.get(`http://localhost:4000/api/v1/operation/children/${decoded.id}`)
+          setChildren(response.data.message.children)
+        }
+      }
+      catch (e) {
+        console.log(e)
+      }
     }
-  }, [pinCode]);
-
-  const handlePinCodeChange = (event) => {
-    setPinCode(event.target.value);
-  };
-
+    getChildren();
+  })
   return (
     <div>
       <section className="shop contain">
         <h2 className="section-title">Children under you</h2>
         <div className="shop-content">
           <div className="content">
-          {orphanages.map((orphanage) => (
+            {children.map(child) => (
+              
+            )}
+            {/* {childre.map((orphanage) => (
             <Link
               to={{
                 pathname: "/GroundWorker",
@@ -51,8 +51,8 @@ const OperationWorker = () => {
               <h2 className="product-title">Name: {orphanage.name}</h2>
               <p className="product-description">Description: {orphanage.CCIdescription}</p>
             </Link>
-          ))}
-        </div>
+          ))} */}
+          </div>
         </div>
       </section>
     </div>

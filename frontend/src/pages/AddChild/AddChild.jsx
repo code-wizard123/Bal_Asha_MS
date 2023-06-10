@@ -39,6 +39,21 @@ const AddChild = () => {
     e.preventDefault();
     setLoading(true);
 
+    const createProcess = async (id) => {
+      console.log(id)
+      try{
+        const response2 = await axios.post(
+          `http://localhost:4000/api/v1/process/create/${id}`
+        )
+        console.log(response2.data)
+      }
+      catch(e){
+        console.log(e)
+      }
+      
+      // Handle successful child creation
+    }
+
     const sendData = {
       name,
       category: category === "Abandoned" ? 1 : category === "Surrendered" ? 2 : 3,
@@ -56,20 +71,13 @@ const AddChild = () => {
         sendData
       );
       console.log(response.data);
-      childID = response.data.child._id;
-
-      const response2 = await axios.post(
-        "http://localhost:4000/api/v1/process/new",
-        { child: childID, DateOfAdmission, EnrollmentDate}
-      )
-      console.log(response2.data)
-      // Handle successful child creation
+      console.log(response.data.child)
+      createProcess(response.data.child._id)
+      
     } catch (error) {
       console.log("API request error:", error);
       // Handle error case
     }
-
-
     setLoading(false);
   };
 
