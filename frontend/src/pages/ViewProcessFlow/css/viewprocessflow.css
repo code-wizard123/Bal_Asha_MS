@@ -1,10 +1,14 @@
 .view-process-img{
-    height:200px;
-    width:200px;
+    border: 2px solid black;
+    height:auto;
+    width:auto;
 }
 
 .process-flow{
-    width:auto;
-    height:auto;
+    width:500px;
+    height:500px;
     border:1px solid black;
+}
+.process-flow p{
+    color:red;
 }
