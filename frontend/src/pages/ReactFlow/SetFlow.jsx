@@ -141,10 +141,10 @@ export default function SetFlow() {
               <td><br></br><br></br>
               </td>
               <td><br></br><br></br></td>
-                <td>  <input type="file" onChange={(e) => setImages(e.target.files[0])}/>
-              <button type="button" onClick={submitImage}>
+                <td>  <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
+               <button type="button" onClick={submitImage}>
                 Upload Process Flow
-              </button>
+               </button>
               <br></br><br></br></td>
             </tr>
           </table>          
