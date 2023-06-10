@@ -5,12 +5,12 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #e6d9ca;
+    background-color: #060606;
   }
   
   .profile-container h1 {
     text-align: center;
-    color:#5a350a;
+    color:#f7f5f2;
   }
   
   .profile-details {
@@ -39,7 +39,7 @@
   .profile-details h1 {
     font-size: 24px;
     margin-bottom: 10px;
-    color: #5a350a;
+    color: #f9f7f5;
     align-items: center;
   }
   
@@ -58,7 +58,7 @@
   }
   
   .profile-details p{
-    color:black;
+    color:rgb(243, 237, 237);
   }
 
   .stats-profile{
@@ -67,5 +67,5 @@
   }
 
   .chartcolor{
-  color:black;
+  color:rgb(245, 237, 237);
   }

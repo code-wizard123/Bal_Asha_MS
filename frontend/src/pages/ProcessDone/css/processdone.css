@@ -7,16 +7,16 @@ body {
 
 h2 {
     text-align: center;
-    color:rgba(68, 13, 13, 0.449);
+    color:rgba(255, 254, 254);
 }
 
-.form-container {
+.form-container1 {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #e6d9ca;
+    background-color: #101010;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -31,7 +31,7 @@ h2 {
 }
 
 label{
-    color:#434643;
+    color:#f3fbf3;
 }
 
 .form-group input[type="date"],
@@ -40,11 +40,14 @@ label{
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background-color:#ffffff;
 }
+
+/* .form-group input[type="file"]
 
 .form-group input[type="file"] {
     padding: 6px;
-}
+} */
 
 .form-group input[type="submit"] {
     /* background-color: #4caf50;
@@ -53,10 +56,17 @@ label{
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer; */
-    background-color: #563727;
+    background-color: #be9e34;
+    font-weight: 600;
         cursor: pointer;
 }
 
 .form-group input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #a3d739;
+    border:2px solid black
+}
+
+.form-group select{
+    width:100%;
+    padding:10px;
 }
