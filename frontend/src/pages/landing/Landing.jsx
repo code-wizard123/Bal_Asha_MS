@@ -132,7 +132,7 @@ const Landing = () => {
 							strokeWidthSecondary={2} />
 					</div>)
 				: null}
-
+				
 			<div className="section-type-landing-page">
 				<div className="section-fluid-main">
 					<div className="section-row">
@@ -191,6 +191,7 @@ const Landing = () => {
 				{/* <div id="features" className='features'>
 					<h1>Features</h1>
 				</div> */}
+				
 			</div >
 
 			<footer className="Footer">Copyright © 2022 All rights reserved.</footer>

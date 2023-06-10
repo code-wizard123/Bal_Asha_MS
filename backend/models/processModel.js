@@ -177,6 +177,20 @@ const generateProcessSchema = (actionLeft) => {
             // required: true
           }
     },
+    ScreenShot: {
+      dateRegistered: {
+          type: Date,
+          default:Date.now()
+        },
+        public_id: {
+          type: String,
+          // required: true
+        },
+        url: {
+          type: String,
+          // required: true
+        }
+  },
     lastVisitByFamily: {
       type: Date
     },

@@ -50,14 +50,15 @@ const GroundWorker = () => {
   };
 
   return (
-    <div class="animation">
-      <section className="shop contain">
-        <h2 className="section-title">Orphanages</h2>
-        <div className="shop-content">
+    <div class="animation1">
+      <section className="shop1 contain1">
+        <h2 className="section-title1">Children</h2>
+        <div className="shop-content1">
           {children && children.length > 0 ? (
             children.map((child) => (
-              <Link to={"/ActionLeft/" + child._id} className="product-box" key={child._id}>
-                <img src={ChildImage} alt="Child Image" className="product-img" />
+              <Link to={"/ActionLeft/" + child._id} className="product-box1" key={child._id}>
+                <img src={ChildImage} alt="Child Image" className="product-img1" />
+                <div>
                 <h2 className="product-title">Name: {child.name}</h2>
                 <span className="price">Id: {child._id}</span>
                 <br />
@@ -68,6 +69,7 @@ const GroundWorker = () => {
                 <span className="price">Category: {child.category}</span>
                 <br />
                 <span className="price">Found At: {child.CCI.name}</span>
+                </div>
               </Link>
             ))
           ) : (

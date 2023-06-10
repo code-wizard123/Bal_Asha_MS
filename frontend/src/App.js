@@ -17,7 +17,7 @@ import {
   ProtectedCaseRoutes,
   ProtectedOperationRoutes,
   Profile,
-  FlowTemp
+  TopPerformerDetails
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -42,6 +42,12 @@ const App = () => {
           {/* <Route path="/GroundWorker" element={<GroundWorker />} /> */}
           {/* <Route path="/CaseManager" element={<CaseManager />} /> */}
           {/* <Route path="/FlowTemp" element={<FlowTemp />} /> */}
+          <Route exact path="/Profile" element={<Profile />} />
+          <Route path="/TopPerformerDetails" element={<TopPerformerDetails />} />
+          {/* <Route element={<ProtectedGroundRoutes />}>
+            <Route path="/GroundWorker" element={<GroundWorker />} />
+            {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
+          {/* </Route> */}
 
           <Route element={<ProtectedGroundRoutes />}>
             <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />

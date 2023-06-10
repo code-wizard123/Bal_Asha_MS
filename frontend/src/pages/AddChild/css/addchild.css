@@ -1,77 +1,119 @@
-/* addchild.css */
 #registration-form {
-    max-width: 500px;
+    max-width: 400px;
     margin: 0 auto;
-    padding: 40px;
-    background-color: #e6d9ca;
-    /* background-color: #DE9E48; */
-    color: #de9e48;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
-.fieldset {
-    border: none;
-    padding: 0;
-    margin: 0;
-}
-
-.legend {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.addChild{
+.addChild {
     text-align: center;
-    color:rgb(188, 147, 12);
+    margin-bottom: 20px;
 }
 
 .row {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    /* text-align: center; */
 }
 
 label {
     display: block;
-    font-size: 18px;
+    font-weight: bold;
+    font-size: 0.8rem;
     margin-bottom: 5px;
+    margin-left:2px;
 }
 
-input,
+input[type='text'],
+input[type='date'],
+input[type='file'],
 select {
-    width: 100%;
+    width: 96%;
+    /* max-width: 300px; */
+    /* Adjust the max-width as desired */
+    padding: 5px;
+    margin-right:10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+/* input[type='file'] { */
+    /* display: none; */
+/* } */
+
+input[type='submit'] {
+    width: 96%;
+    /* max-width: 300px; */
+    /* Adjust the max-width as desired */
     padding: 10px;
+    border: none;
+    background-color: #4fa94d;
+    color: #fff;
     font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    background-color: #7a431d;
-    color: #fff;
-}
-
-select{
-    width:105%;
-    text-align: center;
-}
-
-input[type="submit"] {
-    background-color: #563727;
+    font-weight: bold;
     cursor: pointer;
-}
-
-input[type="file"] {
-    background-color: transparent;
-    color: #de9e48;
-    padding: 0;
-}
-
-button {
-    background-color: #de9e48;
-    color: #fff;
-    padding: 10px 20px;
     border-radius: 5px;
-    border: none;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+input[type='submit']:hover {
+    background-color: #45a345;
+}
+
+.dropdown1 {
+    /* position: relative; */
+    /* text-align: center; */
+    width:96%;
+}
+
+.dropdown1 select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 102%;
+    /* max-width: 300px; */
+    /* Adjust the max-width as desired */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: transparent;
     cursor: pointer;
+    margin: 0 auto;
+    /* margin-left: 5px; */
+}
+
+.dropdown1 select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+}
+
+.row button {
+    padding: 5px 10px;
+    background-color: #4fa94d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+.row button:hover {
+    background-color: #45a345;
+}
+
+.fieldset {
+    border: none;
 }
 
 /* Animations */
+
 @keyframes slideInFromLeft {
     0% {
         transform: translateX(-100%);
@@ -84,32 +126,28 @@ button {
     }
 }
 
-@keyframes fadeIn {
+@keyframes slideInFromRight {
     0% {
+        transform: translateX(100%);
         opacity: 0;
     }
 
     100% {
+        transform: translateX(0);
         opacity: 1;
     }
 }
 
-/* Customizations */
-@media (max-width: 768px) {
-    #registration-form {
-        padding: 20px;
-    }
+#registration-form {
+    animation: slideInFromLeft 2s ease;
+}
 
-    .legend {
-        font-size: 20px;
-    }
+.row {
+    animation: slideInFromRight 2s ease;
+    animation-delay: 0.2s;
+}
 
-    label {
-        font-size: 16px;
-    }
-
-    input,
-    select {
-        font-size: 14px;
-    }
+input[type='submit'] {
+    animation: slideInFromRight 2s ease;
+    animation-delay: 0.4s;
 }

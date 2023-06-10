@@ -14,4 +14,4 @@ export { default as ProtectedCaseRoutes } from "./Protected/ProtectedCaseRoutes"
 export { default as ProtectedOperationRoutes } from "./Protected/ProtectedOperationRoutes";
 export { default as Download } from "./Download/Download";
 export { default as OperationWorker } from "./OperationWorker/OperationWorker";
-export { default as FlowTemp } from "./flowTemp/FlowTemp";
+export { default as TopPerformerDetails } from "./TopPerformer/TopPerformerDetails";
