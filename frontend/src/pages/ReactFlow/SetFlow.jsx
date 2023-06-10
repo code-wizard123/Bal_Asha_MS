@@ -73,6 +73,27 @@ export default function SetFlow() {
     setNodeCount((prevCount) => prevCount + 1);
   };
 
+  const [images, setImages] = useState(null);
+
+  const submitImage = async () => {
+    const formData = new FormData();
+    formData.append("file", images);
+    formData.append("upload_preset", "vkgzvauu");
+    formData.append("cloud_name", "dmomonuiu");
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dmomonuiu/image/upload",
+        formData
+      );
+      console.log(response.data);
+      // Store the image URLa or handle other necessary tasks
+    } catch (error) {
+      console.log(error);
+      // Handle image upload error
+    }
+  };
+
   return (
     <div style={{ width: '100%', height: '400px' }}>
       <ReactFlow
@@ -117,11 +138,14 @@ export default function SetFlow() {
               })}
             </tbody>
             <tr class="uploadButton">
-              <td><br></br>
+              <td><br></br><br></br>
               </td>
-              <td><br></br>
-              <button>Upload Process Flow</button></td>
-              <td><br></br></td>
+              <td><br></br><br></br></td>
+                <td>  <input type="file" onChange={(e) => setImages(e.target.files[0])}/>
+              <button type="button" onClick={submitImage}>
+                Upload Process Flow
+              </button>
+              <br></br><br></br></td>
             </tr>
           </table>          
         ) : (
