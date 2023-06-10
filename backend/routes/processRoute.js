@@ -8,7 +8,7 @@ const router=express.Router();
 router.route("/process/create/:id").post(newProcess);
 router.route("/sendEmail").post(/*isAuthenticatedUser,*/emailChildProfile);
 // router.route("/order/:id").get(isAuthenticatedUser,getSingleOrder);
-router.route("/process/me").get(/*isAuthenticatedUser,*/myProcess);
+router.route("/process/me/:id").get(/*isAuthenticatedUser,*/myProcess);
 router.route("/process/:childId").get(/*isAuthenticatedUser,*/getSingleProcess);
 router.route("/admin/process/ActionDone/:id").get(getActionDoneDetails);
 router.route("/admin/process").get(/*isAuthenticatedUser,authorizeRoles("admin"),*/getAllProcess);

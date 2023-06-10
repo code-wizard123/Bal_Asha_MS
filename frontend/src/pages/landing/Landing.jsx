@@ -34,24 +34,23 @@ const featureList = [
 //INSTITUTE TYPE 1
 
 const NavLinks = () => (
-
 	<React.Fragment>
 		<p>
 			<a href="#features">Features</a>
 		</p>
-		<p>
+		<div>
 			<li className="nav-link dropdown"><a href="/contact" className="dropdown-landing">Contact<i
 				className="bi bi-chevron-compact-down"></i></a>
 				<ul className="dropdown-list">
 					<li className="nav-link">
 						<a href="mailto:cod.callofduty@gmail.com" target="_blank">&nbsp;&nbsp;E-Mail</a>
-						<li className="nav-link">
-							<a href="">Phone</a>
-						</li>
+					</li>
+					<li className="nav-link">
+						<a href="">Phone</a>
 					</li>
 				</ul>
 			</li>
-		</p>
+		</div>
 	</React.Fragment>
 );
 
@@ -69,13 +68,84 @@ const Navbar = () => {
 };
 
 const Landing = () => {
-	let initialRender = true;
+	const signUpFunc = async (e) => {
+		e.preventDefault();
+		if ((password == confpassword) && re.test(email)) {
+			const sendData = {
+				"name": name,
+				"email": email,
+				"password": password,
+				"role": role,
+				"pincode": pincode,
+				"TypeId": String(parseInt(type)),
+				"avatar": url
+			};
+
+			// console.log(sendData);
+			setLoading(true);
+			// console.log(loading)
+
+			try {
+				const response = await axios.post('http://localhost:4000/api/v1/register', sendData)
+				console.log(response.data)
+
+				document.cookie = `token=${response.data.token}`
+				
+				if (parseInt(role) === 3) {
+					navigate('/GroundWorker'); // Redirect to admin dashboard
+				} else if (parseInt(role) === 2) {
+					navigate('/OperationWorker');
+				} else if (parseInt(role) === 1) {
+					navigate('/CaseManager'); // Redirect to user dashboard
+				}
+			}
+			catch (e) {
+				seterrorlogin(e.response.data.message)
+			}
+
+			setLoading(false)
+		}
+	}
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [signIn, toggle] = React.useState(true);
 	const [errorlogin, seterrorlogin] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
+
+	const [username, setUsername] = useState('');
+	const [confpassword, setConfPassword] = useState('');
+	const [name, setName] = useState('');
+	const [firstname, setFirstName] = useState('');
+	const [pincode, setPincode] = useState(400053);
+	const [mobile, setMobile] = useState('');
+	const [type, setType] = useState("3");
+	const [role, setRole] = useState(1);
+	const [confirm, setConfirm] = useState(0);
+	const [url, setUrl] = useState("");
+	const [image, setImage] = useState("");
+	let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const submitImage = () => {
+		setLoading(true)
+		// const [loading, setLoading] = useState(false)
+
+		let userid = (JSON.parse(localStorage.getItem('login')).user.UserId).toString();
+		// console.log(userid);
+		let typeid = (JSON.parse(localStorage.getItem('login')).user.TypeId)
+		const data = new FormData()
+		data.append("file", image)
+		data.append("upload_preset", "vkgzvauu")
+		data.append("cloud_name", "dmomonuiu")
+
+		fetch("'https://api.cloudinary.com/v1_1/dmomonuiu/image/upload',", {
+			method: "post",
+			body: data
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setUrl(data.url)
+			})
+	}
 	// const navigate = useNavigate();
 
 	const signInFunc = async (e) => {
@@ -90,7 +160,6 @@ const Landing = () => {
 			if (success) {
 				// Set the token as a cookie or store it in localStorage as per your preference
 				document.cookie = `token=${token}`;
-				localStorage.setItem('role', message.role)
 
 				// Redirect the user based on their role
 				if (message.role === 3) {
@@ -114,7 +183,7 @@ const Landing = () => {
 		<React.Fragment>
 			<Navbar />
 			{errorlogin
-				? (<h1 className='error-login'>Wrong details pls re enter</h1>)
+				? (<h1 className='error-login'>Wrong Details Please Re-Enter</h1>)
 				: null}
 			{loading
 				? (
@@ -132,7 +201,7 @@ const Landing = () => {
 							strokeWidthSecondary={2} />
 					</div>)
 				: null}
-				
+
 			<div className="section-type-landing-page">
 				<div className="section-fluid-main">
 					<div className="section-row">
@@ -178,7 +247,7 @@ const Landing = () => {
 						</div>
 					</div>
 				</div>
-				<Components.Container>
+				{/* <Components.Container>
 					<Components.SignInContainer signinIn={signIn}>
 						<Components.Form  className='colour' onSubmit={signInFunc}>
 							<Components.Title>Sign in</Components.Title>
@@ -187,11 +256,96 @@ const Landing = () => {
 							<Components.Button type="submit">Sign In</Components.Button>
 						</Components.Form>
 					</Components.SignInContainer>
+				</Components.Container> */}
+				<Components.Container>
+					<Components.SignUpContainer signinIn={signIn}>
+						<Components.Form onSubmit={signUpFunc}>
+							<Components.Title>Create Account</Components.Title>
+							{confirm
+								? (
+									<h1 className='ReEnter'>Re-Enter Details</h1>
+								)
+								: null}
+							<Components.Input type='text' placeholder='Name' value={name} onChange={(e) => setName(e.target.value)} required />
+							{email == ''
+								? null
+								: ((re.test(email))
+									? null
+									: (<h1 className='ReEnter'>Enter valid email</h1>))
+							}
+							<Components.Input type='email' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
+							{/* <Components.Input type='number' placeholder='Role' value={role} onChange={(e) => setRole(e.target.value)} required /> */}
+							<select value={role} onChange={e => setRole(e.target.value)}>
+								<option value="1">Case Manager</option>
+								<option value="2">Operation Worker</option>
+								<option value="3">Ground Worker</option>
+							</select>
+							<Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+							{password === confpassword
+								? null
+								: (<h1 className='ReEnter'>Enter same password</h1>)
+							}
+							<Components.Input type='password' placeholder='Confirm Password' value={confpassword} onChange={(e) => setConfPassword(e.target.value)} required />
+							<div className="upload-btn-wrapper">
+								{/* <button className="btn">Upload a file</button> */}
+								<input type="file" onChange={(e) => setImage(e.target.files[0])} name="myfile" />
+							</div>
+							{/* <button className="btn">Upload a file</button>
+            <input type="file" ></input> */}
+							{/* <button onClick={submitImage} className='file-button'>Upload image as profile Photo</button> */}
+							{/* <div className="selector">
+								<div className="selector-item">
+									<input type="radio" id="radio1" name="selector" value="2" className="selector-item_radio" onClick={(e) => setType(e.target.value)} />
+									<label htmlFor="radio1" className="selector-item_label">Student</label>
+								</div>
+								<div className="selector-item">
+									<input type="radio" id="radio2" name="selector" value="1" className="selector-item_radio" onClick={(e) => setType(e.target.value)} />
+									<label htmlFor="radio2" className="selector-item_label">Teacher</label>
+								</div>
+							</div> */}
+							<Components.Button type="submit">Sign Up</Components.Button>
+						</Components.Form>
+					</Components.SignUpContainer>
+
+					<Components.SignInContainer signinIn={signIn}>
+						<Components.Form onSubmit={signInFunc}>
+							<Components.Title>Sign in</Components.Title>
+							<Components.Input type='text' placeholder='E-Mail ID' value={email} onChange={(e) => setEmail(e.target.value)} required />
+							<Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+							<Components.Button type="submit">Sign In</Components.Button>
+						</Components.Form>
+					</Components.SignInContainer>
+
+					<Components.OverlayContainer signinIn={signIn}>
+						<Components.Overlay signinIn={signIn}>
+
+							<Components.LeftOverlayPanel signinIn={signIn}>
+								<Components.Title>Welcome Back!</Components.Title>
+								<Components.Paragraph>
+									To keep connected with us please login with your personal info
+								</Components.Paragraph>
+								<Components.GhostButton onClick={() => toggle(true)} >
+									Sign In
+								</Components.GhostButton>
+							</Components.LeftOverlayPanel>
+
+							<Components.RightOverlayPanel signinIn={signIn}>
+								<Components.Title>Hello!</Components.Title>
+								<Components.Paragraph>
+									Enter Your personal details and start journey with us
+								</Components.Paragraph>
+								<Components.GhostButton onClick={() => toggle(false)}>
+									Sign Up
+								</Components.GhostButton>
+							</Components.RightOverlayPanel>
+
+						</Components.Overlay>
+					</Components.OverlayContainer>
 				</Components.Container>
 				{/* <div id="features" className='features'>
 					<h1>Features</h1>
 				</div> */}
-				
+
 			</div >
 
 			<footer className="Footer">Copyright © 2022 All rights reserved.</footer>
