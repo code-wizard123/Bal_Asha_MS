@@ -333,3 +333,10 @@ body {
      }
  }
 
+ .list{
+    color:#000000;
+ }
+
+ .list:hover{
+    color:green;
+ }

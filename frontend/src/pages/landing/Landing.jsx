@@ -35,21 +35,8 @@ const featureList = [
 
 const NavLinks = () => (
 	<React.Fragment>
-		<p>
-			<a href="#features">Features</a>
-		</p>
 		<div>
-			<li className="nav-link dropdown"><a href="/contact" className="dropdown-landing">Contact<i
-				className="bi bi-chevron-compact-down"></i></a>
-				<ul className="dropdown-list">
-					<li className="nav-link">
-						<a href="mailto:cod.callofduty@gmail.com" target="_blank">&nbsp;&nbsp;E-Mail</a>
-					</li>
-					<li className="nav-link">
-						<a href="">Phone</a>
-					</li>
-				</ul>
-			</li>
+			
 		</div>
 	</React.Fragment>
 );
@@ -258,7 +245,7 @@ const Landing = () => {
 					</Components.SignInContainer>
 				</Components.Container> */}
 				<Components.Container>
-					<Components.SignUpContainer signinIn={signIn}>
+					<Components.SignUpContainer className="SignUpContainer" signinIn={signIn}>
 						<Components.Form onSubmit={signUpFunc}>
 							<Components.Title>Create Account</Components.Title>
 							{confirm
@@ -275,7 +262,7 @@ const Landing = () => {
 							}
 							<Components.Input type='email' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
 							{/* <Components.Input type='number' placeholder='Role' value={role} onChange={(e) => setRole(e.target.value)} required /> */}
-							<select value={role} onChange={e => setRole(e.target.value)}>
+							<select class="role" value={role} onChange={e => setRole(e.target.value)}>
 								<option value="1">Case Manager</option>
 								<option value="2">Operation Worker</option>
 								<option value="3">Ground Worker</option>

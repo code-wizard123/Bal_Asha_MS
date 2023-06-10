@@ -45,11 +45,14 @@ const OperationWorker = () => {
             //   key={orphanage._id}
             // >
             <div className="product-box" key={index}>
+              <div className="Image-box">
               <img
                 src="https://content.jdmagicbox.com/comp/hyderabad/b3/040pxx40.xx40.131123151657.m4b3/catalogue/care-and-love-orphanage-gajularamaram-hyderabad-orphanages-for-children-2mtljew-250.jpg"
                 alt="Orphanage Image"
                 className="product-img"
               />
+              </div>
+              <div>
               <h2 className="product-title">Name: {child.name}</h2>
               <p className="product-description">Description: {child.keyCase}</p>
               <form>
@@ -58,6 +61,7 @@ const OperationWorker = () => {
                   <option>Ok</option>
                 </select>
               </form>
+              </div>
               </div>
               // </Link>
           ))}

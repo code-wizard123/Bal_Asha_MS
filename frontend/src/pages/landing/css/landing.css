@@ -34,12 +34,21 @@ input {
 }
 
 input[type="text"] {
-	background: transparent;
+	background: white;
 	border: 1px solid black;
+	width: 280px;
+	height: 20px;
+	border-radius: 2px;
+	margin: 5px;
 }
 
 input[type="password"] {
-	background: transparent;
+	background: white;
+	width:264px;
+	height:6.7px;
+	border-radius: 2px;
+	margin:5px;
+	/* margin-top:2px; */
 }
 
 .Footer {
@@ -63,7 +72,11 @@ input[type="password"] {
 
 input[type="email"],input[type="number"]{
 	color:white;
-	background-color: transparent;
+	background-color:white;
+	height:4px;
+	width:264px;
+	border-radius: 2px;
+	margin: 5px;
 }
 /* .No{
 	color:white;
@@ -85,4 +98,16 @@ input[type="email"],input[type="number"]{
 	position: relative;
 	top: 14px;
 	right: -610px;
+}
+
+.role{
+	width:294px;
+	border-radius: 2px;
+	margin:5px;
+}
+
+.upload-btn-wrapper{
+	width: 294px;
+		border-radius: 2px;
+		margin: 5px;
 }
