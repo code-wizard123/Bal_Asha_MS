@@ -66,9 +66,9 @@ const childSchema = new Schema({
   actionLeft: {
     type: [String],
     default: function () {
-      if (this.category === 1) {
+      if (this.category === 2) {
         return ["familyApproval"];
-      } else if (this.category === 2) {
+      } else if (this.category === 1) {
         return ["photoPublication1", "photoPublication2", "tvTelecasting","policeReport","previousOrgReport"];
       } else {
         return [];

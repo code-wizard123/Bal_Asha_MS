@@ -15,6 +15,7 @@ import {
   Download,
   ProtectedGroundRoutes,
   ProtectedCaseRoutes,
+  ProtectedOperationRoutes,
   Profile,
   TopPerformerDetails,
   ViewProcessFlow,
@@ -31,16 +32,18 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Opening />} />
           <Route exact path="/landing" element={<Landing />} />
-          <Route exact path="/AddChild" element={<AddChild />} />
-          <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />
-          <Route exact path="/ProcessDone/:id" element={<ProcessDone />} />
+
+          {/* <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />
+          <Route exact path="/ProcessDone/:id" element={<ProcessDone />} /> */}
           <Route exact path="/Orphanages" element={<Orphanages />} />
-          <Route exact path="/ReactFlow" element={<SetFlow />} />
+
           <Route exact path="/Download" element={<Download />} />
-          <Route path="/OperationWorker" element={<OperationWorker />} />
+          {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
+
+          {/* <Route path="/GroundWorker" element={<GroundWorker />} /> */}
+          {/* <Route path="/CaseManager" element={<CaseManager />} /> */}
+          {/* <Route path="/FlowTemp" element={<FlowTemp />} /> */}
           <Route exact path="/Profile" element={<Profile />} />
-          <Route path="/GroundWorker" element={<GroundWorker />} />
-          <Route path="/CaseManager" element={<CaseManager />} />
           <Route
             path="/TopPerformerDetails"
             element={<TopPerformerDetails />}
@@ -51,9 +54,22 @@ const App = () => {
             {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
           {/* </Route> */}
 
-          {/* <Route element={<ProtectedCaseRoutes />}>
+          <Route element={<ProtectedGroundRoutes />}>
+            <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />
+            <Route exact path="/ProcessDone/:id" element={<ProcessDone />} />
+            <Route path="/GroundWorker" element={<GroundWorker />} />
+            <Route exact path="/Profile" element={<Profile />} />
+          </Route>
+
+          <Route element={<ProtectedOperationRoutes />}>
+            <Route path="/OperationWorker" element={<OperationWorker />} />
+            <Route exact path="/ReactFlow" element={<SetFlow />} />
+          </Route>
+
+          <Route element={<ProtectedCaseRoutes />}>
             <Route path="/CaseManager" element={<CaseManager />} />
-          </Route> */}
+            <Route exact path="/AddChild" element={<AddChild />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer /> {/* Place the ToastContainer at the root level */}

@@ -4,53 +4,12 @@ const Process = require('../models/processModel');
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
-//Register Employee
-// exports.register=catchAsyncErrors(async(req,res,next)=>{
-//     const  { name, email, password, pinCode, phoneNo, photo } = req.body;
-//     const employee = await Employee.create({
-//         name, email, password, pinCode, phoneNo, photo,
-//         avatar:{
-//             public_id:"this is a sample id",
-//             url:"profilepicUrl"
-//         },
-//     });
-//     sendToken(employee,201,res);
-// });
-
-//Login Employee
-// exports.loginEmployee=catchAsyncErrors(async (req,res,next)=>{
-//     const {email,password}=req.body;
-//     if(!email||!password)
-//     {
-//         return next(new errorHandler("Please Enter Email and password",400))
-//     }
-//     const employee = await Employee.findOne({email}).select("+password");
-//     if(!employee)
-//     {
-//         return next(new errorHandler("Invalid email or Password",401));
-//     }
-//     const isPasswordMatched=await employee.comparePassword(password);
-
-//     if(!isPasswordMatched)
-//     {
-//         return next(new errorHandler("Invalid email or Password",401));
-//     }
-//    sendToken(employee,200,res);
-// })
-
 // //Create New Process
-exports.newProcess = catchAsyncErrors(async (req, res, next) => {
-  const { child, DateofAdmission, enrollmentDate } = req.body;
+exports.newProcess = catchAsyncErrors(async (req, res) => {
+  const child = await Child.findById(req.params.id)
+  const process = await Process.create({child : req.params.id, actionLeft: child.actionLeft})
 
-  // Retrieve the child and its actionLeft attribute
-  const childObj = await Child.findById(child);
-  const actionLeft = childObj.actionLeft;
-  // console.log(actionLeft);
-
-  // Create a new process with the retrieved actionLeft attribute
-  const process = await Process.create({ child, DateofAdmission, enrollmentDate, actionLeft });
-
-  res.status(201).json({
+  res.status(200).json({
     success: true,
     process
   });
