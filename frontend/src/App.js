@@ -19,6 +19,7 @@ import {
   Profile,
   TopPerformerDetails,
   ViewProcessFlow,
+  Opening2
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -31,6 +32,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Opening />} />
+          <Route exact path="/logo" element={<Opening2 />} />
           <Route exact path="/landing" element={<Landing />} />
 
           {/* <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />
