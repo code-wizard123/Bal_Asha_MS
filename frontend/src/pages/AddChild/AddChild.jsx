@@ -83,7 +83,7 @@ const AddChild = () => {
               <label htmlFor="firstname">Name</label>
               <input
                 type="text"
-                placeholder="First Name"
+                placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -128,7 +128,7 @@ const AddChild = () => {
                 onChange={(e) => setPinCode(e.target.value)}
               />
             </div>
-            <div className="row dropdown">
+            <div className="row dropdown1">
               <label htmlFor="Gender">Gender</label>
               <select
                 value={gender}
@@ -161,7 +161,7 @@ const AddChild = () => {
               />
             </div>
 
-            <div className="row dropdown">
+            <div className="row dropdown1">
               <label htmlFor="Category">Category</label>
               <select
                 value={category}
