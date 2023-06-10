@@ -89,7 +89,7 @@ export default function SetFlow() {
 
       // Prepare the JSON data
       const json = {
-        child: '647db6f40174c6bfeb976e02',
+        child: '64845acf306fc8557715cd6f',
         ScreenShot: [
           {
             dateRegistered: new Date().toISOString(),
@@ -101,8 +101,15 @@ export default function SetFlow() {
 
       // Post the JSON data to the specified URL
       console.log(json);
-      await axios.post('http://localhost:4000/api/v1/admin/process/647db7040174c6bfeb976e05', json);
+      try {
+        const response = await axios.put('http://localhost:4000/api/v1/admin/process/6484621b79a32bef7e95413b', json);
+        console.log(response.data);
+        // Other logic after successful request
+      } catch (error) {
+        console.log('Error during axios.put:', error);
+      }
       
+      console.log(json);
       // Store the image URL or handle other necessary tasks
     } catch (error) {
       console.log(error);

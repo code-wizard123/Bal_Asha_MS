@@ -17,7 +17,8 @@ import {
   ProtectedCaseRoutes,
   ProtectedOperationRoutes,
   Profile,
-  TopPerformerDetails
+  TopPerformerDetails,
+  ViewProcessFlow,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -31,20 +32,23 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Opening />} />
           <Route exact path="/landing" element={<Landing />} />
-          
+
           {/* <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />
           <Route exact path="/ProcessDone/:id" element={<ProcessDone />} /> */}
           <Route exact path="/Orphanages" element={<Orphanages />} />
-          
+
           <Route exact path="/Download" element={<Download />} />
           {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
-          
+
           {/* <Route path="/GroundWorker" element={<GroundWorker />} /> */}
           {/* <Route path="/CaseManager" element={<CaseManager />} /> */}
           {/* <Route path="/FlowTemp" element={<FlowTemp />} /> */}
           <Route exact path="/Profile" element={<Profile />} />
-          <Route path="/TopPerformerDetails" element={<TopPerformerDetails />} />
-          <Route exact path="/ReactFlow" element={<SetFlow />} />
+          <Route
+            path="/TopPerformerDetails"
+            element={<TopPerformerDetails />}
+          />
+          <Route path="/ViewProcessFlow" element={<ViewProcessFlow />} />
           {/* <Route element={<ProtectedGroundRoutes />}>
             <Route path="/GroundWorker" element={<GroundWorker />} />
             {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
@@ -59,14 +63,13 @@ const App = () => {
 
           <Route element={<ProtectedOperationRoutes />}>
             <Route path="/OperationWorker" element={<OperationWorker />} />
-            {/* <Route exact path="/ReactFlow" element={<SetFlow />} /> */}
+            <Route exact path="/ReactFlow" element={<SetFlow />} />
           </Route>
 
           <Route element={<ProtectedCaseRoutes />}>
             <Route path="/CaseManager" element={<CaseManager />} />
             <Route exact path="/AddChild" element={<AddChild />} />
           </Route>
-          
         </Routes>
       </BrowserRouter>
       <ToastContainer /> {/* Place the ToastContainer at the root level */}

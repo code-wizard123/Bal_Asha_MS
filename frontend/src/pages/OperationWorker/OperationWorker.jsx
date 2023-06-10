@@ -16,6 +16,7 @@ const OperationWorker = () => {
         if (cookie) {
           const decoded = jwtDecode(cookie)
           const response = await axios.get(`http://localhost:4000/api/v1/operation/children/${decoded.id}`)
+          // console.log(response.data.message.children)
           setChildren(response.data.message.children)
         }
       }
@@ -31,27 +32,20 @@ const OperationWorker = () => {
         <h2 className="section-title">Children under you</h2>
         <div className="shop-content">
           <div className="content">
-            {/* {children.map(child) => (
-              
-            )} */}
-            {/* {childre.map((orphanage) => (
-            <Link
-              to={{
-                pathname: "/GroundWorker",
-                state: { orphanageID: "Rahul's Orphanage" }
-              }}
-              className="product-box"
-              key={orphanage._id}
-            >
-              <img
-                src="https://content.jdmagicbox.com/comp/hyderabad/b3/040pxx40.xx40.131123151657.m4b3/catalogue/care-and-love-orphanage-gajularamaram-hyderabad-orphanages-for-children-2mtljew-250.jpg"
-                alt="Orphanage Image"
-                className="product-img"
-              />
-              <h2 className="product-title">Name: {orphanage.name}</h2>
-              <p className="product-description">Description: {orphanage.CCIdescription}</p>
-            </Link>
-          ))} */}
+            {/* {children.map((child, index) => (
+              <div key={index}>{child.name}</div>
+            ))} */}
+            {children.map((child, index) => (
+              <div key={index}>
+                <img
+                  src="https://content.jdmagicbox.com/comp/hyderabad/b3/040pxx40.xx40.131123151657.m4b3/catalogue/care-and-love-orphanage-gajularamaram-hyderabad-orphanages-for-children-2mtljew-250.jpg"
+                  alt="Orphanage Image"
+                  className="product-img"
+                />
+                <h2 className="product-title">Name: {child.name}</h2>
+                <p className="product-description">Description: {child.keyCase}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
