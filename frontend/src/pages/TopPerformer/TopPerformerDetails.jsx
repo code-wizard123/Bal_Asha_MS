@@ -1,31 +1,64 @@
 
 import React from 'react';
 import './css/topPerformer.css'; // Import the CSS file for styling
+import axios from "axios";
+import { useState,useEffect } from "react";
 import { FaFacebook, FaTwitter, FaGithub, FaBehance } from 'react-icons/fa'; // Import the required icons
 
 const  TopPerformerDetails= () => {
+  const getRoleName = (role) => {
+        switch (role) {
+          case 1:
+            return "Case Manager";
+          case 2:
+            return "Operation Manager";
+          case 3:
+            return "Ground Level Worker";
+          default:
+            return "";
+        }
+      };
+        const [topPerformer, setTopPerformer] = useState(null);
+      
+        useEffect(() => {
+          const fetchTopPerformer = async () => {
+            try {
+              const response = await axios.get("http://localhost:4000/api/v1/maxCasesClosed");
+              const topPerformerData = response.data.employee;
+              setTopPerformer(topPerformerData);
+            } catch (error) {
+              console.log(error);
+            }
+          };
+      
+          fetchTopPerformer();
+        }, []);
   return (
     <aside class="profile-card">
-
+      {topPerformer && (
+            <>
     <header>
     
         {/* <!-- here’s the avatar --> */}
         <a href="/">
-            <img src="https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80" />
+            <img src="https://img.freepik.com/premium-vector/business-characters-team-work-office-people-corporate-employee-cartoon-teamwork-communication-business-team-illustration_176516-369.jpg" />
         </a>
-        
         {/* <!-- the username --> */}
-        <h1>David Jones</h1>
+        <h2>{topPerformer.name}</h2>
         
         {/* <!-- and role or location --> */}
-        <h2>Web Developer</h2>
+        <h3>Top Performer Of The Month</h3>
+
+        <h3>Email:{topPerformer.email}</h3>
+        <h3>Number of Children assigned: {topPerformer.children.filter(Boolean).length}</h3>
+        <p>Cases Closed: {topPerformer.casesClosed[0].count}</p>
     
     </header>
+    </>
+      )}
 
     {/* <!-- bit of a bio; who are you? --> */}
     <div class="profile-bio">
-    
-        <p>Even when everything is perfect, you can always make it better. Break barriers in your head, create something crazy and don't forget Code is Poetry...</p>
     
     </div>
 
@@ -70,8 +103,7 @@ const  TopPerformerDetails= () => {
 
 export default TopPerformerDetails;
 
-// import axios from "axios";
-// import { useState,useEffect } from "react";
+
 // const TopPerformerDetails = () => {
 //   const getRoleName = (role) => {
 //     switch (role) {

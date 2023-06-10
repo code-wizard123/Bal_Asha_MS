@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import "./css/profile.css";
@@ -70,41 +71,44 @@ const ProfilePage = () => {
 
   return (
     <div className="stats-profile">
-    <div className="profile-container">
-      <h1>Profile</h1>
-      <div className="profile-details">
-        {profileData && (
-          <>
-            <div className="profile-image">
-              <img src={profileData.avatar.url} alt="Profile" />
-            </div>
-            <h2>{profileData.name}</h2>
-            <div className="chart-container">
-              <LineChart width={500} height={300} data={chartData}>
-                <XAxis dataKey="month" />
-                <YAxis />
-                <CartesianGrid stroke="black" />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="count"
-                  stroke="rgba(75, 192, 192, 1)"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </div>
-            <p>Email: {profileData.email}</p>
-            <p>Role: {getRoleName(profileData.role)}</p>
-            <p>Pincode: {profileData.pincode}</p>
-            <p>
-              Number of Children assigned: {profileData.children.filter(Boolean).length}
-            </p>
-            {/* Other profile details */}
-          </>
-        )}
+      <div className="profile-container">
+        <h1>Profile</h1>
+        <div className="profile-details">
+          {profileData && (
+            <>
+              <div className="profile-image">
+                <img src={profileData.avatar.url} alt="Profile" />
+              </div>
+              <h2>{profileData.name}</h2>
+              <div className="chart-container">
+                <LineChart width={500} height={300} data={chartData}>
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <CartesianGrid stroke="black" />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="count"
+                    stroke="rgba(75, 192, 192, 1)"
+                    strokeWidth={2}
+                  />
+                </LineChart>
+              </div>
+              <p>Email: {profileData.email}</p>
+              <p>Role: {getRoleName(profileData.role)}</p>
+              <p>Pincode: {profileData.pincode}</p>
+              <p>
+                Number of Children assigned: {profileData.children.filter(Boolean).length}
+              </p>
+              {/* Other profile details */}
+              <button>
+                <Link to="/TopPerformerDetails">Find Out the top Performer of the current Month</Link>
+              </button>
+            </>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
