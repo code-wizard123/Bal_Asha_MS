@@ -89,7 +89,7 @@ const AddChild = () => {
           <form onSubmit={handleSubmit}>
             <div className="row">
               <label htmlFor="firstname">Name</label>
-              <input 
+              <input className="inputText"
                 type="text"
                 placeholder="Name"
                 value={name}
@@ -109,7 +109,7 @@ const AddChild = () => {
             </div>
             <div className="row">
               <label htmlFor="Description">Description</label>
-              <input
+              <input className="inputText"
                 type="text"
                 placeholder="Description"
                 value={keyCase}
@@ -120,7 +120,7 @@ const AddChild = () => {
             </div>
             <div className="row">
               <label htmlFor="FamilyDetails">Family Details</label>
-              <input
+              <input className="inputText"
                 type="text"
                 placeholder="Family Details"
                 value={familyDetails}
@@ -129,7 +129,7 @@ const AddChild = () => {
             </div>
             <div className="row">
               <label htmlFor="PinCode">PinCode</label>
-              <input
+              <input className="inputText"
                 type="text"
                 placeholder="PinCode"
                 value={pinCode}

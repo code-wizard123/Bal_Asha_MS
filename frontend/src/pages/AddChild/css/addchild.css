@@ -42,6 +42,19 @@ select {
     color:#7a7878;
 }
 
+.inputText{
+    width: 96%;
+        /* max-width: 300px; */
+        /* Adjust the max-width as desired */
+        padding: 5px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 0 auto;
+        background: #a9e9ef;
+        color: #7a7878;
+}
+
 /* input[type='file'] { */
     /* display: none; */
 /* } */
@@ -156,4 +169,14 @@ select {
 
 .row input[type="text"]{
     background: #fff;
+    width: 96%;
+        /* max-width: 300px; */
+        /* Adjust the max-width as desired */
+        padding: 5px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 0 auto;
+        /* background: #a9e9ef; */
+        color: #7a7878;
 }
