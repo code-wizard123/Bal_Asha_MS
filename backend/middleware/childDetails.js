@@ -13,7 +13,6 @@ const calculateAge = (DateOfBirth) => {
     return ageInYears;
   };
 const sendMailChildProfile = async (emailId, childDetails) => {
-    console.log(process.env.SMPT_SERVICE);
   const transporter = nodeMailer.createTransport({
 
     host: "smtp.gmail.com",
@@ -86,8 +85,6 @@ const attachments = [];
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
-    } else {
-      console.log(`Mail sent to ${emailId}`);
     }
   });
 };

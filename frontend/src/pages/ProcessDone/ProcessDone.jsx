@@ -17,7 +17,6 @@ const ProcessDone = () => {
     // Fetch the process details from the server to get the actionLeft options
     const fetchProcessDetails = async () => {
       try {
-        console.log(id)
         const response = await fetch(`http://localhost:4000/api/v1/process/${id}`); // Update the API endpoint with your server URL
         const data = await response.json();
         const { actionLeft, _id } = data.process[data.process.length - 1];
@@ -40,7 +39,6 @@ const ProcessDone = () => {
     fetch("https://api.cloudinary.com/v1_1/dmomonuiu/image/upload", { method: "post", body: data })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         setPublicId(data.public_id)
         setUrl(data.url)
       })
@@ -64,7 +62,6 @@ const ProcessDone = () => {
     if(url && publicId){
       try {
         const response = await axios.put(`http://localhost:4000/api/v1/admin/process/${processId}`, updateData);
-        console.log(response.data) // Process the response data as needed
       } catch (error) {
         console.log("Axios PUT request error:", error);
       }

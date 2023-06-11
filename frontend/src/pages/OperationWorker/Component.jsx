@@ -7,9 +7,7 @@ const Component = ({ pincode, handleSubmit, id }) => {
   useEffect(() => {
     const getGroundWorker = async () => {
       try {
-        console.log(pincode);
         const response = await axios.get(`http://localhost:4000/api/v1/groundworker/getChild/${pincode}`);
-        console.log(response.data);
         setWorkers(response.data.employee);
       } catch (error) {
         console.log(error)

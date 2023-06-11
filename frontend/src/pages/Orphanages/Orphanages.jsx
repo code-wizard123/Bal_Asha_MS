@@ -15,7 +15,6 @@ const Orphanages = () => {
         .get(`http://localhost:4000/api/v1/childs/orphanage?pinCode=${pinCode}`)
         .then((response) => {
           setOrphanages(response.data.CCIs);
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);

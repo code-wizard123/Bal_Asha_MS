@@ -79,7 +79,6 @@ const ActionLeft = () => {
       };
 
       await axios.post("http://localhost:4000/api/v1/sendEmail", data);
-      console.log("Email sent successfully");
       notify();
     } catch (error) {
       console.log("Email sending error:", error);

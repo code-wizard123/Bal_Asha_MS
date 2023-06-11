@@ -11,7 +11,6 @@ const jwt = require('jsonwebtoken')
 //register employee
 exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
     const { name, email, password, pincode, role, avatar } = req.body;
-    console.log(req.body)
     const employee = await Employee.create({
         name, email, password, pincode, role, avatar
     });
@@ -223,7 +222,6 @@ exports.deleteEmployee = catchAsyncErrors(async (req, res, next) => {
         return next(new errorHandler(`Employee does not exist with id :${req.params.id}`, 400));
     }
     await Employee.deleteOne({ _id: req.params.id });
-    console.log("Employee Deleted");
     res.status(200).json({
         success: true,
         employee

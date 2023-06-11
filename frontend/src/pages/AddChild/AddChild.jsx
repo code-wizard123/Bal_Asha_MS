@@ -28,12 +28,8 @@ const AddChild = () => {
         "https://api.cloudinary.com/v1_1/dmomonuiu/image/upload",
         formData
       );
-      console.log(response.data);
       setUrl(response.data.url);
       setPublicId(response.data.public_id);
-      
-      console.log(url);
-      console.log(publicId);
       // Store the image URLa or handle other necessary tasks
     } catch (error) {
       console.log(error);
@@ -46,12 +42,10 @@ const AddChild = () => {
     setLoading(true);
 
     const createProcess = async (id) => {
-      console.log(id)
       try{
         const response2 = await axios.post(
           `http://localhost:4000/api/v1/process/create/${id}`
         )
-        console.log(response2.data)
       }
       catch(e){
         console.log(e)
@@ -79,8 +73,6 @@ const AddChild = () => {
         "http://localhost:4000/api/v1/admin/child/new",
         sendData
       );
-      console.log(response.data);
-      console.log(response.data.child)
       createProcess(response.data.child._id)
       
     } catch (error) {

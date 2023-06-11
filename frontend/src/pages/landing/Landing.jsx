@@ -77,7 +77,6 @@ const Landing = () => {
 
 			try {
 				const response = await axios.post('http://localhost:4000/api/v1/register', sendData)
-				console.log(response.data)
 
 				document.cookie = `token=${response.data.token}`
 				
@@ -137,7 +136,6 @@ const Landing = () => {
 			.then((data) => {
 				setUrl(data.url)
 				setPublicID(data.public_id)
-				console.log(data)
 			})
 	}
 	// const navigate = useNavigate();
@@ -147,7 +145,6 @@ const Landing = () => {
 
 		try {
 			const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
-			console.log(response.data);
 			// Assuming the server responds with a success message and a token
 			const { success, message, token } = response.data;
 
@@ -163,11 +160,7 @@ const Landing = () => {
 				} else if (message.role === 1) {
 					navigate('/CaseManager'); // Redirect to user dashboard
 				}
-
-				console.log('Login successful!');
-			} else {
-				console.log("Invalid Email and Password")
-			}
+			} 
 		} catch (error) {
 			console.error('An error occurred:', error);
 		}

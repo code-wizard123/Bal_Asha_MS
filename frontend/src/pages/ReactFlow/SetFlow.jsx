@@ -102,16 +102,13 @@ export default function SetFlow() {
       };
 
       // Post the JSON data to the specified URL
-      console.log(json);
       try {
         const response = await axios.put(`http://localhost:4000/api/v1/admin/process/${process_id}`, json);
         // Other logic after successful request
-        console.log(response)
       } catch (error) {
         console.log('Error during axios.put:', error);
       }
       
-      console.log(json);
       // Store the image URL or handle other necessary tasks
     } catch (error) {
       console.log(error);
