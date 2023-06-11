@@ -5,6 +5,7 @@ import "./css/groundworker.css";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import ChildImage from "../../Images/ChildImage.jpg";
+import profile from "../../Images/profile.jpg";
 
 const GroundWorker = () => {
   const [children, setChildren] = useState([]);
@@ -32,6 +33,21 @@ const GroundWorker = () => {
   };
 
   return (
+    <div>
+      <nav role="navigation">
+        <div id="menuToggle">
+          <input type="checkbox" />
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu">
+            <a href="/Profile"><li> <img class="profileImg" src={profile} alt="profile"/> Profile</li></a>
+          </ul>
+        </div>
+      </nav>
+      <br></br><br></br>
     <div className="animation1">
       <section className="shop1 contain1">
         <h2 className="section-title1">Children</h2>
@@ -63,6 +79,7 @@ const GroundWorker = () => {
       </section>
 
 
+    </div>
     </div>
   );
 };

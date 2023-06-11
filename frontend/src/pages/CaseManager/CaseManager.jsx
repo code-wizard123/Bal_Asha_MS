@@ -96,7 +96,7 @@ const CaseManager = () => {
           <span></span>
 
           <ul id="menu">
-            <a href="/Profile"><li> <img class="profileImg" src={profile} alt="profile"/></li></a>
+            <a href="/Profile"><li> <img class="profileImg" src={profile} alt="profile"/> Profile</li></a>
             <a href="/AddChild"><li>Add a Child</li></a>
             <a href="/ViewRegisteredChildren"><li>View all registered children</li></a>
             {/* <a href="#"><li>Info</li></a>

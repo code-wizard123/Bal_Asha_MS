@@ -6,6 +6,7 @@ import "./css/OperationWorker.css";
 import ChildImage from "../../Images/ChildImage.jpg";
 import jwtDecode from "jwt-decode";
 import Component from "./Component";
+import profile from "../../Images/profile.jpg";
 
 const OperationWorker = () => {
   const [children, setChildren] = useState([]);
@@ -69,6 +70,20 @@ const OperationWorker = () => {
 
   return (
     <div>
+      <nav role="navigation">
+        <div id="menuToggle">
+          <input type="checkbox" />
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu">
+            <a href="/Profile"><li> <img class="profileImg" src={profile} alt="profile"/> Profile</li></a>
+          </ul>
+        </div>
+      </nav>
+      <br></br><br></br>
       <section className="shop contain">
         <h2 className="section-title">Children under you</h2>
         <div className="shop-content">
