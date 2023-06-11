@@ -23,7 +23,6 @@ const Login = () => {
 
         try {
             const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
-            console.log(response.data);
             // Assuming the server responds with a success message and a token
             const { success, message, token } = response.data;
 
@@ -41,7 +40,6 @@ const Login = () => {
                     navigate('/CaseManager'); // Redirect to user dashboard
                 }
 
-                console.log('Login successful!');
             } else {
                 setError('Invalid email or password.');
             }

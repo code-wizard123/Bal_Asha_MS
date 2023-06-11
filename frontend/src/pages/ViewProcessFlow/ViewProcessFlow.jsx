@@ -13,7 +13,6 @@ const ViewProcessFlow = () => {
         const response = await axios.get(
           `http://localhost:4000/api/v1/process/me/${id}`
         );
-        console.log(response.data)
         const screenshotData = response.data.process[0].ScreenShot[0];
 
         // Extract date and time

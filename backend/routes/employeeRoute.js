@@ -11,7 +11,7 @@ router.route("/password/reset/:token").put(resetPassword);
 router.route("/logout").get(logOut);
 router.route("/password/update").put(/*isAuthenticatedEmployee,*/ updatePassword);
 router.route("/operation/:pincode").get(getOperationWithPincode);
-router.route("/employees/:employeeId/children/:childId/updateCasesClosed").put(updateCasesClosed);
+router.route("/employees/:employeeId/updateCasesClosed").put(updateCasesClosed);
 router.route("/me").post(getEmployeeDetails);
 router.route("/admin/employees").get(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ getAllEmployee);
 router.route("/admin/employee/:id").get(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ getSingleEmployee).put(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/updateEmployeeRole).delete(/*isAuthenticatedEmployee, authorizeRoles("admin"),*/ deleteEmployee);

@@ -55,7 +55,6 @@ const CaseManager = () => {
         const { id } = jwtDecode(cookie)
         const response = await axios.get("http://localhost:4000/api/v1/childs");
         const childs = response.data.childs;
-        console.log(childs)
         setChildren(childs)
         // setPincode(searchPin);
       } catch (error) {
@@ -83,8 +82,6 @@ const CaseManager = () => {
   // }, [pincode]);
 
   const handleProfileClick = () => {
-    // Logic to show profile details of the employee
-    console.log("Profile clicked");
     <a href="/Profile"></a>
   };
 
