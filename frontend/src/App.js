@@ -66,7 +66,7 @@ const App = () => {
 
           <Route element={<ProtectedOperationRoutes />}>
             <Route path="/OperationWorker" element={<OperationWorker />} />
-            <Route exact path="/ReactFlow/:id" element={<SetFlow />} />
+            <Route exact path="/ReactFlow/:child_id/:process_id" element={<SetFlow />} />
           </Route>
 
           <Route element={<ProtectedCaseRoutes />}>

@@ -130,3 +130,11 @@ exports.getActionDoneDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+exports.getProcessById = catchAsyncErrors(async (req, res) => {
+  const process = Process.findById(req.params.id)
+
+  res.status(200).json({
+    success: true,
+    process
+  })
+})

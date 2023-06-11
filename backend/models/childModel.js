@@ -27,6 +27,11 @@ const childSchema = new Schema({
     type: String,
     required: true
   },
+  pincode:{
+    type:Number,
+    default:400053,
+    required:true
+  },
   images: [
     {
       public_id: {
@@ -63,11 +68,11 @@ const childSchema = new Schema({
     type: [String],
     default: function () {
       if (this.category === 1) {
-        return ["photoPublication1", "photoPublication2", "tvTelecasting", "policeReport", "MER"];
+        return ["photoPublication1", "photoPublication2", "tvTelecasting", "policeReport", "MER", "ScreenShot"];
       } else if (this.category === 2) {
-        return ["familyApproval", "lastVisitByFamily"];
+        return ["familyApproval", "lastVisitByFamily", "ScreenShot"];
       } else {
-        return ["photoPublication1", "photoPublication2", "tvTelecasting", "policeReport", "MER", "OrphanCertificate"];
+        return ["photoPublication1", "photoPublication2", "tvTelecasting", "policeReport", "MER", "OrphanCertificate", "ScreenShot"];
       }
     }
   },

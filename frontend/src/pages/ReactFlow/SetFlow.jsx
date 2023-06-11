@@ -2,8 +2,6 @@ import React, { useCallback, useState, useEffect } from 'react';
 import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge } from 'reactflow';
 import axios from 'axios';
 import './css/updatenode.css';
-import Cookies from 'js-cookie';
-import jwtDecode from 'jwt-decode';
 import 'reactflow/dist/style.css';
 import { useParams } from 'react-router-dom';
 
@@ -26,22 +24,25 @@ export default function SetFlow() {
   const [documentDetails, setDocumentDetails] = useState([]);
   const [nodeCount, setNodeCount] = useState(initialNodes.length + 1);
   const [images, setImages] = useState(null);
-  const { id } = useParams();
+  const { child_id, process_id } = useParams();
+  const [process, setProcess] = useState();
+
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-  useEffect(() => {
-    // Fetch the document details
-    const fetchDocumentDetails = async () => {
-      try {
-        const response = await axios.get(`http://localhost:4000/api/v1/admin/process/ActionDone/${id}`);
-        setDocumentDetails(response.data.actionDoneDetails);
-      } catch (error) {
-        console.log('Error fetching document details:', error);
-      }
-    };
+  // useEffect(() => {
+  //   // Fetch the document details
+  //   const fetchDocumentDetails = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:4000/api/v1/process/get/${processId}`);
+  //       console.log(response.data);
+  //       // setDocumentDetails(response.data.actionDoneDetails);
+  //     } catch (error) {
+  //       console.log('Error fetching document details:', error);
+  //     }
+  //   };
 
-    fetchDocumentDetails();
-  }, []);
+  //   fetchDocumentDetails();
+  // }, []);
 
   const handleDownload = (url, fileName) => {
     fetch(url)
@@ -87,11 +88,10 @@ export default function SetFlow() {
         'https://api.cloudinary.com/v1_1/dmomonuiu/image/upload',
         formData
       );
-      console.log(response.data);
 
       // Prepare the JSON data
       const json = {
-        child: '64845acf306fc8557715cd6f',
+        child: child_id,
         ScreenShot: [
           {
             dateRegistered: new Date().toISOString(),
@@ -104,9 +104,9 @@ export default function SetFlow() {
       // Post the JSON data to the specified URL
       console.log(json);
       try {
-        const response = await axios.put('http://localhost:4000/api/v1/admin/process/6484621b79a32bef7e95413b', json);
-        console.log(response.data);
+        const response = await axios.put(`http://localhost:4000/api/v1/admin/process/${process_id}`, json);
         // Other logic after successful request
+        console.log(response)
       } catch (error) {
         console.log('Error during axios.put:', error);
       }
@@ -136,6 +136,10 @@ export default function SetFlow() {
         <br />
         <br />
         <button onClick={addNode}>Add Node</button>
+        <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
+        <button type="button" onClick={submitImage}>
+                Upload Process Flow
+               </button>
         {documentDetails.length > 0 ? (
           <table className="Download">
             <thead>
@@ -162,7 +166,7 @@ export default function SetFlow() {
                 );
               })}
             </tbody>
-            <tr class="uploadButton">
+            {/* <tr class="uploadButton">
               <td><br></br><br></br></td>
               <td><br></br><br></br></td>
                 <td>  <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
@@ -170,7 +174,7 @@ export default function SetFlow() {
                 Upload Process Flow
                </button>
               <br></br><br></br></td>
-            </tr>
+            </tr> */}
           </table>
         ) : (
           <div>Loading document details...</div>

@@ -40,7 +40,7 @@ const GroundWorker = () => {
             children.map((child, index) => (
               <Link to={"/ActionLeft/" + child._id} className="product-box1" key={index}>
                 <div className="Image-box1">
-                  <img src={ChildImage} alt="Child Image" className="product-img1" />
+                  <img src={child.images[0].url} alt="Child Image" className="product-img1" />
                 </div>
                 <div>
                   <h2 className="product-title">Name: {child.name}</h2>

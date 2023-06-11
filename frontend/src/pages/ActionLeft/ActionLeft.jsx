@@ -64,120 +64,120 @@ const ActionLeft = () => {
 
   const sendChildDetailsEmail = async () => {
     try {
-    const checkedActions = [];
+      const checkedActions = [];
 
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    checkboxes.forEach((checkbox) => {
-      const [action, index] = checkbox.id.split('-');
-      checkedActions.push({ action, index });
-    });
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      checkboxes.forEach((checkbox) => {
+        const [action, index] = checkbox.id.split('-');
+        checkedActions.push({ action, index });
+      });
 
-    const data = {
-      emailId: "manavshah.2003.ms@gmail.com",
-      childDetails: [childDetails], // Wrap childDetails in an array
-      checkedActions,
-    };
+      const data = {
+        emailId: "manavshah.2003.ms@gmail.com",
+        childDetails: [childDetails], // Wrap childDetails in an array
+        checkedActions,
+      };
 
-    await axios.post("http://localhost:4000/api/v1/sendEmail", data);
-    console.log("Email sent successfully");
-    notify();
-  } catch (error) {
-    console.log("Email sending error:", error);
-  }
+      await axios.post("http://localhost:4000/api/v1/sendEmail", data);
+      console.log("Email sent successfully");
+      notify();
+    } catch (error) {
+      console.log("Email sending error:", error);
+    }
 
-    
+
   };
 
   return (
     <div>
       <nav role="navigation">
-  <div id="menuToggle">
-    <input type="checkbox" />
+        <div id="menuToggle">
+          <input type="checkbox" />
 
-    <span></span>
-    <span></span>
-    <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
 
-    <ul id="menu">
-      
-      {actionLeft.map((action, index) => (
-      <a
-        href="#"
-        key={index}
-        onClick={() => {
-          sendChildDetailsEmail();
-          notify();
-          deleteEntry(index);
-        }}
-      >
-        <li>
-          {action === "photoPublication1" && (
-           <React.Fragment>
-              <span>{action}</span><br />
-               
-              <ul>
+          <ul id="menu">
+
+            {actionLeft.map((action, index) => (
+              <a
+                href="#"
+                key={index}
+                onClick={() => {
+                  sendChildDetailsEmail();
+                  notify();
+                  deleteEntry(index);
+                }}
+              >
                 <li>
-                  <input
-                    type="checkbox"
-                    id={`TarunBharat-${index}`}
-                  />
-                  <label class="list" htmlFor={`TarunBharat-${index}`}>
-                    Tarun Bharat
-                  </label>
+                  {action === "photoPublication1" && (
+                    <React.Fragment>
+                      <span>{action}</span><br />
+
+                      <ul>
+                        <li>
+                          <input
+                            type="checkbox"
+                            id={`TarunBharat-${index}`}
+                          />
+                          <label class="list" htmlFor={`TarunBharat-${index}`}>
+                            Tarun Bharat
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="checkbox"
+                            id={`Sakal-${index}`}
+                          />
+                          <label class="list" htmlFor={`Sakal-${index}`}>Sakal</label>
+                        </li>
+                        <li>
+                          <input
+                            type="checkbox"
+                            id={`Pudhari-${index}`}
+                          />
+                          <label class="list" htmlFor={`Pudhari-${index}`}>Pudhari</label>
+                        </li>
+                      </ul>
+                    </React.Fragment>
+                  )}
+                  {action === "photoPublication2" && (
+                    <React.Fragment>
+                      <span>{action}</span><br />
+                      <ul>
+                        <li>
+                          <input
+                            type="checkbox"
+                            id={`MaharashtraTimes-${index}`}
+                          />
+                          <label class="list" htmlFor={`MaharashtraTimes-${index}`}>
+                            Maharashtra Times
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="checkbox"
+                            id={`Sakal2-${index}`}
+                          />
+                          <label class="list" htmlFor={`Sakal2-${index}`}>Sakal</label>
+                        </li>
+                      </ul>
+                    </React.Fragment>
+                  )}
+
                 </li>
-                <li>
-                  <input
-                    type="checkbox"
-                    id={`Sakal-${index}`}
-                  />
-                  <label class="list" htmlFor={`Sakal-${index}`}>Sakal</label>
-                </li>
-                <li>
-                  <input
-                    type="checkbox"
-                    id={`Pudhari-${index}`}
-                  />
-                  <label class="list" htmlFor={`Pudhari-${index}`}>Pudhari</label>
-                </li>
-              </ul>
-            </React.Fragment>
-          )}
-          {action === "photoPublication2" && (
-            <React.Fragment>
-              <span>{action}</span><br />
-              <ul>
-                <li>
-                  <input
-                    type="checkbox"
-                    id={`MaharashtraTimes-${index}`}
-                  />
-                  <label class="list" htmlFor={`MaharashtraTimes-${index}`}>
-                    Maharashtra Times
-                  </label>
-                </li>
-                <li>
-                  <input
-                    type="checkbox"
-                    id={`Sakal2-${index}`}
-                  />
-                  <label class="list" htmlFor={`Sakal2-${index}`}>Sakal</label>
-                </li>
-              </ul>
-            </React.Fragment>
-          )}
-          
-        </li>
-       
-      </a>
-      
-    ))}
-    </ul>
-  </div>
-</nav>
+
+              </a>
+
+            ))}
+          </ul>
+        </div>
+      </nav>
 
 
       <div className="profile">
-        <img src={child} alt="Child Avatar" />
+        <img src={childDetails.images[0].url} alt="Child Avatar" />
         <h2>{name}</h2>
         <p>
           <label>Age:</label> {calculateAge(DateOfBirth)} years
