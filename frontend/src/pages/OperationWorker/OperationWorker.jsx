@@ -15,14 +15,37 @@ const OperationWorker = () => {
     navigate(`/ReactFlow/${response.data.process[0]._id}`)
   }
 
+
+  const handleDelete = async (childId) => {
+    try {
+      // Delete the child
+      const deleteChildResponse = await axios.delete(`http://localhost:4000/api/v1/admin/child/${childId}`);
+
+      if (deleteChildResponse.status === 200) {
+        // Child deleted successfully
+        // Update the "Cases Closed" status for the child
+        const updateCasesClosedResponse = await axios.put(`http://localhost:4000/api/v1/employees/647b663e2ad6798752d3086a/children/${childId}/updateCasesClosed`);
+
+        if (updateCasesClosedResponse.status === 200) {
+          // Cases Closed updated successfully
+          const updatedChildren = children.filter(child => child._id !== childId);
+          setChildren(updatedChildren);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   useEffect(() => {
     const getChildren = async () => {
       try {
         const cookie = Cookies.get("token");
         if (cookie) {
-          const decoded = jwtDecode(cookie);
-          const response = await axios.get(`http://localhost:4000/api/v1/operation/children/${decoded.id}`);
-          setChildren(response.data.message.children);
+          const decoded = jwtDecode(cookie)
+          const response = await axios.get(`http://localhost:4000/api/v1/operation/children/${decoded.id}`)
+          setChildren(response.data.message.children)
         }
       } catch (error) {
         console.log(error);
@@ -65,16 +88,14 @@ const OperationWorker = () => {
                   <p className="product-description">Description: {child.keyCase}</p>
                   <Component pincode={child.pinCode} id={child._id} handleSubmit={handleSubmit} />
                   <button className="DeleteChildButton" onClick={() => handleClick(child)}>View Process</button>
-                  <button className="DeleteChildButton">Delete Child</button>
-                  
+                  <button className="DeleteChildButton" onClick={() => handleDelete(child._id, child.processId)}>Delete Child</button>
                 </div>
-              </div>
-              // </Link>
-            ))}
-          </div>
         </div>
-      </section>
-    </div>
+            ))}
+    </div >
+        </div >
+      </section >
+    </div >
   );
 };
 
