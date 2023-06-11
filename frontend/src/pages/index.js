@@ -17,3 +17,4 @@ export { default as OperationWorker } from "./OperationWorker/OperationWorker";
 export { default as TopPerformerDetails } from "./TopPerformer/TopPerformerDetails";
 export { default as ViewProcessFlow } from "./ViewProcessFlow/ViewProcessFlow";
 export { default as ViewRegisteredChildren } from "./ViewRegisteredChildren/ViewRegisteredChildren";
+export { default as Opening2 } from "./opening2/Opening2";

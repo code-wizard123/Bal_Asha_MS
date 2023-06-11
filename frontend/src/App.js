@@ -19,6 +19,7 @@ import {
   Profile,
   TopPerformerDetails,
   ViewProcessFlow,
+  Opening2
   ViewRegisteredChildren,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -32,6 +33,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Opening />} />
+          <Route exact path="/logo" element={<Opening2 />} />
           <Route exact path="/landing" element={<Landing />} />
 
           {/* <Route exact path="/ActionLeft/:id" element={<ActionLeft />} />

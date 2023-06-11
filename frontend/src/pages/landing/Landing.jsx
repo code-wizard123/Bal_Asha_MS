@@ -10,7 +10,7 @@ import anima from '../../Images/abandened-children.jpg';
 import improve from '../../Images/Adoption.jpg';
 import lecture from '../../Images/children-edu.jpg';
 import proctor1 from '../../Images/children-love.webp';
-import logo from '../../Images/logo.jpg'
+import logo from '../../Images/logocolorcombo.png'
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner'
 import ProtectedRoutes from '../Protected/ProtectedRoutes';
@@ -47,9 +47,9 @@ const Navbar = () => {
 			<div className="landing-navbar-logo-landing">
 				<img src={logo} height="50px" width="100px"></img>
 			</div>
-			<div className="landing-navbar-links">
+			{/* <div className="landing-navbar-links">
 				<NavLinks />
-			</div>
+			</div> */}
 		</div>
 	);
 };
@@ -335,7 +335,7 @@ const Landing = () => {
 
 			</div >
 
-			<footer className="Footer">Copyright © 2022 All rights reserved.</footer>
+			<footer className="Footer">Copyright © 2023 All rights reserved.</footer>
 		</React.Fragment >
 
 	);
