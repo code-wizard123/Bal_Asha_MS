@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.85e35b11.css",
+    "main.js": "/static/js/main.132340b4.js",
+    "static/media/videologo.mp4": "/static/media/videologo.35e525d47a2a2061e0ee.mp4",
+    "static/media/abandened-children.jpg": "/static/media/abandened-children.06d1252b8317070e5839.jpg",
+    "static/media/adoption-backgroud.webp": "/static/media/adoption-backgroud.2dd88e7e8d4ef0bfa410.webp",
+    "static/media/children-edu.jpg": "/static/media/children-edu.fb162e951e6ed1e345ed.jpg",
+    "static/media/logocolorcombo.png": "/static/media/logocolorcombo.6d3d790d84a733ac7b20.png",
+    "static/media/ChildImage.jpg": "/static/media/ChildImage.f98ec550c7d8519a7b1f.jpg",
+    "static/media/children-love.webp": "/static/media/children-love.d7c40fc9139d4966e5d3.webp",
+    "static/media/Adoption.jpg": "/static/media/Adoption.7df123e192e6a72f2ad8.jpg",
+    "index.html": "/index.html",
+    "main.85e35b11.css.map": "/static/css/main.85e35b11.css.map",
+    "main.132340b4.js.map": "/static/js/main.132340b4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.85e35b11.css",
+    "static/js/main.132340b4.js"
+  ]
+}
