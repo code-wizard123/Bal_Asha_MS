@@ -10,25 +10,25 @@ const ViewRegisteredChildren = () => {
   const [children, setChildren] = useState([]);
   const [pincode, setPincode] = useState();
 
-  useEffect(() => {
-    const fetchPincode = async () => {
-      try {
-        const cookie = Cookies.get("token");
-        const { id } = jwtDecode(cookie);
-        const response = await axios.post("http://localhost:4000/api/v1/me", { id });
-        const searchPin = response.data.employee.pincode;
-        setPincode(searchPin);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPincode = async () => {
+  //     try {
+  //       const cookie = Cookies.get("token");
+  //       const { id } = jwtDecode(cookie);
+  //       const response = await axios.post("http://localhost:4000/api/v1/me", { id });
+  //       const searchPin = response.data.employee.pincode;
+  //       setPincode(searchPin);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchPincode();
-  }, []);
+  //   fetchPincode();
+  // }, []);
 
   useEffect(() => {
-    const fetchChildren = async (setpincode) => {
-      if (setpincode) {
+    const fetchChildren = async () => {
+      // if (setpincode) {
         try {
           const response = await axios.get("http://localhost:4000/api/v1/backupChild");
           const childrenData = response.data.backupChildren;
@@ -36,11 +36,11 @@ const ViewRegisteredChildren = () => {
         } catch (error) {
           console.log(error);
         }
-      }
+      // }
     };
 
-    fetchChildren(pincode);
-  }, [pincode]);
+    fetchChildren();
+  }, []);
 
   const calculateAge = (DateOfBirth) => {
     const birthDate = new Date(DateOfBirth);
@@ -79,7 +79,7 @@ const ViewRegisteredChildren = () => {
             children.map((child) => (
               <div className="product-box2" key={child._id}>
                 <div className="Image-box2">
-                  <img src={ChildImage} alt="Child Image" className="product-img2" />
+                  <img src={child.images[0].url} alt="Child Image" className="product-img2" />
                 </div>
                 <div>
                   <h2 className="product-title">Name: {child.name}</h2>
@@ -91,9 +91,9 @@ const ViewRegisteredChildren = () => {
                   <br />
                   <span className="price">Category: {child.category}</span>
                   <br />
-                  <span className="price">
+                  {/* <span className="price">
                     Found At: {child.CCI[0].name}
-                  </span>
+                  </span> */}
                   <br />
                   {Object.entries(child).map(([key, value]) => {
                     if (key !== "name" && key !== "_id" && key !== "gender" && key !== "category" && key !== "CCI" && key !== "DateOfBirth") {

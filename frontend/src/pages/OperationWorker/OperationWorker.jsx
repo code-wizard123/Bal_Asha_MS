@@ -19,12 +19,12 @@ const OperationWorker = () => {
   const handleDelete = async (childId) => {
     try {
       // Delete the child
-      const deleteChildResponse = await axios.delete(`http://localhost:4000/api/v1/admin/child/${childId}`);
+      const deleteChildResponse = await axios.delete(`http://localhost:4000/api/v1/admin/child/6485a6e714a1c90843205044`);
 
       if (deleteChildResponse.status === 200) {
         // Child deleted successfully
         // Update the "Cases Closed" status for the child
-        const updateCasesClosedResponse = await axios.put(`http://localhost:4000/api/v1/employees/647b663e2ad6798752d3086a/children/${childId}/updateCasesClosed`);
+        const updateCasesClosedResponse = await axios.put(`http://localhost:4000/api/v1/employees/647b663e2ad6798752d3086a/children/6485a6e714a1c90843205044/updateCasesClosed`);
 
         if (updateCasesClosedResponse.status === 200) {
           // Cases Closed updated successfully
@@ -45,6 +45,7 @@ const OperationWorker = () => {
         if (cookie) {
           const decoded = jwtDecode(cookie)
           const response = await axios.get(`http://localhost:4000/api/v1/operation/children/${decoded.id}`)
+          console.log(response.data);
           setChildren(response.data.message.children)
         }
       } catch (error) {
@@ -78,7 +79,7 @@ const OperationWorker = () => {
               <div className="product-box" key={index}>
                 <div className="Image-box">
                   <img
-                    src="https://content.jdmagicbox.com/comp/hyderabad/b3/040pxx40.xx40.131123151657.m4b3/catalogue/care-and-love-orphanage-gajularamaram-hyderabad-orphanages-for-children-2mtljew-250.jpg"
+                    src={child.images[0].url}
                     alt="Orphanage Image"
                     className="product-img"
                   />
@@ -86,7 +87,7 @@ const OperationWorker = () => {
                 <div>
                   <h2 className="product-title">Name: {child.name}</h2>
                   <p className="product-description">Description: {child.keyCase}</p>
-                  <Component pincode={child.pinCode} id={child._id} handleSubmit={handleSubmit} />
+                  <Component pinCode={child.pinCode} id={child._id} handleSubmit={handleSubmit} />
                   <button className="DeleteChildButton" onClick={() => handleClick(child)}>View Process</button>
                   <button className="DeleteChildButton" onClick={() => handleDelete(child._id, child.processId)}>Delete Child</button>
                 </div>

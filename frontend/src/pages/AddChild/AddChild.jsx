@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./css/addchild.css";
 import axios from "axios";
@@ -8,7 +7,7 @@ const AddChild = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [keyCase, setKeyCase] = useState("");
   const [familyDetails, setFamilyDetails] = useState("");
-  const [pinCode, setPinCode] = useState("");
+  const [pinCode, setPinCode] = useState(0);
   const [gender, setGender] = useState("Male");
   const [category, setCategory] = useState("Abandoned");
   const [images, setImages] = useState("");
@@ -32,6 +31,9 @@ const AddChild = () => {
       console.log(response.data);
       setUrl(response.data.url);
       setPublicId(response.data.public_id);
+      
+      console.log(url);
+      console.log(publicId);
       // Store the image URLa or handle other necessary tasks
     } catch (error) {
       console.log(error);
@@ -59,17 +61,17 @@ const AddChild = () => {
     }
 
     const sendData = {
-      name,
-      category: category === "Abandoned" ? 1 : category === "Surrendered" ? 2 : 3,
-      keyCase,
-      DateOfBirth: dateOfBirth,
-      familyDetails,
-      gender,
-      pinCode: parseInt(pinCode),
-      images: {
-        publicId,
-        url 
-      } // Assuming the image URL is stored in the 'url' property
+      "name":name,
+      "category": category === "Abandoned" ? 1 : category === "Surrendered" ? 2 : 3,
+      "keyCase":keyCase,
+      "DateOfBirth": dateOfBirth,
+      "familyDetails":familyDetails,
+      "gender":gender,
+      "pincode": pinCode,
+      "images": [{
+        "public_id":publicId,
+        "url":url 
+      }]// Assuming the image URL is stored in the 'url' property
     };
     let childID = ""
     try {

@@ -27,6 +27,11 @@ const childSchema = new Schema({
     type: String,
     required: true
   },
+  // pincode:{
+  //   type:Number,
+  //   defualt:400053,
+  //   required:true
+  // },
   images: [
     {
       public_id: {

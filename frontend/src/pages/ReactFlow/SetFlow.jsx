@@ -2,10 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge } from 'reactflow';
 import axios from 'axios';
 import './css/updatenode.css';
-import Cookies from 'js-cookie';
-import jwtDecode from 'jwt-decode';
 import 'reactflow/dist/style.css';
-import { useParams } from 'react-router-dom';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const initialNodes = [
@@ -26,14 +23,15 @@ export default function SetFlow() {
   const [documentDetails, setDocumentDetails] = useState([]);
   const [nodeCount, setNodeCount] = useState(initialNodes.length + 1);
   const [images, setImages] = useState(null);
-  const { id } = useParams();
+
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
   useEffect(() => {
     // Fetch the document details
     const fetchDocumentDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/admin/process/ActionDone/${id}`);
+        const response = await axios.get('http://localhost:4000/api/v1/admin/process/ActionDone/6485a6e714a1c90843205049');
+        console.log(response.data);
         setDocumentDetails(response.data.actionDoneDetails);
       } catch (error) {
         console.log('Error fetching document details:', error);
@@ -91,7 +89,7 @@ export default function SetFlow() {
 
       // Prepare the JSON data
       const json = {
-        child: '64845acf306fc8557715cd6f',
+        child: '6485a6e714a1c90843205044',
         ScreenShot: [
           {
             dateRegistered: new Date().toISOString(),
@@ -104,7 +102,7 @@ export default function SetFlow() {
       // Post the JSON data to the specified URL
       console.log(json);
       try {
-        const response = await axios.put('http://localhost:4000/api/v1/admin/process/6484621b79a32bef7e95413b', json);
+        const response = await axios.put('http://localhost:4000/api/v1/admin/process/6485a6e714a1c90843205049', json);
         console.log(response.data);
         // Other logic after successful request
       } catch (error) {
@@ -136,6 +134,10 @@ export default function SetFlow() {
         <br />
         <br />
         <button onClick={addNode}>Add Node</button>
+        <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
+        <button type="button" onClick={submitImage}>
+                Upload Process Flow
+               </button>
         {documentDetails.length > 0 ? (
           <table className="Download">
             <thead>
@@ -162,7 +164,7 @@ export default function SetFlow() {
                 );
               })}
             </tbody>
-            <tr class="uploadButton">
+            {/* <tr class="uploadButton">
               <td><br></br><br></br></td>
               <td><br></br><br></br></td>
                 <td>  <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
@@ -170,7 +172,7 @@ export default function SetFlow() {
                 Upload Process Flow
                </button>
               <br></br><br></br></td>
-            </tr>
+            </tr> */}
           </table>
         ) : (
           <div>Loading document details...</div>
