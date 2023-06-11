@@ -71,7 +71,7 @@ input[type="password"] {
 } */
 
 input[type="email"],input[type="number"]{
-	color:white;
+	color:rgb(139, 135, 135);
 	background-color:white;
 	height:4px;
 	width:264px;
