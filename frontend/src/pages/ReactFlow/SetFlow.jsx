@@ -33,9 +33,9 @@ export default function SetFlow() {
     // Fetch the document details
     const fetchDocumentDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/process/get/${process_id}`);
+        const response = await axios.get(`http://localhost:4000/api/v1/admin/process/ActionDone/${process_id}`);
         console.log(response.data);
-        // setDocumentDetails(response.data.actionDoneDetails);
+        setDocumentDetails(response.data.actionDoneDetails);
       } catch (error) {
         console.log('Error fetching document details:', error);
       }

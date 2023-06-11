@@ -26,6 +26,7 @@ const  TopPerformerDetails= () => {
               const response = await axios.get("http://localhost:4000/api/v1/maxCasesClosed");
               const topPerformerData = response.data.employee;
               setTopPerformer(topPerformerData);
+              console.log(topPerformerData)
             } catch (error) {
               console.log(error);
             }
@@ -41,7 +42,7 @@ const  TopPerformerDetails= () => {
     
         {/* <!-- here’s the avatar --> */}
         <a href="/">
-            <img src="https://img.freepik.com/premium-vector/business-characters-team-work-office-people-corporate-employee-cartoon-teamwork-communication-business-team-illustration_176516-369.jpg" />
+            <img src={topPerformer.avatar.url} />
         </a>
         {/* <!-- the username --> */}
         <h2>{topPerformer.name}</h2>
@@ -51,7 +52,7 @@ const  TopPerformerDetails= () => {
 
         <h3>Email:{topPerformer.email}</h3>
         <h3>Number of Children assigned: {topPerformer.children.filter(Boolean).length}</h3>
-        <p>Cases Closed: {topPerformer.casesClosed[0].count}</p>
+        <p>Cases Closed: {topPerformer.casesClosed.length}</p>
     
     </header>
     </>
