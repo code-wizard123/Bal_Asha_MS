@@ -100,11 +100,11 @@ const CaseManager = () => {
 
           <ul id="menu">
             <a href="/Profile"><li> <img class="profileImg" src={profile} alt="profile"/></li></a>
-            <a href="#"><li>Home</li></a>
-            <a href="#"><li>About</li></a>
-            <a href="#"><li>Info</li></a>
+            <a href="/AddChild"><li>Add a Child</li></a>
+            <a href="/ViewRegisteredChildren"><li>View all registered children</li></a>
+            {/* <a href="#"><li>Info</li></a>
             <a href="#"><li>Contact</li></a>
-            <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+            <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a> */}
           </ul>
         </div>
       </nav>

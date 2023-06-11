@@ -1,10 +1,10 @@
-.contain {
+.contain1 {
     position: relative;
     z-index: 0;
     width: 90%;
     margin: 0 auto;
     padding: 2rem;
-    background-color: rgb(9, 9, 9);
+    background-color: rgb(10, 10, 10);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgb(32, 32, 32);
     border-radius: 5px;
@@ -14,18 +14,17 @@
 /* body{
     background-color: #372c2e;
   } */
-.content {
+.content1 {
     width: 100%;
     height: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
-.animation {
+.animation1 {
     position: relative;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     overflow: hidden;
 }
 
@@ -134,7 +133,7 @@
     }
 }
 
-.section-title {
+.section-title1 {
     font-size: 1.8rem;
     color: #7A431D;
     font-weight: 1000;
@@ -142,33 +141,33 @@
     margin-bottom: 1.8rem;
 }
 
-.shop {
+.shop1 {
     margin-top: 2rem;
 }
 
-.shop-content {
+.shop-content1 {
     position: relative;
     width: 100%;
     height: auto;
     display: flex;
     flex-wrap: wrap;
-
+    justify-content: center;
 }
 
-section {
+section1 {
     padding: 4rem 0 3rem;
 }
 
-.product-img {
+.product-img1 {
     height: 9.5rem;
     border-radius: 50%;
     margin-bottom: 0.2rem;
     padding: 10px;
     /* width: 90%; */
-    width:150px;
+    width: 150px;
 }
 
-.product-box {
+.product-box1 {
     background: rgb(254, 250, 250);
     border-radius: 5px;
     /* flex-grow: 1;
@@ -182,7 +181,7 @@ section {
     text-decoration: none;
 }
 
-.product-title {
+.product-title1 {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -190,39 +189,32 @@ section {
     color: black;
 }
 
-.price {
+.price1 {
     font-weight: 500;
     color: rgb(6, 6, 6);
 }
 
-.Pincode {
+.Pincode1 {
     border: 2px solid red;
 }
 
-.product-box:hover {
+.product-box1:hover {
     background: #858380;
     border: 3px solid black;
     box-shadow: 0 8px 32px hsla(0.75, 0.82, 0.165, 1);
     transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.product-box:hover .product-title,
-.product-box:hover .price {
+.product-box1:hover .product-title,
+.product-box1:hover .price {
     color: #141414;
 }
 
-.product-box:hover .img {
+.product-box1:hover .img {
     border: 3px solid black;
 }
 
-.Image-box {
-    background-color:#e0d9d9;
-}
-
-.product-description{
-    color:black;
-}
-.DeleteChildButton{
-    margin-top:6px;
-    margin-bottom:3px;
+.Image-box1 {
+    background-color: #e0d9d9;
+    margin-right: 10px;
 }

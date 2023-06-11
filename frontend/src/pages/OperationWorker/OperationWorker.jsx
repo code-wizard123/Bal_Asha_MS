@@ -61,6 +61,7 @@ const OperationWorker = () => {
                   <option>Ok</option>
                 </select>
               </form>
+              <button class="DeleteChildButton">Delete Child</button>
               </div>
               </div>
               // </Link>

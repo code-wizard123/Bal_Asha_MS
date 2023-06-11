@@ -19,6 +19,7 @@ import {
   Profile,
   TopPerformerDetails,
   ViewProcessFlow,
+  ViewRegisteredChildren,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -69,6 +70,11 @@ const App = () => {
           <Route element={<ProtectedCaseRoutes />}>
             <Route path="/CaseManager" element={<CaseManager />} />
             <Route exact path="/AddChild" element={<AddChild />} />
+            <Route
+              exact
+              path="/ViewRegisteredChildren"
+              element={<ViewRegisteredChildren />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
