@@ -1,12 +1,11 @@
 const app=require('./app');
-const dotenv=require('dotenv');
+require('dotenv').config();
 const connectDatabase=require('./config/database');
 const cors = require('cors');
 app.use(cors())
-dotenv.config({path:"config.env"})
+
 const BASE_URL = process.env.BASE_URL
 const PORT = process.env.PORT 
-
 
 // const cors = require('cors');
 const corsOptions ={
@@ -23,7 +22,7 @@ process.on("uncaughtException",(err)=>{
 });
 //Config
 connectDatabase();
-app.listen(process.env.PORT,()=>{
+app.listen(PORT , ()=>{
     console.log(`Server is working on ${BASE_URL}`);
 })
 //Unhandled Promise rejection
