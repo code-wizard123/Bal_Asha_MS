@@ -3,7 +3,7 @@ const Employee = require("../models/employeeModel")
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const BackupChild = require('../models/backupChildModel');
-const Process=require('../models/processModel');
+const Process = require('../models/processModel');
 const ApiFeatures = require('../utils/apifeatures');
 
 //Create child admin
@@ -95,66 +95,66 @@ exports.updateChild = catchAsyncErrors(async (req, res, next) => {
 exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
     const process = await Process.findOne({ child: req.params.id });
-  
+
     if (!child) {
-      return next(new errorHandler("Child Not found", 404));
+        return next(new errorHandler("Child Not found", 404));
     }
-  
+
     // Create a backup child document using the child details
     const backupChild = new BackupChild({
-      originalChildId: child._id,
-      name: child.name,
-      category: child.category,
-      keyCase: child.keyCase,
-      DateOfBirth: child.DateOfBirth,
-      familyDetails: child.familyDetails,
-      gender: child.gender,
-      images: child.images,
-      CCI: child.CCI,
-      DateofAdmission: process.DateofAdmission,
-      enrollmentDate: process.enrollmentDate,
-      photoPublication1: process.photoPublication1,
-      photoPublication2: process.photoPublication2,
-      tvTelecasting: process.tvTelecasting,
-      policeReport: process.policeReport,
-      familyApproval: process.familyApproval,
-      previousOrgReport: process.previousOrgReport,
-      finalReport: process.finalReport,
-      FreeForAdoptionDate: process.FreeForAdoptionDate,
-      MER: process.MER,
-      CSR: process.CSR,
-      CaringsUpload: process.CaringsUpload,
-      lastVisitByFamily: process.lastVisitByFamily,
-      ActionDone: child.actionLeft,
+        originalChildId: child._id,
+        name: child.name,
+        category: child.category,
+        keyCase: child.keyCase,
+        DateOfBirth: child.DateOfBirth,
+        familyDetails: child.familyDetails,
+        gender: child.gender,
+        images: child.images,
+        CCI: child.CCI,
+        DateofAdmission: process.DateofAdmission,
+        enrollmentDate: process.enrollmentDate,
+        photoPublication1: process.photoPublication1,
+        photoPublication2: process.photoPublication2,
+        tvTelecasting: process.tvTelecasting,
+        policeReport: process.policeReport,
+        familyApproval: process.familyApproval,
+        previousOrgReport: process.previousOrgReport,
+        finalReport: process.finalReport,
+        FreeForAdoptionDate: process.FreeForAdoptionDate,
+        MER: process.MER,
+        CSR: process.CSR,
+        CaringsUpload: process.CaringsUpload,
+        lastVisitByFamily: process.lastVisitByFamily,
+        ActionDone: child.actionLeft,
     });
-  
+
     // Save the backup child document
     await backupChild.save();
-  
+
     // Delete the process document
     await Process.deleteOne({ _id: process._id });
-  
+
     // Delete the child document
     await Child.deleteOne({ _id: req.params.id });
-  
+
     res.status(200).json({
-      message: "Child and associated process deleted successfully",
-      backupChild,
+        message: "Child and associated process deleted successfully",
+        backupChild,
     });
-  });
-  exports.getAllBackupChildDetails = async (req, res, next) => {
+});
+exports.getAllBackupChildDetails = async (req, res, next) => {
     try {
-      const backupChildren = await BackupChild.find();
-  
-      res.status(200).json({
-        success: true,
-        backupChildren
-      });
+        const backupChildren = await BackupChild.find();
+
+        res.status(200).json({
+            success: true,
+            backupChildren
+        });
     } catch (error) {
-      next(new errorHandler('Failed to get backup child details', 500));
+        next(new errorHandler('Failed to get backup child details', 500));
     }
-  };
-  
+};
+
 exports.getOneChild = catchAsyncErrors(async (req, res) => {
     const child = await Child.findById(req.params.id);
     if (!child) {
@@ -183,81 +183,4 @@ exports.setChildtoEmployee = catchAsyncErrors(async (req, res) => {
         success: true,
         employee
     })
-
 })
-// exports.createChildReview=catchAsyncErrors(async(req,res,next)=>{
-//     const {rating,comment,childId}=req.body;
-//     const review={
-//         employee:req.employee.id,
-//         name:req.employee.name,
-//         rating:Number(rating),
-//         comment,
-//     }
-//     const child=await Child.findById(childId);
-//     const isReviewed=child.reviews.find(rev=>rev.employee.toString()===req.employee._id.toString())
-//     if(isReviewed)
-//     {
-//         child.reviews.forEach(rev=>{
-//             if(rev.employee.toString()===req.employee._id.toString())
-//             {
-//                 rev.rating=rating,
-//                 rev.comment=comment
-//             }
-//         })
-//     }
-//     else
-//     {
-//         child.reviews.push(review);
-//         child.numOfReviews=child.reviews.length;
-//     }
-//     let avg=0;
-//     child.reviews.forEach(rev=>{
-//         avg+=rev.rating;
-//     })
-//     child.ratings=avg/child.reviews.length;
-//     await child.save({validateBeforeSave:false});
-//     res.status(200).json({
-//         success:true,
-
-//     })
-// });
-// exports.getChildReviews=catchAsyncErrors(async(req,res,next)=>{
-//     const child=await Child.findById(req.query.id);
-//     if(!child)
-//     {
-//         return next(new errorHandler("Child Not found",404));
-//     }
-//     res.status(200).json({
-//         success:true,
-//         reviews:child.reviews,
-//     });
-// });
-
-// exports.deleteReview=catchAsyncErrors(async(req,res,next)=>{
-//     const child=await Child.findById(req.query.childId);
-//     if(!child)
-//     {
-//         return next(new errorHandler("Child Not found",404));
-//     }
-//     const reviews=child.reviews.filter((rev)=>rev._id.toString()!==req.query.id.toString());
-
-//     let avg=0;
-//     reviews.forEach(rev=>{
-//         avg+=rev.rating;
-//     })
-//     const ratings=avg/reviews.length;
-
-// const numOfReviews=reviews.length;
-
-//     await Child.findByIdAndUpdate(req.query.childId,
-//         {
-//             reviews,ratings,numOfReviews,
-//         },{
-//             new:true,
-//             runValidators:true,
-//         })
-//     res.status(200).json({
-//         success:true,
-//     });
-// });
-

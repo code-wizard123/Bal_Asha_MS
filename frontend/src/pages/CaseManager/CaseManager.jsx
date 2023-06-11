@@ -25,9 +25,7 @@ const CaseManager = () => {
     const response = await axios.post(`http://localhost:4000/api/v1/${employee_id}/${child_id}`)
 
     if(response.data.success){
-      // window.location.reload()
-      
-      
+      window.location.reload()
     }
   }
 
@@ -51,36 +49,38 @@ const CaseManager = () => {
   }, [children])
 
   useEffect(() => {
-    const fetchPincode = async () => {
+    const fetchChildren = async () => {
       try {
         const cookie = Cookies.get("token")
         const { id } = jwtDecode(cookie)
-        const response = await axios.post("http://localhost:4000/api/v1/me", { id });
-        const searchPin = response.data.employee.pincode;
-        setPincode(searchPin);
+        const response = await axios.get("http://localhost:4000/api/v1/childs");
+        const childs = response.data.childs;
+        console.log(childs)
+        setChildren(childs)
+        // setPincode(searchPin);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchPincode();
+    fetchChildren();
   }, []);
 
-  useEffect(() => {
-    const fetchChildren = async (setpincode) => {
-      if (setpincode) {
-        try {
-          const response = await axios.get(`http://localhost:4000/api/v1/children/${setpincode}`);
-          const childrenData = response.data.children;
-          setChildren(childrenData);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const fetchChildren = async (setpincode) => {
+  //     if (setpincode) {
+  //       try {
+  //         const response = await axios.get(`http://localhost:4000/api/v1/children/${setpincode}`);
+  //         const childrenData = response.data.children;
+  //         setChildren(childrenData);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   };
 
-    fetchChildren(pincode);
-  }, [pincode]);
+  //   fetchChildren(pincode);
+  // }, [pincode]);
 
   const handleProfileClick = () => {
     // Logic to show profile details of the employee
@@ -120,7 +120,7 @@ const CaseManager = () => {
           {children.map((child, index) => (
             <div className="product-box" key={index}>
               <div className="Image-box">
-              <img src={orphanage} alt="Orphanage Image" className="product-img" />
+              <img src={child.images[0].url} alt="Orphanage Image" className="product-img" />
               </div>
               <div>
               <h2 className="product-title">{child.name}</h2>

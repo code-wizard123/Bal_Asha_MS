@@ -65,7 +65,10 @@ const Landing = () => {
 				"role": role,
 				"pincode": pincode,
 				"TypeId": String(parseInt(type)),
-				"avatar": url
+				"avatar": {
+					"url": url, 
+					"public_id": public_id
+				}
 			};
 
 			// console.log(sendData);
@@ -87,6 +90,7 @@ const Landing = () => {
 				}
 			}
 			catch (e) {
+				console.log(e)
 				seterrorlogin(e.response.data.message)
 			}
 
@@ -111,26 +115,29 @@ const Landing = () => {
 	const [confirm, setConfirm] = useState(0);
 	const [url, setUrl] = useState("");
 	const [image, setImage] = useState("");
+	const [public_id, setPublicID] = useState("")
 	let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	const submitImage = () => {
+	const submitImage = async () => {
 		setLoading(true)
 		// const [loading, setLoading] = useState(false)
 
-		let userid = (JSON.parse(localStorage.getItem('login')).user.UserId).toString();
-		// console.log(userid);
-		let typeid = (JSON.parse(localStorage.getItem('login')).user.TypeId)
+		// let userid = (JSON.parse(localStorage.getItem('login')).user.UserId).toString();
+		// // console.log(userid);
+		// let typeid = (JSON.parse(localStorage.getItem('login')).user.TypeId)
 		const data = new FormData()
 		data.append("file", image)
 		data.append("upload_preset", "vkgzvauu")
 		data.append("cloud_name", "dmomonuiu")
 
-		fetch("'https://api.cloudinary.com/v1_1/dmomonuiu/image/upload',", {
+		await fetch('https://api.cloudinary.com/v1_1/dmomonuiu/image/upload', {
 			method: "post",
 			body: data
 		})
 			.then((res) => res.json())
 			.then((data) => {
 				setUrl(data.url)
+				setPublicID(data.public_id)
+				console.log(data)
 			})
 	}
 	// const navigate = useNavigate();
@@ -261,7 +268,7 @@ const Landing = () => {
 									: (<h1 className='ReEnter'>Enter valid email</h1>))
 							}
 							<Components.Input type='email' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
-							{/* <Components.Input type='number' placeholder='Role' value={role} onChange={(e) => setRole(e.target.value)} required /> */}
+							<Components.Input type='number' placeholder='PinCode' value={pincode} onChange={(e) => setPincode(e.target.value)} required />
 							<select class="role" value={role} onChange={e => setRole(e.target.value)}>
 								<option value="1">Case Manager</option>
 								<option value="2">Operation Worker</option>
@@ -274,8 +281,8 @@ const Landing = () => {
 							}
 							<Components.Input type='password' placeholder='Confirm Password' value={confpassword} onChange={(e) => setConfPassword(e.target.value)} required />
 							<div className="upload-btn-wrapper">
-								{/* <button className="btn">Upload a file</button> */}
 								<input type="file" onChange={(e) => setImage(e.target.files[0])} name="myfile" />
+								<button className="btn" type='button' onClick={submitImage}>Upload a file</button>
 							</div>
 							{/* <button className="btn">Upload a file</button>
             <input type="file" ></input> */}

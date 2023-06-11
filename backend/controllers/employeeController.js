@@ -10,14 +10,10 @@ const getResetPasswordToken = require('../models/employeeModel')
 const jwt = require('jsonwebtoken')
 //register employee
 exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
-    const { name, email, password, pincode, role } = req.body;
+    const { name, email, password, pincode, role, avatar } = req.body;
     console.log(req.body)
     const employee = await Employee.create({
-        name, email, password, pincode, role,
-        avatar: {
-            public_id: "this is a sample id",
-            url: "profilepicUrl"
-        },
+        name, email, password, pincode, role, avatar
     });
     sendToken(employee, 201, res);
     res.status(200).json({
@@ -314,6 +310,28 @@ exports.getChildrenUnderOpManager = catchAsyncErrors(async (req, res, next) => {
         })
 })
 
+exports.getChildrenUnderGroundWorker = catchAsyncErrors(async (req, res, next) => {
+    const id = req.params.id;
+    Employee.findById(id)
+        .populate('children') // Populating the 'department' field reference
+        .exec()
+        .then(populatedEmployee => {
+            res.status(200).json({
+                success: true,
+                message: populatedEmployee
+            })
+        })
+})
+
+exports.getGroundWorkerByPincode = catchAsyncErrors(async (req, res, next) => {
+    const pincode = req.params.pincode
+    const employee = await Employee.find({pincode: parseInt(pincode), role: 3})
+
+    res.status(200).json({
+        success: true,
+        employee
+    })
+})
 exports.parseToken = catchAsyncErrors(async (req, res, next) => {
     const { token } = req.body;
     const payload = jwt.verify(token, process.env.JWT_SECRET)

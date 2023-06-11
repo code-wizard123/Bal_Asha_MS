@@ -22,12 +22,10 @@ const generateProcessSchema = (actionLeft) => {
       },
       public_id: {
         type: String,
-        default: "Dummy"
         // required: true
       },
       url: {
         type: String,
-        default: "dummy"
         // required: true
       }
     }],
@@ -40,12 +38,10 @@ const generateProcessSchema = (actionLeft) => {
       },
       public_id: {
         type: String,
-        default: "Dummy"
         // required: true
       },
       url: {
         type: String,
-        default: "dummy"
         // required: true
       }
     }],
@@ -63,12 +59,10 @@ const generateProcessSchema = (actionLeft) => {
       },
       public_id: {
         type: String,
-        default: "Dummy"
         // required: true
       },
       url: {
         type: String,
-        default: "dummy"
         // required: true
       }
     }],
@@ -78,27 +72,25 @@ const generateProcessSchema = (actionLeft) => {
       },
       public_id: {
         type: String,
-        default: "Dummy"
         // required: true
       },
       url: {
         type: String,
-        default: "dummy"
         // required: true
       }
     }],
-    previousOrgReport: {
+    OrphanCertificate: {
         dateRegistered: {
             type: Date
           },
           public_id: {
             type: String,
-            default: "Dummy"
+  
             // required: true
           },
           url: {
             type: String,
-            default: "dummy"
+  
             // required: true
           }
     },
@@ -108,12 +100,12 @@ const generateProcessSchema = (actionLeft) => {
           },
           public_id: {
             type: String,
-            default: "Dummy"
+  
             // required: true
           },
           url: {
             type: String,
-            default: "dummy"
+  
             // required: true
           }
     },
@@ -123,12 +115,12 @@ const generateProcessSchema = (actionLeft) => {
           },
           public_id: {
             type: String,
-            default: "Dummy"
+  
             // required: true
           },
           url: {
             type: String,
-            default: "dummy"
+  
             // required: true
           }
     },
@@ -138,12 +130,12 @@ const generateProcessSchema = (actionLeft) => {
           },
           public_id: {
             type: String,
-            default: "Dummy"
+  
             // required: true
           },
           url: {
             type: String,
-            default: "dummy"
+  
             // required: true
           }
     },
@@ -153,12 +145,12 @@ const generateProcessSchema = (actionLeft) => {
           },
           public_id: {
             type: String,
-            default: "Dummy"
+  
             // required: true
           },
           url: {
             type: String,
-            default: "dummy"
+  
             // required: true
           }
     },
@@ -168,12 +160,12 @@ const generateProcessSchema = (actionLeft) => {
           },
           public_id: {
             type: String,
-            default: "Dummy"
+  
             // required: true
           },
           url: {
             type: String,
-            default: "dummy"
+  
             // required: true
           }
     },

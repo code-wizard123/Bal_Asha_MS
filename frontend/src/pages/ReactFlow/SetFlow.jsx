@@ -2,7 +2,10 @@ import React, { useCallback, useState, useEffect } from 'react';
 import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge } from 'reactflow';
 import axios from 'axios';
 import './css/updatenode.css';
+import Cookies from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 import 'reactflow/dist/style.css';
+import { useParams } from 'react-router-dom';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const initialNodes = [
@@ -23,15 +26,14 @@ export default function SetFlow() {
   const [documentDetails, setDocumentDetails] = useState([]);
   const [nodeCount, setNodeCount] = useState(initialNodes.length + 1);
   const [images, setImages] = useState(null);
-
+  const { id } = useParams();
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
   useEffect(() => {
     // Fetch the document details
     const fetchDocumentDetails = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/v1/admin/process/ActionDone/647db7040174c6bfeb976e05');
-        console.log(response.data);
+        const response = await axios.get(`http://localhost:4000/api/v1/admin/process/ActionDone/${id}`);
         setDocumentDetails(response.data.actionDoneDetails);
       } catch (error) {
         console.log('Error fetching document details:', error);

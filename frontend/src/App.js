@@ -51,7 +51,7 @@ const App = () => {
             path="/TopPerformerDetails"
             element={<TopPerformerDetails />}
           />
-          <Route path="/ViewProcessFlow" element={<ViewProcessFlow />} />
+          <Route path="/ViewProcessFlow/:id" element={<ViewProcessFlow />} />
           {/* <Route element={<ProtectedGroundRoutes />}>
             <Route path="/GroundWorker" element={<GroundWorker />} />
             {/* <Route path="/OperationWorker" element={<OperationWorker />} /> */}
@@ -66,7 +66,7 @@ const App = () => {
 
           <Route element={<ProtectedOperationRoutes />}>
             <Route path="/OperationWorker" element={<OperationWorker />} />
-            <Route exact path="/ReactFlow" element={<SetFlow />} />
+            <Route exact path="/ReactFlow/:id" element={<SetFlow />} />
           </Route>
 
           <Route element={<ProtectedCaseRoutes />}>

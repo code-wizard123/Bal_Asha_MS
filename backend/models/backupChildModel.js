@@ -36,11 +36,9 @@ const backupChildSchema = new Schema({
     {
       public_id: {
         type: String,
-        default: "Dummy",
       },
       url: {
         type: String,
-        default: "dummy",
       },
     },
   ],
@@ -57,11 +55,9 @@ const backupChildSchema = new Schema({
       },
       public_id: {
         type: String,
-        default: "Dummy",
       },
       url: {
         type: String,
-        default: "dummy",
       },
     },
   ],
@@ -84,12 +80,10 @@ const backupChildSchema = new Schema({
     },
     public_id: {
       type: String,
-      default: "Dummy"
       // required: true
     },
     url: {
       type: String,
-      default: "dummy"
       // required: true
     }
   }],
@@ -102,12 +96,10 @@ const backupChildSchema = new Schema({
     },
     public_id: {
       type: String,
-      default: "Dummy"
       // required: true
     },
     url: {
       type: String,
-      default: "dummy"
       // required: true
     }
   }],
@@ -125,12 +117,10 @@ const backupChildSchema = new Schema({
     },
     public_id: {
       type: String,
-      default: "Dummy"
       // required: true
     },
     url: {
       type: String,
-      default: "dummy"
       // required: true
     }
   }],
@@ -140,12 +130,10 @@ const backupChildSchema = new Schema({
     },
     public_id: {
       type: String,
-      default: "Dummy"
       // required: true
     },
     url: {
       type: String,
-      default: "dummy"
       // required: true
     }
   }],
@@ -155,12 +143,12 @@ const backupChildSchema = new Schema({
         },
         public_id: {
           type: String,
-          default: "Dummy"
+  
           // required: true
         },
         url: {
           type: String,
-          default: "dummy"
+  
           // required: true
         }
   },
@@ -170,12 +158,12 @@ const backupChildSchema = new Schema({
         },
         public_id: {
           type: String,
-          default: "Dummy"
+  
           // required: true
         },
         url: {
           type: String,
-          default: "dummy"
+  
           // required: true
         }
   },
@@ -185,12 +173,12 @@ const backupChildSchema = new Schema({
         },
         public_id: {
           type: String,
-          default: "Dummy"
+  
           // required: true
         },
         url: {
           type: String,
-          default: "dummy"
+  
           // required: true
         }
   },
@@ -200,12 +188,12 @@ const backupChildSchema = new Schema({
         },
         public_id: {
           type: String,
-          default: "Dummy"
+  
           // required: true
         },
         url: {
           type: String,
-          default: "dummy"
+  
           // required: true
         }
   },
@@ -215,12 +203,12 @@ const backupChildSchema = new Schema({
         },
         public_id: {
           type: String,
-          default: "Dummy"
+  
           // required: true
         },
         url: {
           type: String,
-          default: "dummy"
+  
           // required: true
         }
   },
@@ -230,12 +218,12 @@ const backupChildSchema = new Schema({
         },
         public_id: {
           type: String,
-          default: "Dummy"
+  
           // required: true
         },
         url: {
           type: String,
-          default: "dummy"
+  
           // required: true
         }
   },

@@ -11,7 +11,9 @@ const AddChild = () => {
   const [pinCode, setPinCode] = useState("");
   const [gender, setGender] = useState("Male");
   const [category, setCategory] = useState("Abandoned");
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState("");
+  const [publicId, setPublicId] = useState("");
+  const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [EnrollmentDate, setEnrollmentDate] = useState("");
   const [DateOfAdmission, setDateOfAdmission] = useState("");
@@ -28,6 +30,8 @@ const AddChild = () => {
         formData
       );
       console.log(response.data);
+      setUrl(response.data.url);
+      setPublicId(response.data.public_id);
       // Store the image URLa or handle other necessary tasks
     } catch (error) {
       console.log(error);
@@ -62,7 +66,10 @@ const AddChild = () => {
       familyDetails,
       gender,
       pinCode: parseInt(pinCode),
-      images: images ? images.url : "", // Assuming the image URL is stored in the 'url' property
+      images: {
+        publicId,
+        url 
+      } // Assuming the image URL is stored in the 'url' property
     };
     let childID = ""
     try {

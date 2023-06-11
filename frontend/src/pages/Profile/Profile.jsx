@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import "./css/profile.css";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 
 const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
@@ -23,8 +25,10 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
+        const cookie = Cookies.get("token")
+        const { id } = jwtDecode(cookie)
         const response = await axios.get(
-          "http://localhost:4000/api/v1/admin/employee/647b663e2ad6798752d3086a"
+          `http://localhost:4000/api/v1/admin/employee/${id}`
         );
         setProfileData(response.data.employee);
         setLoading(false);
