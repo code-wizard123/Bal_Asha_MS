@@ -7,16 +7,13 @@ import { useParams } from 'react-router-dom';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const initialNodes = [
-  { id: '1', position: { x: 300, y: 100 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' }, type: 'textUpdater' },
-  { id: '2', position: { x: 350, y: 100 }, data: { label: 'photoPublication2' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
-  { id: '3', position: { x: 400, y: 200 }, data: { label: 'tvTelecasting' }, style: { backgroundColor: 'green', color: '#fffff' } },
-  { id: '4', position: { x: 450, y: 300 }, data: { label: 'MER' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
+  { id: '1', position: { x: 100, y: 100 }, data: { label: 'photoPublication1' }, style: { backgroundColor: 'green', color: '#fffff' }, type: 'textUpdater' },
+  { id: '2', position: { x: 150, y: 200 }, data: { label: 'photoPublication2' }, style: { backgroundColor: 'green', color: '#ffffff' } },
+  { id: '3', position: { x: 200, y: 300 }, data: { label: 'tvTelecasting' }, style: { backgroundColor: 'green', color: '#fffff' } },
+  { id: '4', position: { x: 250, y: 400 }, data: { label: 'Police Report' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
+  { id: '5', position: { x: 300, y: 500 }, data: { label: 'MER' }, style: { backgroundColor: '#ff0000', color: '#ffffff' } },
 ];
-const initialEdges = [
-  { id: 'e1-2', source: '1', target: '2', data: { label: 'Edge 1 to 2' } },
-  { id: 'e2-3', source: '2', target: '3', data: { label: 'Edge 2 to 3' } },
-  { id: 'e3-4', source: '3', target: '4', data: { label: 'Edge 3 to 4' } },
-];
+const initialEdges = [];
 
 export default function SetFlow() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -69,7 +66,7 @@ export default function SetFlow() {
     const newNode = {
       id: newNodeId,
       position: { x: 0, y: 0 },
-      data: { label: 'tvTelecasting' },
+      data: { label: 'New Government Policy' },
       style: { backgroundColor: 'red', color: '#fffff' },
     };
 
