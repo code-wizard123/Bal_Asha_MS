@@ -82,12 +82,12 @@ const OperationWorker = () => {
                     className="product-img"
                   />
                 </div>
-                <div>
+                <div class="product2">
                   <h2 className="product-title">Name: {child.name}</h2>
                   <p className="product-description">Description: {child.keyCase}</p>
                   <Component pincode={child.pincode} id={child._id} handleSubmit={handleSubmit} />
                   <button className="DeleteChildButton" onClick={() => handleClick(child)}>View Process</button>
-                  <button className="DeleteChildButton" onClick={() => handleDelete(child._id, child.processId)}>Delete Child</button>
+                  <button className="DeleteChildButton" onClick={() => handleDelete(child._id, child.processId)}>Delete Child</button></div>
                 </div>
         </div>
             ))}
