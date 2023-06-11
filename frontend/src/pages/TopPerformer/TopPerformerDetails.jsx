@@ -41,7 +41,7 @@ const  TopPerformerDetails= () => {
     <header>
     
         {/* <!-- here’s the avatar --> */}
-        <a href="/">
+        <a href="#">
             <img src={topPerformer.avatar.url} />
         </a>
         {/* <!-- the username --> */}
