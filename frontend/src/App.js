@@ -19,7 +19,7 @@ import {
   Profile,
   TopPerformerDetails,
   ViewProcessFlow,
-  Opening2
+  Opening2,
   ViewRegisteredChildren,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

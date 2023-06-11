@@ -94,7 +94,8 @@ exports.updateChild = catchAsyncErrors(async (req, res, next) => {
 
 exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
     const child = await Child.findById(req.params.id);
-    const process = await Process.find({ child: req.params.childId});
+    const process = await Process.findOne({ child: req.params.id });
+  
     if (!child) {
       return next(new errorHandler("Child Not found", 404));
     }
@@ -130,14 +131,30 @@ exports.deleteChild = catchAsyncErrors(async (req, res, next) => {
     // Save the backup child document
     await backupChild.save();
   
+    // Delete the process document
+    await Process.deleteOne({ _id: process._id });
+  
     // Delete the child document
     await Child.deleteOne({ _id: req.params.id });
   
     res.status(200).json({
-      message: "Child deleted successfully",
-      backupChild
+      message: "Child and associated process deleted successfully",
+      backupChild,
     });
   });
+  exports.getAllBackupChildDetails = async (req, res, next) => {
+    try {
+      const backupChildren = await BackupChild.find();
+  
+      res.status(200).json({
+        success: true,
+        backupChildren
+      });
+    } catch (error) {
+      next(new errorHandler('Failed to get backup child details', 500));
+    }
+  };
+  
 exports.getOneChild = catchAsyncErrors(async (req, res) => {
     const child = await Child.findById(req.params.id);
     if (!child) {
