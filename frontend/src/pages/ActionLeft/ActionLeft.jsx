@@ -14,7 +14,7 @@ const ActionLeft = () => {
   const notify = () => toast("Email Sent Successfully");
 
   const viewProcess = () => {
-    console.log('Showing Process')
+    navigate(`/ViewProcessFlow/${id}`)
   }
 
   const handleProcess = () => {

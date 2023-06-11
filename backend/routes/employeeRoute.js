@@ -1,6 +1,6 @@
 const express = require('express');
 const { registerEmployee, loginEmployee,
-    logOut, getAllEmployee, getChildrenUnderOpManager, updateEmployeeRole, getSingleEmployee, deleteEmployee, forgotPassword, resetPassword, updatePassword, getEmployeeWithRole, parseToken, getEmployeeDetails, getOperationWithPincode, updateCasesClosed, /* updateProfile */getEmployeeWithMaxCasesClosed } = require("../controllers/employeeController");
+    logOut, getAllEmployee, getChildrenUnderOpManager, updateEmployeeRole, getSingleEmployee, deleteEmployee, forgotPassword, resetPassword, updatePassword, getEmployeeWithRole, parseToken, getEmployeeDetails, getOperationWithPincode, updateCasesClosed, /* updateProfile */getEmployeeWithMaxCasesClosed, getGroundWorkerByPincode, getChildrenUnderGroundWorker } = require("../controllers/employeeController");
 const { isAuthenticatedEmployee, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
@@ -18,5 +18,7 @@ router.route("/admin/employee/:id").get(/*isAuthenticatedEmployee, authorizeRole
 router.route("/parsetoken").post(parseToken)
 router.route("/getemployee/:role").get(getEmployeeWithRole)
 router.route("/operation/children/:id").get(getChildrenUnderOpManager)
+router.route("/ground/children/:id").get(getChildrenUnderGroundWorker)
 router.route("/maxCasesClosed").get(getEmployeeWithMaxCasesClosed)
+router.route("/groundworker/getChild/:pincode").get(getGroundWorkerByPincode)
 module.exports = router;
