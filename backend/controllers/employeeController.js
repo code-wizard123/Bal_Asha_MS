@@ -355,7 +355,7 @@ exports.getEmployeeWithMaxCasesClosed = async (req, res, next) => {
       // Find the employee with maximum cases closed in the current month
       const employee = await Employee.findOne()
         .sort({ 'casesClosed.count': -1 })
-        .select('name email casesClosed')
+        // .select('name email casesClosed')
         .populate('children', 'name')
         .exec();
   

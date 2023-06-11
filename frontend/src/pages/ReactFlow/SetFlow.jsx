@@ -29,20 +29,20 @@ export default function SetFlow() {
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-  // useEffect(() => {
-  //   // Fetch the document details
-  //   const fetchDocumentDetails = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:4000/api/v1/process/get/${processId}`);
-  //       console.log(response.data);
-  //       // setDocumentDetails(response.data.actionDoneDetails);
-  //     } catch (error) {
-  //       console.log('Error fetching document details:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    // Fetch the document details
+    const fetchDocumentDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/v1/admin/process/ActionDone/${process_id}`);
+        console.log(response.data);
+        setDocumentDetails(response.data.actionDoneDetails);
+      } catch (error) {
+        console.log('Error fetching document details:', error);
+      }
+    };
 
-  //   fetchDocumentDetails();
-  // }, []);
+    fetchDocumentDetails();
+  }, []);
 
   const handleDownload = (url, fileName) => {
     fetch(url)

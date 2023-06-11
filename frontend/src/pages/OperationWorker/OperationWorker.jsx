@@ -88,10 +88,9 @@ const OperationWorker = () => {
                   <Component pincode={child.pincode} id={child._id} handleSubmit={handleSubmit} />
                   <button className="DeleteChildButton" onClick={() => handleClick(child)}>View Process</button>
                   <button className="DeleteChildButton" onClick={() => handleDelete(child._id, child.processId)}>Delete Child</button></div>
-                </div>
-        </div>
+              </div>
             ))}
-    </div >
+          </div >
         </div >
       </section >
     </div >

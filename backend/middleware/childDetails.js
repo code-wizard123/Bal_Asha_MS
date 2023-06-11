@@ -66,7 +66,7 @@ const attachments = [];
       if (cci.url) {
         const attachment = {
           filename: "Imageofthechild.jpg", // Set the filename as per your requirement
-          path: "https://images.pexels.com/photos/35537/child-children-girl-happy.jpg?cs=srgb&dl=pexels-bess-hamiti-35537.jpg&fm=jpg",
+          path: child.images[0].url,
         };
         attachments.push(attachment);
       }
