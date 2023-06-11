@@ -1,4 +1,4 @@
-.contain1 {
+.contain2 {
     position: relative;
     z-index: 0;
     width: 90%;
@@ -14,14 +14,14 @@
 /* body{
     background-color: #372c2e;
   } */
-.content1 {
+.content2 {
     width: 100%;
     height: auto;
     display: flex;
     flex-wrap: wrap;
 }
 
-.animation1 {
+.animation2 {
     position: relative;
     width: 100%;
     /* height: 100vh; */
@@ -133,7 +133,7 @@
     }
 }
 
-.section-title1 {
+.section-title2 {
     font-size: 1.8rem;
     color: #7A431D;
     font-weight: 1000;
@@ -141,11 +141,11 @@
     margin-bottom: 1.8rem;
 }
 
-.shop1 {
+.shop2 {
     margin-top: 2rem;
 }
 
-.shop-content1 {
+.shop-content2 {
     position: relative;
     width: 100%;
     height: auto;
@@ -154,11 +154,11 @@
     justify-content: center;
 }
 
-section1 {
+section {
     padding: 4rem 0 3rem;
 }
 
-.product-img1 {
+.product-img2 {
     height: 9.5rem;
     border-radius: 50%;
     margin-bottom: 0.2rem;
@@ -167,8 +167,8 @@ section1 {
     width: 150px;
 }
 
-.product-box1 {
-    background: rgb(254, 250, 250);
+.product-box2 {
+    background: rgb(215, 211, 211);
     border-radius: 5px;
     /* flex-grow: 1;
     flex-basis: 0;*/
@@ -177,11 +177,12 @@ section1 {
     width: 380px;
     padding: 0.25rem;
     border: 2px solid black;
-    display: flex;
+    display: grid;
     text-decoration: none;
+    color:black;
 }
 
-.product-title1 {
+.product-title2 {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -189,32 +190,47 @@ section1 {
     color: black;
 }
 
-.price1 {
+.price2 {
     font-weight: 500;
     color: rgb(6, 6, 6);
+    margin-right:10px;
 }
 
-.Pincode1 {
+.Pincode2 {
     border: 2px solid red;
 }
 
-.product-box1:hover {
-    background: #858380;
+.product-box2:hover {
+    background: #d8bb90;
     border: 3px solid black;
     box-shadow: 0 8px 32px hsla(0.75, 0.82, 0.165, 1);
     transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.product-box1:hover .product-title,
-.product-box1:hover .price {
+.product-box2:hover .product-title,
+.product-box2:hover .price {
     color: #141414;
 }
 
-.product-box1:hover .img {
+.product-box2:hover img {
     border: 3px solid black;
 }
 
-.Image-box1 {
-    background-color: #e0d9d9;
-    margin-right: 10px;
+.product-box2 img{
+    margin-left: 25%;
 }
+.Image-box2 {
+    background-color: #ffffff;
+    margin:10px;
+}
+
+a {
+    text-decoration: none;
+    color: purple;
+}
+
+a:hover{
+    cursor:pointer;
+   
+}
+

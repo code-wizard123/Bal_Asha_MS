@@ -50,26 +50,40 @@ const ViewRegisteredChildren = () => {
     return ageInYears;
   };
 
-  const handleDownload = (url) => {
-    // Logic to handle the download based on the provided URL
-    // You can use JavaScript libraries or built-in browser APIs for downloading the file
-    // Example: window.open(url, "_blank");
+  const handleDownload = (url,fileName) => {
+    fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create a download link
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+
+        // Trigger the click event on the link
+        link.click();
+
+        // Clean up
+        URL.revokeObjectURL(link.href);
+      })
+      .catch((error) => {
+        console.log('Download error:', error);
+      });
   };
 
   return (
-    <div class="animation1">
-      <section className="shop1 contain1">
-        <h2 className="section-title1">Children</h2>
-        <div className="shop-content1">
+    <div class="animation2">
+      <section className="shop2 contain2">
+        <h2 className="section-title2">Children</h2>
+        <div className="shop-content2">
           {children && children.length > 0 ? (
             children.map((child) => (
-              <div className="product-box1" key={child._id}>
-                <div className="Image-box1">
-                  <img src={ChildImage} alt="Child Image" className="product-img1" />
+              <div className="product-box2" key={child._id}>
+                <div className="Image-box2">
+                  <img src={ChildImage} alt="Child Image" className="product-img2" />
                 </div>
                 <div>
                   <h2 className="product-title">Name: {child.name}</h2>
-                  <span className="price">Id: {child._id}</span>
+                  {/* <span className="price">Id: {child._id}</span> */}
                   <br />
                   <span className="price">Age: {calculateAge(child.DateOfBirth)}</span>
                   <br />
@@ -85,7 +99,7 @@ const ViewRegisteredChildren = () => {
                     if (key !== "name" && key !== "_id" && key !== "gender" && key !== "category" && key !== "CCI" && key !== "DateOfBirth") {
                       return (
                         <div key={key}>
-                          <span className="price">{key}: </span>
+                          <span className="price2">{key}:   </span>
                           {Array.isArray(value) ? (
                             value.map((item, index) => (
                               <div key={index}>
