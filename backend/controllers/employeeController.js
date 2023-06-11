@@ -10,14 +10,10 @@ const getResetPasswordToken = require('../models/employeeModel')
 const jwt = require('jsonwebtoken')
 //register employee
 exports.registerEmployee = catchAsyncErrors(async (req, res, next) => {
-    const { name, email, password, pincode, role } = req.body;
+    const { name, email, password, pincode, role, avatar } = req.body;
     console.log(req.body)
     const employee = await Employee.create({
-        name, email, password, pincode, role,
-        avatar: {
-            public_id: "this is a sample id",
-            url: "profilepicUrl"
-        },
+        name, email, password, pincode, role, avatar
     });
     sendToken(employee, 201, res);
     res.status(200).json({

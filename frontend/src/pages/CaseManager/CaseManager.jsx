@@ -49,36 +49,38 @@ const CaseManager = () => {
   }, [children])
 
   useEffect(() => {
-    const fetchPincode = async () => {
+    const fetchChildren = async () => {
       try {
         const cookie = Cookies.get("token")
         const { id } = jwtDecode(cookie)
-        const response = await axios.post("http://localhost:4000/api/v1/me", { id });
-        const searchPin = response.data.employee.pincode;
-        setPincode(searchPin);
+        const response = await axios.get("http://localhost:4000/api/v1/childs");
+        const childs = response.data.childs;
+        console.log(childs)
+        setChildren(childs)
+        // setPincode(searchPin);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchPincode();
+    fetchChildren();
   }, []);
 
-  useEffect(() => {
-    const fetchChildren = async (setpincode) => {
-      if (setpincode) {
-        try {
-          const response = await axios.get(`http://localhost:4000/api/v1/children/${setpincode}`);
-          const childrenData = response.data.children;
-          setChildren(childrenData);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const fetchChildren = async (setpincode) => {
+  //     if (setpincode) {
+  //       try {
+  //         const response = await axios.get(`http://localhost:4000/api/v1/children/${setpincode}`);
+  //         const childrenData = response.data.children;
+  //         setChildren(childrenData);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   };
 
-    fetchChildren(pincode);
-  }, [pincode]);
+  //   fetchChildren(pincode);
+  // }, [pincode]);
 
   const handleProfileClick = () => {
     // Logic to show profile details of the employee
