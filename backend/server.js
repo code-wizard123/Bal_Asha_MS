@@ -3,8 +3,9 @@ const dotenv=require('dotenv');
 const connectDatabase=require('./config/database');
 const cors = require('cors');
 app.use(cors())
-dotenv.config({path:"config/config.env"})
+dotenv.config({path:"config.env"})
 const BASE_URL = process.env.BASE_URL
+const PORT = process.env.PORT 
 
 
 // const cors = require('cors');
