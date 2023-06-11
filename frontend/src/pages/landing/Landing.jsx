@@ -268,7 +268,7 @@ const Landing = () => {
 									: (<h1 className='ReEnter'>Enter valid email</h1>))
 							}
 							<Components.Input type='email' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
-							{/* <Components.Input type='number' placeholder='Role' value={role} onChange={(e) => setRole(e.target.value)} required /> */}
+							<Components.Input type='number' placeholder='PinCode' value={pincode} onChange={(e) => setPincode(e.target.value)} required />
 							<select class="role" value={role} onChange={e => setRole(e.target.value)}>
 								<option value="1">Case Manager</option>
 								<option value="2">Operation Worker</option>

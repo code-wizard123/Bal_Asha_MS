@@ -120,7 +120,7 @@ const CaseManager = () => {
           {children.map((child, index) => (
             <div className="product-box" key={index}>
               <div className="Image-box">
-              <img src={orphanage} alt="Orphanage Image" className="product-img" />
+              <img src={child.images[0].url} alt="Orphanage Image" className="product-img" />
               </div>
               <div>
               <h2 className="product-title">{child.name}</h2>
