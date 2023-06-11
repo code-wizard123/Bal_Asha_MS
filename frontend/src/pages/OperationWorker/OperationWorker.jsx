@@ -10,11 +10,11 @@ import Component from "./Component";
 const OperationWorker = () => {
   const [children, setChildren] = useState([]);
   const navigate = useNavigate()
+
   const handleClick = async (child) => {
     const response = await axios.get(`http://localhost:4000/api/v1/process/${child._id}`)
-    navigate(`/ReactFlow/${response.data.process[0]._id}`)
+    navigate(`/ReactFlow/${child._id}/${response.data.process[0]._id}`)
   }
-
 
   const handleDelete = async (childId) => {
     try {
@@ -87,7 +87,7 @@ const OperationWorker = () => {
                 <div>
                   <h2 className="product-title">Name: {child.name}</h2>
                   <p className="product-description">Description: {child.keyCase}</p>
-                  <Component pinCode={child.pinCode} id={child._id} handleSubmit={handleSubmit} />
+                  <Component pincode={child.pincode} id={child._id} handleSubmit={handleSubmit} />
                   <button className="DeleteChildButton" onClick={() => handleClick(child)}>View Process</button>
                   <button className="DeleteChildButton" onClick={() => handleDelete(child._id, child.processId)}>Delete Child</button>
                 </div>

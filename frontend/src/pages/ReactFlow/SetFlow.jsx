@@ -3,6 +3,7 @@ import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState,
 import axios from 'axios';
 import './css/updatenode.css';
 import 'reactflow/dist/style.css';
+import { useParams } from 'react-router-dom';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const initialNodes = [
@@ -23,23 +24,25 @@ export default function SetFlow() {
   const [documentDetails, setDocumentDetails] = useState([]);
   const [nodeCount, setNodeCount] = useState(initialNodes.length + 1);
   const [images, setImages] = useState(null);
+  const { child_id, process_id } = useParams();
+  const [process, setProcess] = useState();
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-  useEffect(() => {
-    // Fetch the document details
-    const fetchDocumentDetails = async () => {
-      try {
-        const response = await axios.get('http://localhost:4000/api/v1/admin/process/ActionDone/6485a6e714a1c90843205049');
-        console.log(response.data);
-        setDocumentDetails(response.data.actionDoneDetails);
-      } catch (error) {
-        console.log('Error fetching document details:', error);
-      }
-    };
+  // useEffect(() => {
+  //   // Fetch the document details
+  //   const fetchDocumentDetails = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:4000/api/v1/process/get/${processId}`);
+  //       console.log(response.data);
+  //       // setDocumentDetails(response.data.actionDoneDetails);
+  //     } catch (error) {
+  //       console.log('Error fetching document details:', error);
+  //     }
+  //   };
 
-    fetchDocumentDetails();
-  }, []);
+  //   fetchDocumentDetails();
+  // }, []);
 
   const handleDownload = (url, fileName) => {
     fetch(url)
@@ -85,11 +88,10 @@ export default function SetFlow() {
         'https://api.cloudinary.com/v1_1/dmomonuiu/image/upload',
         formData
       );
-      console.log(response.data);
 
       // Prepare the JSON data
       const json = {
-        child: '6485a6e714a1c90843205044',
+        child: child_id,
         ScreenShot: [
           {
             dateRegistered: new Date().toISOString(),
@@ -102,9 +104,9 @@ export default function SetFlow() {
       // Post the JSON data to the specified URL
       console.log(json);
       try {
-        const response = await axios.put('http://localhost:4000/api/v1/admin/process/6485a6e714a1c90843205049', json);
-        console.log(response.data);
+        const response = await axios.put(`http://localhost:4000/api/v1/admin/process/${process_id}`, json);
         // Other logic after successful request
+        console.log(response)
       } catch (error) {
         console.log('Error during axios.put:', error);
       }
