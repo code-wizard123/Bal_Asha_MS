@@ -29,20 +29,20 @@ export default function SetFlow() {
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-  // useEffect(() => {
-  //   // Fetch the document details
-  //   const fetchDocumentDetails = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:4000/api/v1/process/get/${processId}`);
-  //       console.log(response.data);
-  //       // setDocumentDetails(response.data.actionDoneDetails);
-  //     } catch (error) {
-  //       console.log('Error fetching document details:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    // Fetch the document details
+    const fetchDocumentDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/v1/process/get/${process_id}`);
+        console.log(response.data);
+        setDocumentDetails(response.data.actionDoneDetails);
+      } catch (error) {
+        console.log('Error fetching document details:', error);
+      }
+    };
 
-  //   fetchDocumentDetails();
-  // }, []);
+    fetchDocumentDetails();
+  }, []);
 
   const handleDownload = (url, fileName) => {
     fetch(url)
@@ -136,10 +136,6 @@ export default function SetFlow() {
         <br />
         <br />
         <button onClick={addNode}>Add Node</button>
-        <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
-        <button type="button" onClick={submitImage}>
-                Upload Process Flow
-               </button>
         {documentDetails.length > 0 ? (
           <table className="Download">
             <thead>
@@ -166,7 +162,7 @@ export default function SetFlow() {
                 );
               })}
             </tbody>
-            {/* <tr class="uploadButton">
+            <tr class="uploadButton">
               <td><br></br><br></br></td>
               <td><br></br><br></br></td>
                 <td>  <input class="uploadButtonwidth"  type="file" onChange={(e) => setImages(e.target.files[0])}/><br></br>
@@ -174,7 +170,7 @@ export default function SetFlow() {
                 Upload Process Flow
                </button>
               <br></br><br></br></td>
-            </tr> */}
+            </tr>
           </table>
         ) : (
           <div>Loading document details...</div>
