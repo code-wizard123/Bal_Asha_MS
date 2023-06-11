@@ -48,7 +48,7 @@ const employeeSchema = new mongoose.Schema({
     {
       month: {
         type: String,
-        default:"January",
+        default:"June",
       },
       count: {
         type: Number,

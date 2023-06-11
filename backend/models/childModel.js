@@ -31,11 +31,9 @@ const childSchema = new Schema({
     {
       public_id: {
         type: String,
-        default: "Dummy"
       },
       url: {
         type: String,
-        default: "dummy"
       }
     }
   ],
@@ -55,11 +53,9 @@ const childSchema = new Schema({
       },
       public_id: {
         type: String,
-        default: "Dummy"
       },
       url: {
         type: String,
-        default: "dummy"
       }
     }
   ],
@@ -67,11 +63,11 @@ const childSchema = new Schema({
     type: [String],
     default: function () {
       if (this.category === 1) {
-        return ["familyApproval","ScreenShot"];
+        return ["photoPublication1", "photoPublication2", "tvTelecasting", "policeReport", "MER"];
       } else if (this.category === 2) {
-        return ["photoPublication1", "photoPublication2", "tvTelecasting","policeReport","previousOrgReport","ScreenShot"];
+        return ["familyApproval", "lastVisitByFamily"];
       } else {
-        return [];
+        return ["photoPublication1", "photoPublication2", "tvTelecasting", "policeReport", "MER", "OrphanCertificate"];
       }
     }
   },
