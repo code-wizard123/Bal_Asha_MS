@@ -6,25 +6,26 @@ import "./css/OperationWorker.css";
 import ChildImage from "../../Images/ChildImage.jpg";
 import jwtDecode from "jwt-decode";
 import Component from "./Component";
+import { BASE_URL } from "../../services/helper";
 
 const OperationWorker = () => {
   const [children, setChildren] = useState([]);
   const navigate = useNavigate()
 
   const handleClick = async (child) => {
-    const response = await axios.get(`http://localhost:4000/api/v1/process/${child._id}`)
+    const response = await axios.get(`${BASE_URL}/api/v1/process/${child._id}`)
     navigate(`/ReactFlow/${child._id}/${response.data.process[0]._id}`)
   }
 
   const handleDelete = async (childId) => {
     try {
       // Delete the child
-      const deleteChildResponse = await axios.delete(`http://localhost:4000/api/v1/admin/child/${childId}`);
+      const deleteChildResponse = await axios.delete(`${BASE_URL}/api/v1/admin/child/${childId}`);
 
       if (deleteChildResponse.status === 200) {
         const token = Cookies.get("token")
         const decoded_id = jwtDecode(token)
-        const updateCasesClosedResponse = await axios.put(`http://localhost:4000/api/v1/employees/${decoded_id}/updateCasesClosed`);
+        const updateCasesClosedResponse = await axios.put(`${BASE_URL}/api/v1/employees/${decoded_id}/updateCasesClosed`);
 
         if (updateCasesClosedResponse.status === 200) {
           // Cases Closed updated successfully
@@ -44,7 +45,7 @@ const OperationWorker = () => {
         const cookie = Cookies.get("token");
         if (cookie) {
           const decoded = jwtDecode(cookie)
-          const response = await axios.get(`http://localhost:4000/api/v1/operation/children/${decoded.id}`)
+          const response = await axios.get(`${BASE_URL}/api/v1/operation/children/${decoded.id}`)
           setChildren(response.data.message.children)
         }
       } catch (error) {
@@ -60,7 +61,7 @@ const OperationWorker = () => {
     const employee_id = e.target[0].value
     const child_id = id;
     try {
-      const response = await axios.post(`http://localhost:4000/api/v1/${employee_id}/${child_id}`)
+      const response = await axios.post(`${BASE_URL}/api/v1/${employee_id}/${child_id}`)
     }
     catch (e) {
       console.log(e)

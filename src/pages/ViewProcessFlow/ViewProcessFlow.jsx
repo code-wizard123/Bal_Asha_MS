@@ -3,6 +3,7 @@ import axios from "axios";
 import ChildImage from "../../Images/ChildImage.jpg";
 import "./css/viewprocessflow.css";
 import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../services/helper";
 
 const ViewProcessFlow = () => {
   const [screenshot, setScreenshot] = useState(null);
@@ -11,7 +12,7 @@ const ViewProcessFlow = () => {
     const fetchScreenshot = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/process/me/${id}`
+          `${BASE_URL}/api/v1/process/me/${id}`
         );
         const screenshotData = response.data.process[0].ScreenShot[0];
 

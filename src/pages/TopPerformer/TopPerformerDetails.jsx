@@ -4,6 +4,7 @@ import './css/topPerformer.css'; // Import the CSS file for styling
 import axios from "axios";
 import { useState,useEffect } from "react";
 import { FaFacebook, FaTwitter, FaGithub, FaBehance } from 'react-icons/fa'; // Import the required icons
+import { BASE_URL } from '../../services/helper';
 
 const  TopPerformerDetails= () => {
   const getRoleName = (role) => {
@@ -23,7 +24,7 @@ const  TopPerformerDetails= () => {
         useEffect(() => {
           const fetchTopPerformer = async () => {
             try {
-              const response = await axios.get("http://localhost:4000/api/v1/maxCasesClosed");
+              const response = await axios.get(`${BASE_URL}/api/v1/maxCasesClosed`);
               const topPerformerData = response.data.employee;
               setTopPerformer(topPerformerData);
               console.log(topPerformerData)

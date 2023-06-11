@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../services/helper";
 
 const ActionLeft = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const ActionLeft = () => {
     const getChildDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/groundWorker/childs/${id}`
+          `${BASE_URL}/api/v1/groundWorker/childs/${id}`
         );
         const { child } = response.data;
         setChildDetails(child);
@@ -78,7 +79,7 @@ const ActionLeft = () => {
         checkedActions,
       };
 
-      await axios.post("http://localhost:4000/api/v1/sendEmail", data);
+      await axios.post(`${BASE_URL}/api/v1/sendEmail`, data);
       notify();
     } catch (error) {
       console.log("Email sending error:", error);

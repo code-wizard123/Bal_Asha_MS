@@ -5,6 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "r
 import "./css/profile.css";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
+import { BASE_URL } from "../../services/helper";
 
 const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ const ProfilePage = () => {
         const cookie = Cookies.get("token")
         const { id } = jwtDecode(cookie)
         const response = await axios.get(
-          `http://localhost:4000/api/v1/admin/employee/${id}`
+          `${BASE_URL}/api/v1/admin/employee/${id}`
         );
         setProfileData(response.data.employee);
         setLoading(false);

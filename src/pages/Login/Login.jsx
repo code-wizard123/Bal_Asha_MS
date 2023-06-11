@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../services/helper';
 
 const Login = () => {
 
@@ -22,7 +23,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
+            const response = await axios.post(`${BASE_URL}/api/v1/login`, { email, password });
             // Assuming the server responds with a success message and a token
             const { success, message, token } = response.data;
 

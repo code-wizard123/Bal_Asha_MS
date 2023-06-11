@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./css/orphanages.css";
 import ChildImage from "../../Images/ChildImage.jpg";
+import { BASE_URL } from "../../services/helper";
 
 const Orphanages = () => {
   const [pinCode, setPinCode] = useState("");
@@ -12,7 +13,7 @@ const Orphanages = () => {
     if (pinCode) {
       // Make the Axios GET request to retrieve the orphanages data
       axios
-        .get(`http://localhost:4000/api/v1/childs/orphanage?pinCode=${pinCode}`)
+        .get(`${BASE_URL}/api/v1/childs/orphanage?pinCode=${pinCode}`)
         .then((response) => {
           setOrphanages(response.data.CCIs);
         })

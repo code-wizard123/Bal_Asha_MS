@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./css/processdone.css";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../services/helper";
 
 const ProcessDone = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const ProcessDone = () => {
     // Fetch the process details from the server to get the actionLeft options
     const fetchProcessDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/v1/process/${id}`); // Update the API endpoint with your server URL
+        const response = await fetch(`${BASE_URL}/api/v1/process/${id}`); // Update the API endpoint with your server URL
         const data = await response.json();
         const { actionLeft, _id } = data.process[data.process.length - 1];
         setProcessId(_id)
@@ -61,7 +62,7 @@ const ProcessDone = () => {
 
     if(url && publicId){
       try {
-        const response = await axios.put(`http://localhost:4000/api/v1/admin/process/${processId}`, updateData);
+        const response = await axios.put(`${BASE_URL}/api/v1/admin/process/${processId}`, updateData);
       } catch (error) {
         console.log("Axios PUT request error:", error);
       }

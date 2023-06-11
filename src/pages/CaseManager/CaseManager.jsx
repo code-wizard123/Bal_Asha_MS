@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import profile from "../../Images/profile.jpg";
+import { BASE_URL } from "../../services/helper";
 
 const getCategory = {
   1: "Abandoned",
@@ -22,7 +23,7 @@ const CaseManager = () => {
     e.preventDefault();
     const employee_id = e.target[0].value
     const child_id = id;
-    const response = await axios.post(`http://localhost:4000/api/v1/${employee_id}/${child_id}`)
+    const response = await axios.post(`${BASE_URL}/api/v1/${employee_id}/${child_id}`)
 
     if(response.data.success){
       window.location.reload()
@@ -36,7 +37,7 @@ const CaseManager = () => {
     const getOperation = async () => {
       if (children) {
         try {
-          const response = await axios.get("http://localhost:4000/api/v1/getemployee/2");
+          const response = await axios.get(`${BASE_URL}/api/v1/getemployee/2`);
           const { employees } = response.data
           setOperation(employees)
         } catch (error) {
@@ -53,7 +54,7 @@ const CaseManager = () => {
       try {
         const cookie = Cookies.get("token")
         const { id } = jwtDecode(cookie)
-        const response = await axios.get("http://localhost:4000/api/v1/childs");
+        const response = await axios.get(`${BASE_URL}/api/v1/childs`);
         const childs = response.data.childs;
         setChildren(childs)
         // setPincode(searchPin);

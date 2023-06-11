@@ -4,6 +4,7 @@ import axios from 'axios';
 import './css/updatenode.css';
 import 'reactflow/dist/style.css';
 import { useParams } from 'react-router-dom';
+import { BASE_URL } from '../../services/helper';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const initialNodes = [
@@ -33,7 +34,7 @@ export default function SetFlow() {
     // Fetch the document details
     const fetchDocumentDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/admin/process/ActionDone/${process_id}`);
+        const response = await axios.get(`${BASE_URL}/api/v1/admin/process/ActionDone/${process_id}`);
         console.log(response.data);
         setDocumentDetails(response.data.actionDoneDetails);
       } catch (error) {
@@ -103,7 +104,7 @@ export default function SetFlow() {
 
       // Post the JSON data to the specified URL
       try {
-        const response = await axios.put(`http://localhost:4000/api/v1/admin/process/${process_id}`, json);
+        const response = await axios.put(`${BASE_URL}/api/v1/admin/process/${process_id}`, json);
         // Other logic after successful request
       } catch (error) {
         console.log('Error during axios.put:', error);

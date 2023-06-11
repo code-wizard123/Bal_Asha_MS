@@ -5,6 +5,7 @@ import "./css/groundworker.css";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import ChildImage from "../../Images/ChildImage.jpg";
+import { BASE_URL } from "../../services/helper";
 
 const GroundWorker = () => {
   const [children, setChildren] = useState([]);
@@ -13,7 +14,7 @@ const GroundWorker = () => {
       try {
         const cookie = Cookies.get("token")
         const { id } = jwtDecode(cookie)
-        const response = await axios.get(`http://localhost:4000/api/v1/ground/children/${id}`);
+        const response = await axios.get(`${BASE_URL}/api/v1/ground/children/${id}`);
         setChildren(response.data.message.children);
       } catch (error) {
         console.log(error);

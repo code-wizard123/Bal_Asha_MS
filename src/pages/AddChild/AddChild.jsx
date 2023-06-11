@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./css/addchild.css";
 import axios from "axios";
+import { BASE_URL } from "../../services/helper";
 
 const AddChild = () => {
   const [name, setName] = useState("");
@@ -44,7 +45,7 @@ const AddChild = () => {
     const createProcess = async (id) => {
       try{
         const response2 = await axios.post(
-          `http://localhost:4000/api/v1/process/create/${id}`
+          `${BASE_URL}/api/v1/process/create/${id}`
         )
       }
       catch(e){
@@ -70,7 +71,7 @@ const AddChild = () => {
     let childID = ""
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/admin/child/new",
+        `${BASE_URL}/api/v1/admin/child/new`,
         sendData
       );
       createProcess(response.data.child._id)

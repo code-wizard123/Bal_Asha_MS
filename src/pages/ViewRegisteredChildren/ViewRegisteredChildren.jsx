@@ -5,6 +5,7 @@ import "./css/viewregisteredchildren.css";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import ChildImage from "../../Images/ChildImage.jpg";
+import { BASE_URL } from "../../services/helper";
 
 const ViewRegisteredChildren = () => {
   const [children, setChildren] = useState([]);
@@ -30,7 +31,7 @@ const ViewRegisteredChildren = () => {
     const fetchChildren = async () => {
       // if (setpincode) {
         try {
-          const response = await axios.get("http://localhost:4000/api/v1/backupChild");
+          const response = await axios.get(`${BASE_URL}/api/v1/backupChild`);
           const childrenData = response.data.backupChildren;
           setChildren(childrenData);
         } catch (error) {

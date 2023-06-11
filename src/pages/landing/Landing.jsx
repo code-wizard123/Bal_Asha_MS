@@ -14,6 +14,7 @@ import logo from '../../Images/logocolorcombo.png'
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner'
 import ProtectedRoutes from '../Protected/ProtectedRoutes';
+import { BASE_URL } from '../../services/helper';
 
 // const ROLES = {
 // 	GROUND_WORKER: 3,
@@ -76,7 +77,7 @@ const Landing = () => {
 			// console.log(loading)
 
 			try {
-				const response = await axios.post('http://localhost:4000/api/v1/register', sendData)
+				const response = await axios.post(`${BASE_URL}/api/v1/register`, sendData)
 
 				document.cookie = `token=${response.data.token}`
 				
@@ -144,7 +145,7 @@ const Landing = () => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post('http://localhost:4000/api/v1/login', { email, password });
+			const response = await axios.post(`${BASE_URL}/api/v1/login`, { email, password });
 			// Assuming the server responds with a success message and a token
 			const { success, message, token } = response.data;
 
