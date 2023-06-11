@@ -5,6 +5,7 @@ const cors = require('cors');
 app.use(cors())
 dotenv.config({path:"config.env"})
 const BASE_URL = process.env.BASE_URL
+const PORT = process.env.PORT 
 
 
 // const cors = require('cors');
