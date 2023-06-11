@@ -1,0 +1,37 @@
+const express=require('express');
+const { getAllChilds,createChild , updateChild, deleteChild,/*, getOneChild, getChildDetails, createChildReview, deleteReview, getChildReviews*/ 
+getChildDetails,getOneChild, getAllCCIsByPinCode, getChildrenByCCI, getChildrenByPincode, setChildtoEmployee, getAllBackupChildDetails}=require("../controllers/childController");
+const { isAuthenticatedEmployee,authorizeRoles } = require('../middleware/auth');
+// const { getAllChilds } = require('../controllers/childController');
+
+const router=express.Router();
+
+router.route('/childs').get(getAllChilds);
+router.route('/backupChild').get(getAllBackupChildDetails);//Add ? to get pincode specific details
+router.route('/childs/orphanage').get(getAllCCIsByPinCode);
+router.route('/childs/CCI').get(getChildrenByCCI);
+router.route('/children/:pincode').get(getChildrenByPincode)
+router.route('/admin/child/new').post/*(isAuthenticatedUser,authorizeRoles("admin"),*/(createChild);
+router.route('/:e_id/:c_id').post(setChildtoEmployee)
+router.route('/child/update/:id').post(updateChild)
+//Operation Manager
+// router.route('/opManager/').(isAuthenticatedUser,authorizeRoles(2), );
+
+// Ground Worker
+router.route('/groundWorker/new').post(/*isAuthenticatedEmployee,authorizeRoles(3),*/ createChild);
+router.route('/groundWorker/childs').get(/*isAuthenticatedEmployee,authorizeRoles(3),*/ getAllChilds);
+router.route('/groundWorker/childs/:id').get(/*isAuthenticatedEmployee,authorizeRoles(3),*/ getOneChild);
+router.route('/groundWorker/getchild/:id').post(/*isAuthenticatedEmployee,authorizeRoles(3),*/ getChildDetails);
+router.route('/child/delete/:id').post(/*isAuthenticatedEmployee,authorizeRoles(3),*/ deleteChild);
+
+//Case Manager
+
+
+
+router.route('/admin/child/new').post/*(isAuthenticatedUser,authorizeRoles("admin"),*/(createChild);
+router.route('/admin/child/:id').put(/*isAuthenticatedUser,authorizeRoles("admin"),*/updateChild).delete(/*isAuthenticatedUser,authorizeRoles("admin"),*/deleteChild);
+
+// router.route('/admin/child/:id').get(getChildDetails);
+// router.route('/review').put(isAuthenticatedUser,createChildReview);
+// router.route('/reviews').get(getChildReviews).delete(isAuthenticatedUser,deleteReview);
+module.exports=router;
