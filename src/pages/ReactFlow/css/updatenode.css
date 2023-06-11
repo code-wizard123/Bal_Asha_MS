@@ -1,0 +1,89 @@
+.updatenode__controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 4;
+    font-size: 12px;
+  }
+  
+  .updatenode__controls label {
+    display: block;
+  }
+  
+  .updatenode__bglabel {
+    margin-top: 10px;
+  }
+  
+  .updatenode__checkboxwrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+     .Download {
+       border-collapse: collapse;
+       width: 50%;
+       border:1px solid rgb(8, 8, 8);
+       /* border-bottom: none; */
+       position:absolute;
+       top:1rem;
+       right:1rem;
+     }
+  
+    .Download th,
+    .Download td {
+      text-align: left;
+      padding: 8px;
+      color: black;
+    }
+
+    .uploadButton{
+      border-top:1px solid rgb(15, 15, 15) ;
+      border-left: none;
+    }
+    .uploadButtonwidth{
+      max-width:150px;
+    }
+    /* .Download tr:nth-child(even) {
+      background-color: #ffffff;
+      /* White */
+    /* } */
+  
+    /* .Download tr:nth-child(odd) { */
+      /* background-color: #DE0E48; */
+      /* Pink */
+    /* } */ 
+  
+    /* .download-button {
+      background-color: #7a431D; */
+      /* Brown */
+      /* border: none;
+      color: white;
+      padding: 6px 12px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    } */
+button {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #d7a526;
+  color: #333333;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #727171;
+  color: #ffffff;
+  border-color: #333333;
+}
+  

@@ -181,7 +181,7 @@
 }
 
 .untitled__slide:nth-child(1) .untitled__slideBg {
-    background-image: url(https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80);
+    background-image: url("../../../Images/abandened-children.jpg");
 }
 
 .untitled__slide:nth-child(2) {
@@ -189,7 +189,8 @@
 }
 
 .untitled__slide:nth-child(2) .untitled__slideBg {
-    background-image: url(https://wallpapercave.com/wp/wp3161585.jpg);
+    background-image: url("../../../Images/children-love.webp");
+    
 }
 
 .untitled__slide:nth-child(3) {
@@ -197,7 +198,7 @@
 }
 
 .untitled__slide:nth-child(3) .untitled__slideBg {
-    background-image: url(https://unsplash.it/g/1500/1000?image=1077);
+background-image: url("../../../Images/children-edu.jpg");
 }
 
 .untitled__slide:nth-child(4) {
@@ -205,7 +206,8 @@
 }
 
 .untitled__slide:nth-child(4) .untitled__slideBg {
-    background-image: url(https://images.unsplash.com/photo-1497561813398-8fcc7a37b567?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
+    background-image: url("../../../Images/adoption-backgroud.webp");
+    
 }
 
 .untitled__slideBg {
@@ -264,7 +266,7 @@
 
 .untitled__slideContent span {
     display: block;
-    font-size: 15vmin;
+    font-size: 10vmin;
 }
 
 .button {
